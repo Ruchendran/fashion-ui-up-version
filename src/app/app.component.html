@@ -1,3 +1,36 @@
-<h1>
-  Initial
-</h1>
+<div class="render-container">
+    <header class="header">
+        <div class="bar">
+
+        </div>
+        <div class="section flex-space-around">
+            <label>
+                Home
+            </label>
+            <label>
+                Products
+            </label>
+            <label>
+                Trending
+            </label>
+            <label>
+                Cart
+            </label>
+            <label id="sign-in" (pointerover)="pointHover()">
+                Sign In
+            </label>
+        </div>
+    </header>
+    <div class="sign-in-hover" id="sign-in-hover" #signInHover>
+        <label>
+            Admin
+        </label>
+        <hr class="line"/>
+        <label>
+            User
+        </label>
+    </div>
+    <router-outlet>
+        
+    </router-outlet>
+</div>

@@ -1,0 +1,73 @@
+@import "../styles.scss";
+.render-container{
+    background-color:$bgColor;
+    color:$fontColor;
+    height: 100vh;
+    opacity: 1;
+    background-blend-mode: overlay;
+}
+.header{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+.section{
+    height: 60px;
+    width: calc(100% - 200px);
+    background-color:$fontColor;
+    color:$bgColor;
+    font-weight: bold;
+}
+.bar{
+    height: 60px;
+    width: 200px;
+    background-color:$fontColor;
+    position: relative;
+}
+.bar::before{
+    content: '';
+    position: absolute;
+    width:60px;
+    height: 60px;
+    background-color:$bgColor;
+    right: -15px;
+    rotate: 45deg;
+}
+.bar::after{
+    content: '';
+    position: absolute;
+    width: 170px;
+    height: 20px;
+    background-color:$bgColor;
+    top: 20px;
+}
+label{
+    cursor: pointer;
+}
+.sign-in-hover{
+    display: none;
+}
+.line{
+    width: 100%;
+}
+.sign-in-hover label{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    align-self: center;
+}
+.sign-in-hover-label{
+    display: block;
+    color:$bgColor;
+    width:200px;
+    height: 100px;
+    position: absolute;
+    background-color:$fontColor;
+    right: 10px;
+    font-weight: bold;
+    flex-direction: column;
+    display: flex;
+    overflow: hidden;
+    // top: 20px;
+}
