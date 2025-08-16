@@ -1,0 +1,50 @@
+@import "../../../styles.scss";
+.admin-upload-section{
+    color:$fontColor;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    flex-direction: column;
+    justify-content: start;
+}
+.image-section{
+    margin-top: 20px;
+    width: 200px;
+    height: 200px;
+    border: 2px $fontColor solid;
+    border-radius: 10px;
+    flex-direction: column;
+}
+.product-details{
+    margin-top: 20px;
+    flex-direction: column;
+}
+.txt-input{
+    color:$fontColor;
+    background:transparent;
+}
+.input-section{
+    margin-top: 20px;
+    color:$fontColor;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.input-section textarea{
+    color:$fontColor;
+    background: transparent;
+}
+.submit-btn{
+    margin-top: 20px;
+    color:$fontColor;
+    cursor: pointer;
+    background-color:transparent;
+    border: 2px solid $fontColor;
+    width:200px;
+    height: 40px;
+    border-radius: 5px;
+    align-self: center;
+}
+.image-input{
+    width: 180px;
+}

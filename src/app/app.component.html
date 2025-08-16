@@ -4,16 +4,16 @@
 
         </div>
         <div class="section flex-space-around">
-            <label>
+            <label routerLink="/">
                 Home
             </label>
-            <label>
+            <label routerLink="/products">
                 Products
             </label>
-            <label>
+            <label routerLink="trending">
                 Trending
             </label>
-            <label>
+            <label routerLink="cart">
                 Cart
             </label>
             <label id="sign-in" (pointerover)="pointHover()">
@@ -22,11 +22,11 @@
         </div>
     </header>
     <div class="sign-in-hover" id="sign-in-hover" #signInHover>
-        <label>
+        <label routerLink="admin">
             Admin
         </label>
         <hr class="line"/>
-        <label>
+        <label routerLink="user">
             User
         </label>
     </div>

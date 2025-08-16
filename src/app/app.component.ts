@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit,ViewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet,RouterModule} from '@angular/router';
 import { HostListener} from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
