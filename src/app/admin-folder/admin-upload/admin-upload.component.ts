@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { ReactiveFormsModule,FormGroup,FormControl, Validators,FormsModule} from '@angular/forms';
-import { File } from 'buffer';
-
+import { ApiserviceService } from '../../apiservice.service';
 @Component({
   selector: 'app-admin-upload',
-  imports: [ReactiveFormsModule,FormsModule],
+  imports: [ReactiveFormsModule,FormsModule,CommonModule],
   templateUrl: './admin-upload.component.html',
   styleUrl: './admin-upload.component.scss'
 })
 export class AdminUploadComponent implements OnInit {
   submitForm=false;
+  private apiService = inject(ApiserviceService); 
   constructor(){
 
   }
+
   productData=new FormGroup({
     prodImg:new FormControl('',Validators.required),
     prodName:new FormControl('',Validators.required),
     prodPrice:new FormControl('',Validators.required),
-    prodDes:new FormControl('file',Validators.required)
+    prodDes:new FormControl(' ',Validators.required)
   })
   ngOnInit(): void {
     if(this.productData.valid){
@@ -25,7 +27,14 @@ export class AdminUploadComponent implements OnInit {
     }
   }
   onSubmit=()=>{
-    console.log(this.productData.value)
+    this.apiService.adminUpload(this.productData.value).subscribe((data)=>{
+      console.log(data);
+    });
+    this.productData.reset();
+    this.productData.patchValue({
+      prodImg:''
+    });
+    window.location.reload();
   }
   onChange=(event:Event)=>{
     const input=event.target as HTMLInputElement;

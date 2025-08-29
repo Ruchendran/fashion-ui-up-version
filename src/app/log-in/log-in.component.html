@@ -1,0 +1,38 @@
+<div class="login-section">
+    <img src="assets/mens-cloth1.png"  alt="mens-cloth1" class="mens-cloth1"/>
+    <img  src="assets/mens-cloth5.png" alt="mens-cloth5" class="mens-cloth5"/>
+    <!-- <img src="assets/ani-img-male.png" alt="ani-img-male" class="ani-img-male" /> -->
+    <img  src="assets/mens-cloth3.png" alt="mens-cloth3" class="mens-cloth3"/>
+    <div class="form-section">
+        <h2 class="form-head">
+           Welcome To Fashion Shop
+        </h2>
+        <form class="login-form">
+            <div class="user-section">
+                <i class="fa-solid fa-user icon"></i>
+                <input placeholder="Enter Username"  htmlFor="username"  type="text" class="input-field"/>
+            </div>
+            <div class="user-section">
+                <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
+                <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i>
+                <input placeholder="Enter Password"   [type]="eyeOpen?'text':'password'"  class="input-field"/>
+            </div>
+            <div class="user-section">
+                <i class="fa-solid fa-phone-flip icon"></i>
+                <input placeholder="Enter Phone"  htmlFor="phone"  type="text"  class="input-field"/>
+            </div>
+            <div  class="forgot-section flex">
+                <a>Forgot Password?</a>
+            </div>
+            <button class="submit-btn">
+                Submit
+            </button>
+            <div  class="dont-have-section flex">
+                <span>
+                    Don't Have Account?
+                </span>
+                <a>Register Now</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -3,8 +3,10 @@ body{
     margin: 0px;
     padding: 0px;
 }
-$bgColor:#17161a;
-$fontColor:#e9e6f0;
+$bgColor:#FFFFFF;
+$fontColor:#000000;
+$designColor:#f2b50c;
+$fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 .flex-space-around{
     display: flex;
     justify-content: space-around;
@@ -14,4 +16,7 @@ $fontColor:#e9e6f0;
     display: flex;
     justify-content:center;
     align-items: center;
+}
+body{
+    font-family: $fontFamily;
 }

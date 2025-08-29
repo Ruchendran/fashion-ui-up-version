@@ -4,43 +4,82 @@
     color:$fontColor;
     height: auto;
     opacity: 1;
-    background-blend-mode: overlay;
+    width: 100vw;
+    position: relative;
 }
+
 .header{
-    width: 100%;
+    width: 100vw;
     height: 80px;
     display: flex;
     align-items: center;
+    position: relative;
+    top: 5px;
+    z-index: 0;
+    // box-shadow: 0px 0px 10px grey;
 }
 .section{
-    height: 60px;
-    width: calc(100% - 200px);
-    background-color:$fontColor;
-    color:$bgColor;
+    height: 100%;
+    width: 100%;
+    background-color:$bgColor;
+    color:$designColor;
     font-weight: bold;
-}
-.bar{
-    height: 60px;
-    width: 200px;
-    background-color:$fontColor;
     position: relative;
 }
-.bar::before{
+.section::before{
     content: '';
     position: absolute;
-    width:60px;
-    height: 60px;
-    background-color:$bgColor;
-    right: -15px;
-    rotate: 45deg;
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(to right,#ffffff,$designColor);
+    z-index: -1;
+    filter: blur(10px);
+    top: 0px;
+    left: 0px;
 }
-.bar::after{
+.label{
+    width: 120px;
+    padding: 10px;
+    text-align: center;
+    z-index: 1;
+}
+.header-label{
+    position: relative;
+    overflow: hidden;
+    width: 120px;
+    padding: 10px;
+    text-align: center;
+    z-index: 1;
+    border-radius: 10px;
+}
+.header-label::before{
     content: '';
     position: absolute;
-    width: 170px;
-    height: 20px;
+    left: 40%;
+    top: -50px;
+    background-color:$designColor;
+    width: 15px;
+    height: 150px;
+    z-index: -1;
+    animation: label-ani 2.5s linear infinite ;
+}
+@keyframes label-ani{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.header-label::after{
+    content: '';
+    left: 0px;
+    top: 0px;
+    position: absolute;
     background-color:$bgColor;
-    top: 20px;
+    z-index: -1;
+    inset: 3px;
+    border-radius: 5px;
 }
 label{
     cursor: pointer;
@@ -61,13 +100,19 @@ label{
     display: block;
     color:$bgColor;
     width:200px;
-    height: 100px;
+    height: auto;
     position: absolute;
-    background-color:$fontColor;
+    background-color:$designColor;
     right: 10px;
     font-weight: bold;
     flex-direction: column;
     display: flex;
     overflow: hidden;
     // top: 20px;
+    z-index: 2;
+}
+@media screen and (max-width : 576px) {
+    .render-container{
+        display: none;
+    }
 }
