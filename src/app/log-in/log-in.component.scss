@@ -83,7 +83,7 @@
 .submit-btn{
     cursor: pointer;
     margin-top: 12px;
-    width: 360px;
+    width: 380px;
     height: 45px;
     border-radius: 20px;
     align-self: center;
@@ -163,6 +163,124 @@
     top: 28px;
     right: 15px;
 }
-.eye{
+.eye,a{
     cursor: pointer;
+}
+.card-train{
+    color:$designColor;
+    width:650px;
+    height: 200px;
+    position: absolute;
+    top: 50vh;
+    right: 5vw;
+    overflow: hidden;
+    mask-image:linear-gradient(to right,transparent,#000000 30%,#000000 70%,transparent);
+}
+.cards{
+    cursor: pointer;
+    width:100px;
+    height: 65px;
+    box-shadow: 0px 0px 10px grey;
+    animation: card-motion 10s linear infinite;
+    position: absolute;
+    left: 100%;
+    background-color:$bgColor;
+    transform: rotate(-30deg) skew(35deg);
+    transform-origin: right;
+    transform-style: preserve-3d;
+    flex-shrink: 0;
+}
+.cards::before{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 65px;
+    background-color:#c2c4c4;
+    left: -10px;
+    transform: skewY(-45deg);
+    top: 2.5px;
+}
+.cards::after{
+    content: '';
+    position: absolute;
+    width:103px;
+    height: 10px;
+    background-color:#c2c4c4;
+    top: 63px;
+    transform: skewX(-45deg);
+    left: -5px;
+}
+.cards:hover{
+    transform:rotate(-30deg) skew(35deg) translate(5px,-5px);
+    transition: 0.3s linear;
+    box-shadow: -20px 20px 100px grey;
+}
+.card1{
+    animation-delay: -8s;
+}
+.card2{
+    animation-delay: -6s;
+}
+.card3{
+    animation-delay: -4s;
+}
+.card4{
+    animation-delay: -2s;
+}
+.card5{
+    animation-delay: 0s;
+}
+@keyframes card-motion{
+to{
+    left: -120px;
+}
+}
+@media screen and (max-width : 576px) {
+    .mens-cloth1{
+        display: none;
+    }
+    .mens-cloth5{
+        display: none;
+    }
+    .mens-cloth3{
+        display: none;
+    }
+    .form-section{
+        animation: none;
+        position: relative;
+        opacity: 1;
+        top: 0px;
+        right: 0px;
+        height: 100vh;
+        filter: none;
+    }
+    .render-container{
+        height: 100vh;
+    }
+    .login-section{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+    }
+    .input-field{
+        width: 80vw;
+    }
+    .login-form{
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .icon{
+        right: 20px;
+    }
+    .submit-btn{
+        width: 80vw;
+    }
+    .forgot-section,.dont-have-section{
+        width: 80vw;
+    }
+    .card-train{
+        display: none;
+    }
 }

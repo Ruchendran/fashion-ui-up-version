@@ -7,32 +7,43 @@
         <h2 class="form-head">
            Welcome To Fashion Shop
         </h2>
-        <form class="login-form">
+        <form class="login-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
             <div class="user-section">
                 <i class="fa-solid fa-user icon"></i>
-                <input placeholder="Enter Username"  htmlFor="username"  type="text" class="input-field"/>
+                <input placeholder="Enter Username"  htmlFor="username"  type="text" class="input-field" formControlName="username"/>
             </div>
             <div class="user-section">
                 <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
                 <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i>
-                <input placeholder="Enter Password"   [type]="eyeOpen?'text':'password'"  class="input-field"/>
+                <input placeholder="Enter Password"   [type]="eyeOpen?'text':'password'"  class="input-field" formControlName="password"/>
             </div>
-            <div class="user-section">
+            <div class="user-section" *ngIf="register">
                 <i class="fa-solid fa-phone-flip icon"></i>
-                <input placeholder="Enter Phone"  htmlFor="phone"  type="text"  class="input-field"/>
+                <input placeholder="Enter Phone"  htmlFor="phone"  type="text"  class="input-field" formControlName="phone"/>
             </div>
             <div  class="forgot-section flex">
                 <a>Forgot Password?</a>
             </div>
-            <button class="submit-btn">
+            <button class="submit-btn" type="submit">
                 Submit
             </button>
             <div  class="dont-have-section flex">
                 <span>
                     Don't Have Account?
                 </span>
-                <a>Register Now</a>
+                <a (click)="onRegister()" *ngIf="!register">Register Now</a>
+                <a (click)="onRegister()"  *ngIf="register">Login Now</a>
             </div>
         </form>
     </div>
+    <div class="card-train flex" id="cards">
+            <div class="cards card1 flex">one</div>
+            <div class="cards card2 flex"> two</div>
+            <div class="cards card3 flex">three</div>
+            <div class="cards card4 flex">foure</div>
+            <div class="cards card5 flex">five</div>
+    </div>
 </div>
+<ng-container #loaderContainer>
+
+</ng-container>

@@ -112,7 +112,41 @@ label{
     z-index: 2;
 }
 @media screen and (max-width : 576px) {
-    .render-container{
+    .header{
         display: none;
     }
+    .render-container{
+        width: 100%;
+        height: auto;
+        background-color:$bgColor;
+        position: relative;
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+    }
+    .render-container::before{
+        content: '';
+        width: 100vw;
+        height: 20vh;
+        position: absolute;
+        background-color:$designColor;
+        border-bottom-right-radius:80px;
+        border-bottom-left-radius: 10% ;
+        box-shadow: 5px 5px 10px grey;
+        rotate: 15deg;
+        left: -5vw;
+        top: -12vh;
+    }
+    .render-container::after{
+    content: '';
+    width: 100vw;
+    height: 20vh;
+    position: absolute;
+    background-color:$designColor;
+    border-top-right-radius:10%;
+    border-top-left-radius: 80px;
+    right:-5vw;
+    rotate: 15deg;
+    bottom:-12vh;
+    box-shadow: -5px -5px 5px grey;
+}
 }
