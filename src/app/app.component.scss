@@ -15,13 +15,16 @@
     align-items: center;
     position: relative;
     top: 5px;
-    z-index: 0;
-    // box-shadow: 0px 0px 10px grey;
+    z-index: 1;
+    box-shadow:inset 0px 0px 10px grey;
+    background: transparent;
+    position: absolute;
+    top: 0px;
 }
 .section{
     height: 100%;
     width: 100%;
-    background-color:$bgColor;
+    background-color:transparent;
     color:$designColor;
     font-weight: bold;
     position: relative;
@@ -31,7 +34,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image:linear-gradient(to right,#ffffff,$designColor);
+    // background-image:linear-gradient(to right,#ffffff,$designColor);
     z-index: -1;
     filter: blur(10px);
     top: 0px;
@@ -46,24 +49,19 @@
 .header-label{
     position: relative;
     overflow: hidden;
-    width: 120px;
-    padding: 10px;
-    text-align: center;
-    z-index: 1;
     border-radius: 10px;
 }
 .header-label::before{
-    content: '';
+    content: "";
     position: absolute;
-    left: 40%;
-    top: -50px;
+    width: 200%;
+    left: -40%;
+    height: 25px;
     background-color:$designColor;
-    width: 15px;
-    height: 150px;
     z-index: -1;
-    animation: label-ani 2.5s linear infinite ;
+    animation: highlight-rot 1s infinite linear;
 }
-@keyframes label-ani{
+@keyframes highlight-rot {
     0%{
         transform: rotate(0deg);
     }
@@ -71,15 +69,15 @@
         transform: rotate(360deg);
     }
 }
+
 .header-label::after{
     content: '';
-    left: 0px;
-    top: 0px;
+    inset: 4px;
     position: absolute;
-    background-color:$bgColor;
     z-index: -1;
-    inset: 3px;
-    border-radius: 5px;
+    backdrop-filter: blur(1000px);
+    filter: blur(1000px);
+    background:transparent;
 }
 label{
     cursor: pointer;
@@ -97,6 +95,7 @@ label{
     align-self: center;
 }
 .sign-in-hover-label{
+    top: 50px;
     display: block;
     color:$bgColor;
     width:200px;
@@ -108,8 +107,10 @@ label{
     flex-direction: column;
     display: flex;
     overflow: hidden;
-    // top: 20px;
     z-index: 2;
+}
+.mobile-nav-section{
+    display: none;
 }
 @media screen and (max-width : 576px) {
     .header{
@@ -118,7 +119,7 @@ label{
     .render-container{
         width: 100%;
         height: auto;
-        background-color:$bgColor;
+        background-color:$mobileBg;
         position: relative;
         overflow-x: hidden !important;
         overflow-y: hidden !important;
@@ -137,16 +138,33 @@ label{
         top: -12vh;
     }
     .render-container::after{
-    content: '';
-    width: 100vw;
-    height: 20vh;
-    position: absolute;
-    background-color:$designColor;
-    border-top-right-radius:10%;
-    border-top-left-radius: 80px;
-    right:-5vw;
-    rotate: 15deg;
-    bottom:-12vh;
-    box-shadow: -5px -5px 5px grey;
-}
+        content: '';
+        width: 100vw;
+        height: 20vh;
+        position: absolute;
+        background-color:$designColor;
+        border-top-right-radius:10%;
+        border-top-left-radius: 80px;
+        right:-5vw;
+        rotate: 15deg;
+        bottom:-12vh;
+        box-shadow: -5px -5px 5px grey;
+    }
+    .mobile-nav-section{
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 40px;
+        background: $mobileBg;
+        opacity: 0.4;
+        bottom: 0px;
+        left: 0px;
+        z-index: 1;
+    }
+ .icon-font{
+    cursor: pointer;
+    padding-top: 5px;
+    font-size: 25px;
+ }
+
 }

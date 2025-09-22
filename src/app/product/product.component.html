@@ -1,1 +1,24 @@
-<p>product works!</p>
+<div class="container">
+    <div class="row d-flex flex-direction-row justify-content-around">
+        <div class="col-md-5 product flex mt-3" *ngFor="let data of listOfProducts">
+            <img [src]="data.productImg" class="image" />
+            <div>
+                <h1>
+                    {{data.productName}}
+                </h1>
+                <p>
+                    {{data.productDes}}
+                </p>
+                <p>
+                    {{data.productPrice}}
+                </p>
+                <button (click)="addToCart(data)">
+                    Add Cart
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-container #loaderContainer>
+
+</ng-container>

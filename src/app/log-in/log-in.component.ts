@@ -3,6 +3,7 @@ import { Component, ComponentRef, OnInit, ViewChild,ViewContainerRef } from '@an
 import { ReactiveFormsModule,FormGroup,FormControl, Validators} from '@angular/forms';
 import { ApiserviceService } from '../apiservice.service';
 import { LoaderComponent } from '../loader/loader.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -11,7 +12,7 @@ import { LoaderComponent } from '../loader/loader.component';
   styleUrl: './log-in.component.scss'
 })
 export class LogInComponent implements OnInit {
-  constructor(private apiService:ApiserviceService,private containerRef:ViewContainerRef){}
+  constructor(private apiService:ApiserviceService,private containerRef:ViewContainerRef,private route:Router){}
   @ViewChild('loaderContainer') loaderContainer!:ComponentRef<any>;
   userForm:any;
   register=false;
@@ -58,7 +59,7 @@ export class LogInComponent implements OnInit {
     if(this.register){
       this.apiService.registerUser(this.userForm.value).subscribe((res:any)=>{
         this.hideLoader();
-        alert(res.message)
+        this.route.navigate(["/"]);
       },
       (error)=>{
         this.hideLoader();
@@ -69,7 +70,7 @@ export class LogInComponent implements OnInit {
     else{
       this.apiService.loginUser(this.userForm.value).subscribe((res:any)=>{
         this.hideLoader();
-        alert(res.message)
+       this.route.navigate(["/"]);
       },
       (error)=>{
         this.hideLoader();

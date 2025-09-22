@@ -71,7 +71,7 @@
 }
 .input-field{
     margin-top: 15px;
-    width: 350px;
+    width: 380px;
     height: 40px;
     padding-left: 25px;
     border-radius: 20px;
@@ -261,6 +261,7 @@ to{
         width: 100vw;
         height: 100vh;
         display: flex;
+        position: relative;
     }
     .input-field{
         width: 80vw;
@@ -283,4 +284,5 @@ to{
     .card-train{
         display: none;
     }
+    
 }

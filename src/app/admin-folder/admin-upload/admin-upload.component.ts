@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit,ComponentRef,ViewContainerRef, ViewChild } from '@angular/core';
 import { ReactiveFormsModule,FormGroup,FormControl, Validators,FormsModule} from '@angular/forms';
 import { ApiserviceService } from '../../apiservice.service';
+import { LoaderComponent } from '../../loader/loader.component';
 @Component({
   selector: 'app-admin-upload',
   imports: [ReactiveFormsModule,FormsModule,CommonModule],
@@ -11,10 +12,10 @@ import { ApiserviceService } from '../../apiservice.service';
 export class AdminUploadComponent implements OnInit {
   submitForm=false;
   private apiService = inject(ApiserviceService); 
-  constructor(){
+  constructor(private containerRef:ViewContainerRef){
 
   }
-
+  @ViewChild('loaderContainer') loaderContainer!:ComponentRef<any>;
   productData=new FormGroup({
     prodImg:new FormControl('',Validators.required),
     prodName:new FormControl('',Validators.required),
@@ -27,14 +28,24 @@ export class AdminUploadComponent implements OnInit {
     }
   }
   onSubmit=()=>{
-    this.apiService.adminUpload(this.productData.value).subscribe((data)=>{
-      console.log(data);
-    });
-    this.productData.reset();
-    this.productData.patchValue({
-      prodImg:''
-    });
-    window.location.reload();
+    this.showLoader();
+    if(this.productData.value.prodName && this.productData.value.prodDes && this.productData.value.prodPrice){
+      this.apiService.adminUpload(this.productData.value).subscribe((res:any)=>{
+        console.log(res);
+        this.hideLoader();
+      },error=>{
+        this.hideLoader();
+      });
+      this.productData.reset();
+      this.productData.patchValue({
+        prodImg:''
+      });
+    }
+    else{
+     this.hideLoader();
+      alert("Please fill the all manditory values.")
+    
+    }
   }
   onChange=(event:Event)=>{
     const input=event.target as HTMLInputElement;
@@ -48,6 +59,12 @@ export class AdminUploadComponent implements OnInit {
       }
       reader.readAsDataURL(file);
     }
+  }
+  showLoader = () => {
+    this.loaderContainer = this.containerRef.createComponent(LoaderComponent)
+  }
+  hideLoader = () => {
+    this.loaderContainer.destroy();
   }
 }
 

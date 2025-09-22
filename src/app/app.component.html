@@ -1,38 +1,42 @@
 <div class="render-container">
-    <header class="header">
-        <div class="section flex-space-around">
-            <label routerLink="/" class="label" routerLinkActive="header-label" [routerLinkActiveOptions]="{exact:true}" >
-                Home
+        <router-outlet>
+            
+        </router-outlet>
+        <header class="header">
+            <div class="section flex-space-around">
+                <label routerLink="/" class="label" routerLinkActive="header-label" [routerLinkActiveOptions]="{exact:true}" >
+                    Home
+                </label>
+                <label routerLink="/products" class="label" routerLinkActive="header-label">
+                    Products
+                </label>
+                <label routerLink="/trending" class="label" routerLinkActive="header-label">
+                    Trending
+                </label>
+                <label routerLink="/cart" class="label" routerLinkActive="header-label">
+                    Cart
+                </label>
+                <label id="sign-in" (pointerover)="pointHover()" class="label">
+                    Sign In
+                </label>
+            </div>
+        </header>
+
+        <div class="sign-in-hover" id="sign-in-hover" #signInHover>
+            <label routerLink="/admin">
+                Admin
             </label>
-            <label routerLink="/products" class="label" routerLinkActive="header-label">
-                Products
+            <hr class="line"/>
+            <label routerLink="/register">
+                Register
             </label>
-            <label routerLink="/trending" class="label" routerLinkActive="header-label">
-                Trending
-            </label>
-            <label routerLink="/cart" class="label" routerLinkActive="header-label">
-                Cart
-            </label>
-            <label id="sign-in" (pointerover)="pointHover()" class="label">
-                Sign In
+            <hr class="line"/>
+            <label routerLink="/log-in">
+                Log In
             </label>
         </div>
-    </header>
-
-    <div class="sign-in-hover" id="sign-in-hover" #signInHover>
-        <label routerLink="/admin">
-            Admin
-        </label>
-        <hr class="line"/>
-        <label routerLink="/register">
-            Register
-        </label>
-        <hr class="line"/>
-        <label routerLink="/log-in">
-            Log In
-        </label>
-    </div>
-    <router-outlet>
-        
-    </router-outlet>
+        <div class="mobile-nav-section">
+            <i class="fa-etch fa-solid fa-angle-up flex icon-font" (click)="clickMobileArrow()" *ngIf="!mobileNav"></i>
+            <i class="fa-etch fa-solid fa-angle-down flex icon-font" *ngIf="mobileNav"  (click)="clickMobileArrow()"></i>
+        </div>
 </div>

@@ -1,17 +1,18 @@
 import { Component, ElementRef, Inject, OnInit,PLATFORM_ID,ViewChild } from '@angular/core';
 import { RouterOutlet,RouterModule} from '@angular/router';
 import { HostListener} from '@angular/core';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,RouterModule],
+  imports: [RouterOutlet,RouterModule,CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit  {
   title = 'fashion-ui';
+  mobileNav:boolean=false;
   constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object){
 
   }
@@ -37,6 +38,9 @@ export class AppComponent implements OnInit  {
   pointHover=()=>{
     let signInHoverElement=document.getElementById('sign-in-hover');
     signInHoverElement?.classList.add('sign-in-hover-label');
+  }
+  clickMobileArrow=()=>{
+    this.mobileNav=!this.mobileNav;
   }
 
 }

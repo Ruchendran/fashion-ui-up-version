@@ -12,7 +12,9 @@ export class ApiserviceService implements OnInit {
 
   apiConstants={
     registerUser:serverVal.server+'/auth/register',
-    loginUser:serverVal.server+'/auth/login'
+    loginUser:serverVal.server+'/auth/login',
+    getAllProducts:serverVal.server+'/products',
+    saveToCart:serverVal.server+'/cart/save',
   }
 
   ngOnInit(): void {
@@ -27,7 +29,12 @@ export class ApiserviceService implements OnInit {
     return this.http.post(this.apiConstants.registerUser,data);
   }
   loginUser(data:any){
-    console.log("hit");
     return this.http.post(this.apiConstants.loginUser,data);
+  }
+  getAllProducts(){
+    return this.http.get(this.apiConstants.getAllProducts);
+  }
+  saveToCart(payload:any){
+    return this.http.post(this.apiConstants.saveToCart,payload)
   }
 }

@@ -10,7 +10,7 @@
         <form class="login-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
             <div class="user-section">
                 <i class="fa-solid fa-user icon"></i>
-                <input placeholder="Enter Username"  htmlFor="username"  type="text" class="input-field" formControlName="username"/>
+                <input placeholder="Enter Username as Mail"  htmlFor="username"  type="text" class="input-field" formControlName="username"/>
             </div>
             <div class="user-section">
                 <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
