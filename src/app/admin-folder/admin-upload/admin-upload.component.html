@@ -1,9 +1,8 @@
-<div >
-    <form [formGroup]="productData" class="admin-upload-section flex" (ngSubmit)="onSubmit()">
-            <div class="image-section flex">
-                <img *ngIf="productData.value.prodImg" [src]="productData.value.prodImg" class="product-image" />
-            </div>
-            <div class="product-details">
+<form [formGroup]="productData" class="admin-upload-section flex" (ngSubmit)="onSubmit()" >
+        <div class="image-section flex">
+            <img *ngIf="productData.value.prodImg" [src]="productData.value.prodImg" class="product-image" />
+        </div>
+        <div class="product-details">
             <div class="prod-price-section input-section">
                 <label>
                     Product Image :
@@ -22,13 +21,21 @@
                 </label>
                 <input type="text" class="txt-input"   formControlName="prodPrice"/>
             </div>
+            <div class="prod-price-section input-section">
+                <label>
+                    Product Family :
+                </label>
+                <select class="select-input" formControlName="productFamily">
+                    <option *ngFor="let family of productFamilyList">
+                        {{family}}
+                    </option>
+                </select>
+            </div>
             <div class="input-section">
                 <label>
                     Product Desription : 
                 </label>
-                <textarea formControlName="prodDes">
-
-                </textarea>
+                <textarea formControlName="prodDes"></textarea>
                 <!-- <input type="text"  formControlName="prodDes" class="txt-input"/> -->
             </div>
             <div class="btn-section flex">
@@ -37,8 +44,7 @@
                 </button>
             </div>
         </div>
-    </form>
-</div>
+</form>
 <ng-container #loaderContainer>
 
 </ng-container>

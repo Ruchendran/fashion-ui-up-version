@@ -21,6 +21,10 @@
                 <i class="fa-solid fa-phone-flip icon"></i>
                 <input placeholder="Enter Phone"  htmlFor="phone"  type="text"  class="input-field" formControlName="phone"/>
             </div>
+            <div class="user-section" *ngIf="register">
+                <i class="fa-solid fa-phone-flip icon"></i>
+                <input placeholder="Enter Name"  htmlFor="phone"  type="text"  class="input-field" formControlName="user"/>
+            </div>
             <div  class="forgot-section flex">
                 <a>Forgot Password?</a>
             </div>
@@ -31,8 +35,8 @@
                 <span>
                     Don't Have Account?
                 </span>
-                <a (click)="onRegister()" *ngIf="!register">Register Now</a>
                 <a (click)="onRegister()"  *ngIf="register">Login Now</a>
+                <a (click)="onRegister()" *ngIf="!register">Register Now</a>
             </div>
         </form>
     </div>

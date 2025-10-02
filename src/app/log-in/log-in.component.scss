@@ -1,5 +1,6 @@
 @import "../../styles.scss";
 .login-section{
+    margin-top: 80px;
     width: 100vw;
     height: 555px;
     position: relative;
@@ -117,11 +118,12 @@
     align-items: center;
     position: absolute;    
     right: 20vw;
-    top: 5vh;
+    top: 0vh;
     animation: form-animation 2s forwards ease-in-out;
     animation-delay:0.1s;
     opacity: 0;
     filter: drop-shadow(-2px -2px 5px grey);
+    z-index: 2;
 }
 @keyframes form-animation{
     0%{
@@ -262,6 +264,32 @@ to{
         height: 100vh;
         display: flex;
         position: relative;
+    }
+    .login-section::after{
+        content: '';
+        width: 100vw;
+        height: 20vh;
+        position: absolute;
+        background-color:$designColor;
+        border-top-right-radius:10%;
+        border-top-left-radius: 80px;
+        right:-5vw;
+        rotate: 15deg;
+        bottom:-12vh;
+        box-shadow: -5px -5px 5px grey;
+    }
+    .login-section::before{
+        content: '';
+        width: 100vw;
+        height: 20vh;
+        position: absolute;
+        background-color:$designColor;
+        border-bottom-right-radius:80px;
+        border-bottom-left-radius: 10% ;
+        box-shadow: 5px 5px 10px grey;
+        rotate: 15deg;
+        left: -5vw;
+        top: -12vh;
     }
     .input-field{
         width: 80vw;

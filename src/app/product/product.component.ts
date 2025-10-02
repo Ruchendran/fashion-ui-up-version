@@ -34,8 +34,8 @@ export class ProductComponent implements OnInit {
   }
   addToCart=(product:any)=>{
     this.showLoader();
-    this.apiService.saveToCart(product).subscribe((res)=>{
-      console.log(res,"20001");
+    this.apiService.saveToCart(product).subscribe((res:any)=>{
+      alert(JSON.stringify(res.message))
       this.hideLoader();
     },
     er=>{

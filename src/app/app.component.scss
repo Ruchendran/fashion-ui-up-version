@@ -24,10 +24,13 @@
 .section{
     height: 100%;
     width: 100%;
-    background-color:transparent;
+    background-color:#171615;
     color:$designColor;
     font-weight: bold;
     position: relative;
+}
+.home-page-header{
+    background-color:transparent;
 }
 .section::before{
     content: '';
@@ -57,7 +60,7 @@
     width: 200%;
     left: -40%;
     height: 25px;
-    background-color:$designColor;
+    background-image: linear-gradient(to left,$designColor,$designColor);
     z-index: -1;
     animation: highlight-rot 1s infinite linear;
 }
@@ -102,7 +105,7 @@ label{
     height: auto;
     position: absolute;
     background-color:$designColor;
-    right: 10px;
+    right: 20%;
     font-weight: bold;
     flex-direction: column;
     display: flex;
@@ -111,6 +114,86 @@ label{
 }
 .mobile-nav-section{
     display: none;
+}
+.whatsapp-container{
+    position: fixed;
+    right: 20px;
+    bottom: 40px;
+    display: flex;
+    flex-direction: row;
+    z-index: 1;
+}
+.wts-img{
+    cursor: pointer;
+    width: 65px;
+    height: 65px;
+    z-index: 2;
+}
+.join-container{
+    width:0px;
+    background-color:#25D366;
+    height: 65px;
+    position: absolute;
+    right: 0px;
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+}
+
+.whats-animation-open{
+    animation: sliding-whats-open 1s  1 linear forwards;
+
+}
+
+.whats-animation-close{
+    animation: sliding-whats-close  1s  1 linear forwards;
+}
+.whats-text{
+    cursor: pointer;
+    color:$text-color;
+    opacity: 0;
+    padding-left: 40px;
+    z-index: 2;
+}
+.show-text{
+    display: block;
+    animation: show-txt 1s 1 1s linear forwards;
+}
+@keyframes show-txt {
+    0%{
+        opacity: 0;
+    }    
+    100%{
+        opacity: 1;
+    }
+}
+
+@keyframes sliding-whats-open {
+    0%{
+        width: 0px;
+    }
+    100%{
+        width: 300px;
+    }
+}
+@keyframes sliding-whats-close {
+    0%{
+        width: 300px;
+    }
+    100%{
+        width: 0px ;
+    }
+}
+.user{
+    color:$fontColor;
+    width: 25px;
+    height: 25px;
+    background-color:$designColor;
+    border-radius: 10px;
+}
+.user-span{
+    padding-left: 10px;
+    text-transform: capitalize;
 }
 @media screen and (max-width : 576px) {
     .header{
@@ -124,35 +207,35 @@ label{
         overflow-x: hidden !important;
         overflow-y: hidden !important;
     }
-    .render-container::before{
-        content: '';
-        width: 100vw;
-        height: 20vh;
-        position: absolute;
-        background-color:$designColor;
-        border-bottom-right-radius:80px;
-        border-bottom-left-radius: 10% ;
-        box-shadow: 5px 5px 10px grey;
-        rotate: 15deg;
-        left: -5vw;
-        top: -12vh;
-    }
-    .render-container::after{
-        content: '';
-        width: 100vw;
-        height: 20vh;
-        position: absolute;
-        background-color:$designColor;
-        border-top-right-radius:10%;
-        border-top-left-radius: 80px;
-        right:-5vw;
-        rotate: 15deg;
-        bottom:-12vh;
-        box-shadow: -5px -5px 5px grey;
-    }
+    // .render-container::before{
+    //     content: '';
+    //     width: 100vw;
+    //     height: 20vh;
+    //     position: absolute;
+    //     background-color:$designColor;
+    //     border-bottom-right-radius:80px;
+    //     border-bottom-left-radius: 10% ;
+    //     box-shadow: 5px 5px 10px grey;
+    //     rotate: 15deg;
+    //     left: -5vw;
+    //     top: -12vh;
+    // }
+    // .render-container::after{
+    //     content: '';
+    //     width: 100vw;
+    //     height: 20vh;
+    //     position: absolute;
+    //     background-color:$designColor;
+    //     border-top-right-radius:10%;
+    //     border-top-left-radius: 80px;
+    //     right:-5vw;
+    //     rotate: 15deg;
+    //     bottom:-12vh;
+    //     box-shadow: -5px -5px 5px grey;
+    // }
     .mobile-nav-section{
         display: block;
-        position: absolute;
+        position: fixed;
         width: 100%;
         height: 40px;
         background: $mobileBg;

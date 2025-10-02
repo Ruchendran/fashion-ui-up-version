@@ -1,0 +1,57 @@
+@import "../../styles.scss";
+
+.footer-container{
+    position: absolute;
+    width:100vw;
+    background-image: url("../../assets/diomond.webp");
+    height: 300px;
+    background-size: cover;
+    position: relative;
+    overflow-x: hidden;
+    z-index: 0;
+}
+.screen{
+    width: 100vw;
+    height: 300px;
+    position: absolute;
+    top: 0px;
+    background-color:#0d0f1c;
+    opacity: 0.9;
+}
+.foooter-para{
+    color:$orange;
+}
+.foter-icon-container>span,.icon{
+    color:$orange;
+}
+.icon{
+    // color:$orange;
+}
+.logo-img{
+  cursor: pointer;
+  width: 90px;
+  border-radius: 100%;
+  padding: 10px;
+}
+strong{
+  color:$orange;
+}
+
+@media (max-width:992px) and (min-width:768px) {
+    .footer-container,.screen{
+        height: 450px;
+    }
+
+  
+}
+@media (max-width:768px) and (min-width:576px) {
+    .footer-container,.screen{
+        height: 450px;
+    }
+}
+
+@media (max-width:576px) {
+    .footer-container,.screen{
+        height: 572px;
+    }
+}

@@ -1,5 +1,6 @@
 <div class="container-fluid mt-3">
     <div class="row">
+        <!--First fvashion section-->
         <div class="col-md-12 fashion-section flex fashion-img1" #fashionSection>
             <div class="fashion-content flex  p-3" *ngIf="activeImg1">
                 <h2>
@@ -56,7 +57,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12 swipe-section mt-2">
+        <!--This is the swipe section-->
+        <!-- <div class="col-md-12 swipe-section mt-2">
             <div class="col-md-12 row">
                 <div class="col-md-6 flex">
                      <img  src="../../assets/home-section/swipe-section/swipe1.jpg" alt="swipe-one" class="swipe-one-img img img1 m-2" />
@@ -80,6 +82,132 @@
                 <div class="com-md-6">
 
                 </div>
+            </div>
+        </div> -->
+        <!--The content section-->
+        <div class="content-section flex">
+            <h2>
+              Fashion is the armor to survive the reality of everyday life.
+            </h2>
+            <div class="flex content-sub-division">
+                <div class="left-content" [ngClass]="contentAnimation?'left-side-content':''">
+                    <p>
+                        Introducing the indispensable fashion shirt, the foundational 
+                        piece that effortlessly bridges the gap between casual comfort 
+                        and sharp sophistication. Crafted from premium, breathable fabrics 
+                        like Pima cotton, durable linen, or soft Tencel, these shirts are 
+                        designed not just to look good, but to feel incredible through long days. 
+                        The meticulous attention to detail is evident in the reinforced stitching, 
+                        perfectly aligned plackets, and the selection of unique buttons that add a 
+                        subtle signature touch.Stay ahead of the curve with our expertly curated guide to the season's
+                         most compelling fashion moments. From the dominant color palettes making waves globally to the 
+                         essential silhouettes redefining modern dressing—we break down the trends that truly matter. 
+                         We don't chase every fleeting fad; instead, we handpick key items, unique textures, and innovative 
+                         styling ideas that are worth integrating into your existing collection.
+                    </p>
+                </div>
+                <div class="right-content" [ngClass]="contentAnimation?'right-side-content':''">
+                    <p>
+                        Available in a spectrum of fits—from modern slim-fit to relaxed 
+                        classic-fit—each piece is tailored to flatter various body types, 
+                        ensuring everyone can find their perfect silhouette. Whether you're 
+                        dressing for a high-stakes meeting or a relaxed weekend brunch, a quality
+                        fashion shirt remains the cornerstone of a versatile, well-curated wardrobe,
+                        promising lasting wear and timeless appeal. It's an investment in daily 
+                        confidence and enduring style.While trends provide excitement, timeless 
+                        style offers power. The core of a sophisticated wardrobe lies in enduring 
+                        classics—pieces that transcend seasonal shifts and remain impeccably relevant 
+                        year after year. Focus your investment on foundational garments like the perfect
+                         tailored trench, the crisp white button-down, or premium, straight-leg denim. 
+                         We champion quality over quantity, encouraging a mindful approach to shopping 
+                         that prioritizes superior fabrics.
+                    </p>
+                </div>  
+            </div>
+        </div>
+        <!--Brand section-->
+        <div class="brand-section flex">
+            <h2>
+                Brands Available At Fashion Shop <span class="span-txt">Trends!</span>
+            </h2>
+            <div class="col-md-12 row brands-cards flex">
+                <div class="col-md-5 flex card">
+                    <img src="../../assets/home-section/brands/brand4.jpg" alt="" class="card-img">
+                    <img src="../../assets/home-section/brands/brand5.jpg" alt="" class="card-img">
+                    <img src="../../assets/home-section/brands/brand6.jpg" alt="" class="card-img">
+                </div>
+                <div class="col-md-5 flex card ">
+                    <img src="../../assets/home-section/brands/brand7.jpg" alt="" class="card-img">
+                    <img src="../../assets/home-section/brands/brand8.jpg" alt="" class="card-img">
+                    <img src="../../assets/home-section/brands/brand9.jpg" alt="" class="card-img">
+                </div>
+                <div class="col-md-6 flex card ">
+                    <img src="../../assets/home-section/brands/brand10.jpg" alt="" class="card-img">
+                    <img src="../../assets/home-section/brands/brand11.jpg" alt="" class="card-img">
+                    <img src="../../assets/home-section/brands/brand12.jpg" alt="" class="card-img">
+                    <img src="../../assets/home-section/brands/brand13.jpg" alt="" class="card-img">
+                </div>
+                <div class="col-md-4 flex card ">
+                    <img src="../../assets/home-section/brands/brand14.jpg" alt="" class="card-img">
+                    <img src="../../assets/home-section/brands/brand15.jpg" alt="" class="card-img">
+                </div>
+            </div>
+        </div>
+        <!--Three cards section-->
+        <div class="three-d-cards-section flex">
+            <h2 class="h2-element">
+                Pick Up the Styles <span class="span-txt">Today!</span>
+            </h2>
+            <div class="three-d-cards-images-container flex">
+                <div class="three-d-cards-img1-div">
+                    <img src="../../assets/home-section/3d-images/3d-card1.jpg" alt="" class="three-d-cards-img1" #threeDImg1>
+                </div>
+                <div class="three-d-cards-img2-div">
+                    <img src="../../assets/home-section/3d-images/3d-card2.jpg" alt="" class="three-d-cards-img2">
+                </div>
+                <div class="three-d-cards-img3-div">
+                    <img src="../../assets/home-section/3d-images/3d-card3.jpg" alt="" class="three-d-cards-img3" #threeDImg3>
+                </div>
+            </div>
+            <div class="three-d-card-train flex">
+                <div class="three-d-card cart-back flex">One</div>
+                <div class="three-d-card cart-back flex">Two</div>
+                <div class="three-d-card cart-back flex">Three</div>
+                <div class="three-d-card cart-back flex">Four</div>
+                <div class="three-d-card cart-back flex">Five</div>
+                <div class="three-d-card cart-back flex">Six</div>
+                <div class="three-d-card cart-back flex">Seven</div>
+                <div class="three-d-card cart-back flex">Eight</div>
+                <div class="three-d-card cart-back flex">Nine</div>
+                <div class="three-d-card cart-back flex">Ten</div>
+            </div>
+            <div class="three-d-card-train flex">
+                <div class="three-d-card card-forward flex">One</div>
+                <div class="three-d-card card-forward  flex">Two</div>
+                <div class="three-d-card card-forward  flex">Three</div>
+                <div class="three-d-card card-forward  flex">Four</div>
+                <div class="three-d-card card-forward  flex">Five</div>
+                <div class="three-d-card card-forward  flex">Six</div>
+                <div class="three-d-card card-forward  flex">Seven</div>
+                <div class="three-d-card card-forward  flex">Eight</div>
+                <div class="three-d-card card-forward  flex">Nine</div>
+                <div class="three-d-card card-forward  flex">Ten</div>
+            </div>
+            
+        </div>
+        <!--Brands moving section-->
+        <!-- <div class="brand-moving-section flex">
+            <h2>
+                Choose the Fit From <span  class="span-txt">Fashion</span>
+            </h2>
+        </div> -->
+        <!--Zoom section-->
+        <div class="zoom-section flex">
+            <h2 class="zoom-heading">
+                Trend Alert Must-Have Looks of the <span class="span-txt">Year</span>
+            </h2>
+            <div class="zoom-img-container flex">
+                <img src="../../assets/home-section/zoom/zoom-img.jpg" class="zoom-img" />
             </div>
         </div>
     </div>

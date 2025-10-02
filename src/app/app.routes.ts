@@ -33,6 +33,6 @@ export const routes: Routes = [
         component:AdminComponent
     },
     {
-        path:'admin-upload',component:AdminUploadComponent
+        path:'admin/upload',component:AdminUploadComponent
     }
 ];

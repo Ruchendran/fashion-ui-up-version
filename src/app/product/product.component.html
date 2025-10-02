@@ -1,6 +1,11 @@
-<div class="container">
-    <div class="row d-flex flex-direction-row justify-content-around">
-        <div class="col-md-5 product flex mt-3" *ngFor="let data of listOfProducts">
+<pre>
+
+
+
+</pre>
+<div class="container-fluid">
+    <div class="row  justify-content-center">
+        <div class="col-md-3 product flex m-3" *ngFor="let data of listOfProducts">
             <img [src]="data.productImg" class="image" />
             <div>
                 <h1>
@@ -10,9 +15,9 @@
                     {{data.productDes}}
                 </p>
                 <p>
-                    {{data.productPrice}}
+                    {{data.productPrice | currency:'INR'}}
                 </p>
-                <button (click)="addToCart(data)">
+                <button (click)="addToCart(data)" class="btn">
                     Add Cart
                 </button>
             </div>

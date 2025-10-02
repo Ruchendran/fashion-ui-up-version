@@ -1,21 +1,27 @@
 import { Component, ElementRef, Inject, OnInit,PLATFORM_ID,ViewChild } from '@angular/core';
-import { RouterOutlet,RouterModule} from '@angular/router';
+import { RouterOutlet,RouterModule,Router} from '@angular/router';
 import { HostListener} from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,RouterModule,CommonModule],
+  imports: [RouterOutlet,RouterModule,CommonModule,FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit  {
   title = 'fashion-ui';
   mobileNav:boolean=false;
-  constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object){
+  openWhatsapp:any=false;
+  whatsCount:any=0;
+  landingPage=false;
+  userFromSession:any='';
+  constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object,private route:Router){
 
   }
+  headerHide:boolean=true;
   @ViewChild('signInHover') signInHover!:ElementRef;
   @HostListener('click',['$event'])
   onClick=(outOfHover:Event)=>{
@@ -26,7 +32,25 @@ export class AppComponent implements OnInit  {
     }
   }
   ngOnInit(): void {
+    if(isPlatformBrowser(this.platformId)){
+    let data=sessionStorage.getItem('user');
+    if(data){
+      this.userFromSession=JSON.parse(data);
+    }
+    }
     this.location.onUrlChange((url)=>{
+      if(url == '/register' || url == '/log-in'){
+        this.headerHide=false;
+      }
+      else{
+        this.headerHide=true;
+      }
+      if(url == '/'){
+        this.landingPage=true;
+      }
+      else{
+        this.landingPage=false;
+      }
       if(isPlatformBrowser(this.platformId)){
         let signInHoverElement=document.getElementById('sign-in-hover');
         signInHoverElement?.classList.remove('sign-in-hover-label');
@@ -41,6 +65,22 @@ export class AppComponent implements OnInit  {
   }
   clickMobileArrow=()=>{
     this.mobileNav=!this.mobileNav;
+  }
+    whatsAppClick=()=>{
+    this.whatsCount=1;
+    this.openWhatsapp=!this.openWhatsapp
+  }
+
+
+  MsgThroughWts=()=>{
+    console.log("hit")
+    window.open("https://wa.me/+918074178839",'_blank');
+  }
+
+  onLogOut=()=>{
+    sessionStorage?.removeItem('user');
+    sessionStorage?.removeItem('password');
+    this.route.navigate(['/log-in']);
   }
 
 }

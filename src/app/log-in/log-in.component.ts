@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, ComponentRef, OnInit, ViewChild,ViewContainerRef } from '@angular/core';
+import { CommonModule,isPlatformBrowser } from '@angular/common';
+import { Component, ComponentRef, OnInit, ViewChild,ViewContainerRef,PLATFORM_ID, Inject } from '@angular/core';
 import { ReactiveFormsModule,FormGroup,FormControl, Validators} from '@angular/forms';
 import { ApiserviceService } from '../apiservice.service';
 import { LoaderComponent } from '../loader/loader.component';
@@ -7,12 +7,13 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
-  imports: [CommonModule,ReactiveFormsModule,LoaderComponent],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.scss'
 })
 export class LogInComponent implements OnInit {
-  constructor(private apiService:ApiserviceService,private containerRef:ViewContainerRef,private route:Router){}
+  constructor(private apiService:ApiserviceService,private containerRef:ViewContainerRef,private route:Router,@Inject(PLATFORM_ID) private platformId:Object
+  ){}
   @ViewChild('loaderContainer') loaderContainer!:ComponentRef<any>;
   userForm:any;
   register=false;
@@ -47,11 +48,13 @@ export class LogInComponent implements OnInit {
     this.userForm=new FormGroup({
       username:new FormControl('',Validators.required),
       password:new FormControl('',Validators.required),
-      phone:new FormControl('',Validators.required)
+      phone:new FormControl('',Validators.required),
+      user:new FormControl('',Validators.required)
     })
   }
   onRegister(){
-    this.register=!this.register
+    this.register=!this.register;
+        console.log(this.register,)
   }
   onSubmit=()=>{
     this.showLoader();
@@ -59,7 +62,14 @@ export class LogInComponent implements OnInit {
     if(this.register){
       this.apiService.registerUser(this.userForm.value).subscribe((res:any)=>{
         this.hideLoader();
-        this.route.navigate(["/"]);
+        if(res.status==200){
+           if(isPlatformBrowser(this.platformId)){
+            sessionStorage?.setItem('user',this.userForm?.value?.user);
+            sessionStorage?.setItem('password',this.userForm?.value?.password);
+           }
+          this.route.navigate(["/"]);
+          
+        }
       },
       (error)=>{
         this.hideLoader();
