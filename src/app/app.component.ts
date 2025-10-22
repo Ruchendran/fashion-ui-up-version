@@ -4,6 +4,7 @@ import { HostListener} from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
+import { SharedataService } from './sharedata.service';
 
 @Component({
   selector: 'app-root',
@@ -17,8 +18,7 @@ export class AppComponent implements OnInit  {
   openWhatsapp:any=false;
   whatsCount:any=0;
   landingPage=false;
-  userFromSession:any='';
-  constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object,private route:Router){
+  constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object,private route:Router,public shareData:SharedataService){
 
   }
   headerHide:boolean=true;
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit  {
     if(isPlatformBrowser(this.platformId)){
     let data=sessionStorage.getItem('user');
     if(data){
-      this.userFromSession=JSON.parse(data);
+      this.shareData.setLogInUserVal(data);
     }
     }
     this.location.onUrlChange((url)=>{

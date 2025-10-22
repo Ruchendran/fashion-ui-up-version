@@ -15,6 +15,9 @@ export class ApiserviceService implements OnInit {
     loginUser:serverVal.server+'/auth/login',
     getAllProducts:serverVal.server+'/products',
     saveToCart:serverVal.server+'/cart/save',
+    getCartProducts:serverVal.server+'/cart/list',
+    appendOrder:serverVal.server+'/order/append',
+    getOrderList:serverVal.server+'/order/list'
   }
 
   ngOnInit(): void {
@@ -35,6 +38,17 @@ export class ApiserviceService implements OnInit {
     return this.http.get(this.apiConstants.getAllProducts);
   }
   saveToCart(payload:any){
-    return this.http.post(this.apiConstants.saveToCart,payload)
+    return this.http.post(this.apiConstants.saveToCart,payload);
   }
+  getCartProducts(userToken: string){
+    let url=this.apiConstants.getCartProducts+"/"+userToken;
+    return this.http.get(url);
+  }
+  appendOrder(payloadObj:any){
+    return this.http.post( this.apiConstants.appendOrder,payloadObj);
+  }
+  getOrderList(userToken: string){
+    let url=this.apiConstants.getOrderList+"/"+userToken;
+    return this.http.get(url);
+  } 
 }

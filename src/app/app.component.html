@@ -11,8 +11,8 @@
             <label routerLink="/products" class="label" routerLinkActive="header-label">
                 Products
             </label>
-            <label routerLink="/trending" class="label" routerLinkActive="header-label">
-                Trending
+            <label routerLink="/orders" class="label" routerLinkActive="header-label">
+                Orders
             </label>
             <label routerLink="/cart" class="label" routerLinkActive="header-label">
                 Cart
@@ -25,10 +25,10 @@
             </div>
             <div class="flex">
                 <div class="user flex">
-                    {{userFromSession[0]}}
+                    {{this.shareData.logInUser()[0]}}
                 </div>
                 <span class="user-span">
-                    {{userFromSession}}
+                    {{ this.shareData.logInUser()}}
                 </span>
             </div>
         </div>

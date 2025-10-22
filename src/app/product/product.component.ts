@@ -1,7 +1,7 @@
-import { Component, OnInit, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ComponentRef, ViewChild, ViewContainerRef,PLATFORM_ID, Inject } from '@angular/core';
 import { ApiserviceService } from '../apiservice.service';
 import { LoaderComponent } from '../loader/loader.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule,isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-product',
@@ -10,13 +10,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product.component.scss'
 })
 export class ProductComponent implements OnInit {
-  constructor(private apiService: ApiserviceService, private containerRef: ViewContainerRef) {
+  constructor(private apiService: ApiserviceService, private containerRef: ViewContainerRef,@Inject(PLATFORM_ID) private platformId:Object) {
 
   }
    @ViewChild('loaderContainer', { read: ViewContainerRef }) loaderContainer!: ViewContainerRef;
   listOfProducts: any = [];
    private loaderRef!: ComponentRef<LoaderComponent>;
+   userToken:any='';
   ngOnInit(): void {
+    if(isPlatformBrowser(this.platformId)){
+      this.userToken=sessionStorage.getItem('userToken');
+    }
     this.showLoader();
     this.apiService.getAllProducts().subscribe((res) => {
       this.hideLoader();
@@ -34,7 +38,7 @@ export class ProductComponent implements OnInit {
   }
   addToCart=(product:any)=>{
     this.showLoader();
-    this.apiService.saveToCart(product).subscribe((res:any)=>{
+    this.apiService.saveToCart({...product,userToken:this.userToken,quantity:1}).subscribe((res:any)=>{
       alert(JSON.stringify(res.message))
       this.hideLoader();
     },

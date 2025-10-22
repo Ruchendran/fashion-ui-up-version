@@ -3,11 +3,14 @@
 
 
 </pre>
-<div class="container">
+<div class="container" *ngIf="orderList"> 
   <div class="row">
     <table class="col-md-12 mt-3 mb-3">
         <thead>
             <tr>
+                <th>
+                    Index
+                </th>
                 <th>
                     Image
                 </th>
@@ -26,29 +29,26 @@
             </tr>
         </thead>
         <tbody>
-        @for (cart of cartList; track cart._id) {
+        @for (order of orderList; track order._id) {
             <tr>
                 <td>
-                  <img [src]="cart.productImg" class="image" />
+                    {{$index+1}}
                 </td>
                 <td>
-                    {{cart.productName}}
+                  <img [src]="order.productImg" class="image" />
+                </td>
+                <td>
+                    {{order.productName}}
                 </td>
                 <td >
-                    <button class="quntity-btn" (click)="addQuantity(cart)">
-                        +
-                    </button>
-                    {{cart.quantity}}
-                    <button class="quntity-btn" (click)="reduceQuantity(cart)">
-                        -
-                    </button>
+                    {{order.quantity}}
                 </td>
                 <td>
-                     {{cart.productPrice*cart.quantity | currency:'INR'}}
+                     {{order.productPrice | currency:'INR'}}
                 </td>
                 <td>
-                    <button  class="btn" (click)="placeOrder(cart)">
-                        Place Order
+                    <button  class="btn" (click)="viewOrder(order)">
+                        View Order
                     </button>
                 </td>
             </tr>      
