@@ -37,4 +37,4 @@ export class OrderComponent implements OnInit {
   viewOrder=(order:any)=>{
    this.route.navigate(['/view-order'],{queryParams:{orderId:order?._id}});
   }
-}
+};
