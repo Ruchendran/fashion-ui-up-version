@@ -3,6 +3,7 @@ import { CommonModule,isPlatformBrowser } from '@angular/common';
 import { ApiserviceService } from '../apiservice.service';
 import { SharedataService } from '../sharedata.service';
 import { LoaderComponent } from '../loader/loader.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +12,7 @@ import { LoaderComponent } from '../loader/loader.component';
   styleUrl: './cart.component.scss'
 })
 export class CartComponent implements OnInit {
-  constructor(private apiService:ApiserviceService,private containerRef: ViewContainerRef,@Inject(PLATFORM_ID) private platformId:Object){
+  constructor(private apiService:ApiserviceService,private containerRef: ViewContainerRef,@Inject(PLATFORM_ID) private platformId:Object,private route:Router){
 
   }
   cartList:any;
@@ -44,17 +45,7 @@ export class CartComponent implements OnInit {
   }
   placeOrder=(cart:any)=>{
     console.log(cart,"placed orders");
-     this.showLoader();
-    this.apiService.appendOrder({...cart,productPrice:cart.productPrice*cart.quantity}).subscribe((res:any)=>{
-       if(res.status == 409){
-        alert(res.message);
-       }
-       else{
-         alert(res.message);
-       }
-       this.hideLoader();
-    },er=>{
-       this.hideLoader();
-    })
+    //  this.showLoader();
+      this.route.navigate(['/place-order'],{queryParams:{productId:cart?.productId},state:{quantity:cart?.quantity}});
   }
 }

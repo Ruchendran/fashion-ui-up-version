@@ -35,6 +35,10 @@ export class OrderComponent implements OnInit {
       this.loaderRef?.destroy();
   }
   viewOrder=(order:any)=>{
-   this.route.navigate(['/view-order'],{queryParams:{orderId:order?._id}});
+  //  this.route.navigate(['/view-order'],{queryParams:{orderId:order?._id}});
   }
-};
+  trackOrder=(order:any)=>{
+    console.log(order,"ssss")
+     this.route.navigate(['/track-order'],{queryParams:{orderId:order?._id}});
+  }
+}

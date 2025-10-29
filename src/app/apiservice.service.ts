@@ -17,7 +17,9 @@ export class ApiserviceService implements OnInit {
     saveToCart:serverVal.server+'/cart/save',
     getCartProducts:serverVal.server+'/cart/list',
     appendOrder:serverVal.server+'/order/append',
-    getOrderList:serverVal.server+'/order/list'
+    getOrderList:serverVal.server+'/order/list',
+    getOrderDetail:serverVal.server+'/order',
+    getPlaceOrderDetail:serverVal.server+'/cart'
   }
 
   ngOnInit(): void {
@@ -51,4 +53,12 @@ export class ApiserviceService implements OnInit {
     let url=this.apiConstants.getOrderList+"/"+userToken;
     return this.http.get(url);
   } 
+  getOrderDetail(orderId:any){
+    let url=this.apiConstants.getOrderDetail+"/"+orderId;
+    return this.http.get(url);
+  }
+  getPlaceOrderDetail(productId:any){
+    let url=this.apiConstants.getPlaceOrderDetail+"/place-order/"+productId;
+    return this.http.get(url);
+  }
 }

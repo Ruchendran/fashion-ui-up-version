@@ -1,0 +1,73 @@
+<pre>
+
+
+
+</pre>
+<div class="container place-order-container"  *ngIf="orderDetails">
+    <div class="row">
+        <div class="col-md-6 col-12  flex mt-2">
+            <img [src]="orderDetails?.productImg" alt="order-image" class="order-img" />
+        </div>
+        <div class="col-md-6 col-12  flex mt-2 order-product-det">
+            <h4>
+                {{orderDetails?.productName}}
+            </h4>
+            <p>
+                {{orderDetails?.productDes}}
+            </p>
+            <p>
+                {{orderDetails?.productPrice | currency:'INR'}}
+            </p>
+            <p>
+                Quantity:{{orderDetails?.quantity}}
+            </p>
+            <button class="btn m-1" (click)="deliveryAddress(orderDetails)">
+                Delivery Address
+            </button>
+            <button class="btn m-1" (click)="confirmOrder(orderDetails)">
+                Confirm Order
+            </button>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="deliveryAddressForm">
+    <div class="payment-popup mt-3 mb-3 flex">
+        <div class="payment-form flex">
+            <form class="product-details p-2">
+                <i class="fa fa-window-close close-icon" aria-hidden="true" (click)="onCloseForm()"></i>
+                <div class="flex">
+                    <h4>
+                        User Address
+                    </h4>
+                </div>
+                <div class="flex input-div">
+                    <label class="label-txt">
+                        Pincode
+                    </label>
+                    <input class="input-field input-height" placeholder="Enter the pincode" />
+                </div>
+                <div class="flex input-div">
+                    <label class="label-txt">
+                        State
+                    </label>
+                    <select  class="input-field input-height">
+                        @for(state of stateList;track state){
+                            <option>
+                                {{state}}
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="flex input-div">
+                    <label class="label-txt">
+                        Address
+                    </label>
+                    <textarea class="input-field" placeholder="Enter the address..."></textarea>
+                </div>
+            </form>
+            <!-- <div class="razor-div">
+
+            </div> -->
+        </div>
+    </div>
+</ng-container>

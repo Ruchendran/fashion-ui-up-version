@@ -18,6 +18,7 @@ export class AppComponent implements OnInit  {
   openWhatsapp:any=false;
   whatsCount:any=0;
   landingPage=false;
+  userInitial:any;
   constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object,private route:Router,public shareData:SharedataService){
 
   }
@@ -58,6 +59,7 @@ export class AppComponent implements OnInit  {
       }
       
     })
+    
   }
   pointHover=()=>{
     let signInHoverElement=document.getElementById('sign-in-hover');
@@ -80,6 +82,7 @@ export class AppComponent implements OnInit  {
   onLogOut=()=>{
     sessionStorage?.removeItem('user');
     sessionStorage?.removeItem('password');
+    sessionStorage?.removeItem('userToken');
     this.route.navigate(['/log-in']);
   }
 

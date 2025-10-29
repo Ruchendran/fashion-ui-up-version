@@ -7,7 +7,8 @@ import { CartComponent } from './cart/cart.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { RegisterComponent } from './register/register.component';
 import { OrderComponent } from './order/order.component';
-import { ViewOrderComponent } from './view-order/view-order.component';
+import { PlaceOrderComponent } from './place-order/place-order.component';
+import { TrackOrderComponent } from './track-order/track-order.component';
 
 export const routes: Routes = [
     {
@@ -24,9 +25,8 @@ export const routes: Routes = [
         title:"Orders page"
     },
     {
-        path:'view-order', component:ViewOrderComponent,
-        title:"View Orders"
-       
+        path:'place-order', component:PlaceOrderComponent,
+        title:"Place Order"  
     },
     {
         path:'cart',component:CartComponent,
@@ -48,5 +48,9 @@ export const routes: Routes = [
     {
         path:'admin/upload',component:AdminUploadComponent,
         title:"Upload Page"
+    },
+    {
+        path:"track-order",component:TrackOrderComponent,
+        title:"Track Order"
     }
 ];
