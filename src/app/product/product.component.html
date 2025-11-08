@@ -1,16 +1,12 @@
-<pre>
 
-
-
-</pre>
 <div class="container-fluid">
     <div class="row  justify-content-center">
         <div class="col-md-3 product flex m-3" *ngFor="let data of listOfProducts">
             <img [src]="data.productImg" class="image" />
             <div>
-                <h1>
+                <h5>
                     {{data.productName}}
-                </h1>
+                </h5>
                 <p>
                     {{data.productDes}}
                 </p>

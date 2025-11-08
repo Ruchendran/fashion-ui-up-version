@@ -1,61 +1,8 @@
-<div class="container-fluid mt-3">
+<div class="container-fluid">
     <div class="row">
         <!--First fvashion section-->
-        <div class="col-md-12 fashion-section flex fashion-img1" #fashionSection>
-            <div class="fashion-content flex  p-3" *ngIf="activeImg1">
-                <h2>
-                    Trendy Shirts for Every Style!
-                </h2>
-                <p>
-                    "Browse our wide selection of high-quality shirts designed to fit every 
-                    personality, occasion, and wardrobe need. From classic button-downs to casual 
-                    tees, our collection offers the latest styles, fabrics, and fits to keep you 
-                    looking sharp. Whether you're dressing up for an event or keeping it laid-back 
-                    for the weekend, find your perfect shirt here."
-                </p>
-                <button (click)="naToProducts()">
-                    Explore More
-                </button>
-            </div>
-            <div class="fashion-content flex  p-3" *ngIf="activeImg2">
-                <h2>
-                    Premium Shirts for Every Occasion
-                </h2>
-                <p>
-                    "Explore our curated collection of premium shirts, crafted with the finest 
-                    fabrics and the latest trends in mind. Whether you're heading to the office, 
-                    a night out, or just relaxing, our shirts are designed for comfort, durability, 
-                    and a perfect fit. Find your go-to shirt today and step up your wardrobe game."
-                </p>
-                <button (click)="naToProducts()">
-                    Explore More
-                </button>
-            </div>
-            <div class="fashion-content flex  p-3" *ngIf="activeImg3">
-                <h2>
-                    Fresh Styles, Endless Comfort !
-                </h2>
-                <p>
-                    "From sleek and sophisticated to casual and cool, our shirt collection has 
-                    something for every taste. Designed for ultimate comfort and style, each shirt 
-                    is made to fit you perfectly and keep you looking sharp all day long. Browse now 
-                    and upgrade your wardrobe with the latest trends and timeless classics."
-                </p>
-                <button (click)="naToProducts()">
-                    Explore More
-                </button>
-            </div>
-            <div class="slider-note col-md-8 flex">
-                <div class="slide flex" (click)="clickSlide(1)" [ngClass]="activeImg1?'fashion-img-highlight':''">
-                    <img src="../../assets/home-section/swipe-section/swipe1.webp" class="slide-img" alt="slide-image1" />
-                </div>
-                <div class="slide flex" (click)="clickSlide(2)" [ngClass]="activeImg2?'fashion-img-highlight':''">
-                    <img src="../../assets/home-section/swipe-section/swipe2.webp" class="slide-img" alt="slide-img2" />
-                </div>
-                <div class="slide flex" (click)="clickSlide(3)" [ngClass]="activeImg3?'fashion-img-highlight':''">
-                    <img src="../../assets/home-section/swipe-section/swipe3.webp" class="slide-img"  alt="slide-img3"/>
-                </div>
-            </div>
+        <div class="col-md-12 fashion-section" #fashionSection>
+            <app-wear-section></app-wear-section>
         </div>
         <!--This is the swipe section-->
         <!-- <div class="col-md-12 swipe-section mt-2">

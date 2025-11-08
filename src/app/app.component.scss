@@ -14,12 +14,9 @@
     display: flex;
     align-items: center;
     position: relative;
-    top: 5px;
     z-index: 1;
-    box-shadow:inset 0px 0px 10px grey;
+    // box-shadow:inset 0px 0px 10px grey;
     background: transparent;
-    position: absolute;
-    top: 0px;
 }
 .section{
     height: 100%;
@@ -63,6 +60,7 @@
     background-image: linear-gradient(to left,$designColor,$designColor);
     z-index: -1;
     animation: highlight-rot 1s infinite linear;
+    border-radius: 4px;
 }
 @keyframes highlight-rot {
     0%{
@@ -78,9 +76,8 @@
     inset: 4px;
     position: absolute;
     z-index: -1;
-    backdrop-filter: blur(1000px);
-    filter: blur(1000px);
-    background:transparent;
+    background:$bgColor;
+    border-radius: 4px;
 }
 label{
     cursor: pointer;

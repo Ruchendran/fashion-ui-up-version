@@ -1,33 +1,11 @@
 @import "../../styles.scss";
 .fashion-section{
-    color:#ffffff;
     width: 100%;
-    height: 600px;
+    height: 500px;
     background-size: cover;
-    box-shadow: 2px 2px 100px grey;
+    // box-shadow: 2px 2px 100px grey;
     z-index: 0;
     position: relative;
-}
-.fashion-img-highlight{
-    background-color:green !important;
-}
-.fashion-img1{
-    background-image: url("../../assets/home-section/swipe-section/swipe1.webp");
-    background-size: cover;
-    opacity: 0;
-    animation: opacity-img 2s 1 forwards ease-in;
-}
-.fashion-img2{
-    background-image: url("../../assets/home-section/swipe-section/swipe2.webp");
-    background-size: cover;
-    opacity: 0;
-    animation: opacity-img 2s 1 forwards ease-in;
-}
-.fashion-img3{
-    background-image: url("../../assets/home-section/swipe-section/swipe3.webp");
-    background-size: cover;
-    opacity: 0;
-    animation: opacity-img 2s 1 forwards ease-in;
 }
 @keyframes opacity-img{
     0%{
@@ -37,28 +15,7 @@
         opacity: 1;
     }
 }
-.fashion-content{
-    width: 60%;
-    backdrop-filter: blur(25px);
-    flex-direction: column;
-    align-items: start;
-    border-radius: 5px;
-}
-.fashion-content>h1{
-    justify-self: start;
-}
-.fashion-content>p{
-    text-align: justify;
-}
-.fashion-content>button{
-    color:#ffffff;
-    align-self: center;
-    width: 200px;
-    height: 40px;
-    background: transparent;
-    border: 2px solid #ffffff;
-    border-radius: 5px;
-}
+
 .slider-note {
     width: 50%;
     justify-content: space-around;

@@ -1,17 +1,15 @@
 import { CommonModule } from '@angular/common';
 import {  Component,ElementRef,HostListener,OnInit,ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
+import { WearSectionComponent } from '../wear-section/wear-section.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule],
+  imports: [CommonModule,WearSectionComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit{
-  activeImg1=true;
-  activeImg2=false;
-  activeImg3=false;
   @ViewChild('fashionSection') fashionSection!:ElementRef;
   @ViewChild('threeDImg1') threeDImg1!:ElementRef;
   @ViewChild('threeDImg3') threeDImg3!:ElementRef;
@@ -52,28 +50,5 @@ export class HomeComponent implements OnInit{
     }
 
   }
-  clickSlide=(val:number)=>{
-    this.activeImg1=false;
-    this.activeImg2=false;
-    this.activeImg3=false;
-    if(val==1){
-      this.activeImg1=true;
-    }
-    else if(val==2){
-      this.activeImg2=true;
-    }
-    else if(val==3){
-      this.activeImg3=true
-    }
-    let fashionEle=this.fashionSection.nativeElement as HTMLElement;
-    fashionEle.classList.remove('fashion-img1');
-    fashionEle.classList.remove('fashion-img2');
-    fashionEle.classList.remove('fashion-img3');
-    setTimeout(()=>{
-      fashionEle.classList.add(`fashion-img${val}`);
-    },0)
-  }
-  naToProducts=()=>{
-    this.router.navigate(['/products'])
-  }
+
 }

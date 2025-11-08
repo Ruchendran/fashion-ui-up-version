@@ -1,9 +1,6 @@
 <div class="render-container">
-    <router-outlet>
-
-    </router-outlet>
     <header class="header" *ngIf="headerHide">
-        <div class="section flex-space-around" [ngClass]="landingPage?'home-page-header':''">
+        <div class="section flex-space-around home-page-header" >
             <label routerLink="/" class="label" routerLinkActive="header-label"
                 [routerLinkActiveOptions]="{exact:true}">
                 Home
@@ -33,7 +30,9 @@
             </div>
         </div>
     </header>
+    <router-outlet>
 
+    </router-outlet>
     <div class="sign-in-hover" id="sign-in-hover" #signInHover>
         <label routerLink="/admin">
             Admin

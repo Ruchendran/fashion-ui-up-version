@@ -17,7 +17,6 @@ export class AppComponent implements OnInit  {
   mobileNav:boolean=false;
   openWhatsapp:any=false;
   whatsCount:any=0;
-  landingPage=false;
   userInitial:any;
   constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object,private route:Router,public shareData:SharedataService){
 
@@ -45,12 +44,6 @@ export class AppComponent implements OnInit  {
       }
       else{
         this.headerHide=true;
-      }
-      if(url == '/'){
-        this.landingPage=true;
-      }
-      else{
-        this.landingPage=false;
       }
       if(isPlatformBrowser(this.platformId)){
         let signInHoverElement=document.getElementById('sign-in-hover');

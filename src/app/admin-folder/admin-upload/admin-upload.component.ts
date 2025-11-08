@@ -12,7 +12,7 @@ import { LoaderComponent } from '../../loader/loader.component';
 export class AdminUploadComponent implements OnInit {
   submitForm=false;
   private apiService = inject(ApiserviceService); 
-  productFamilyList=['Gents-Wears','Home-Appliences','Foot-Wear'];
+  productFamilyList=['Wears','Gadgets','Asthetics','Utensils','Groceries'];
   constructor(private containerRef:ViewContainerRef){
 
   }
