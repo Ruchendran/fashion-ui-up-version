@@ -1,6 +1,6 @@
-import { CommonModule,isPlatformBrowser } from '@angular/common';
-import { Component, ComponentRef, OnInit, ViewChild,ViewContainerRef,PLATFORM_ID, Inject } from '@angular/core';
-import { ReactiveFormsModule,FormGroup,FormControl, Validators} from '@angular/forms';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, ViewChild, PLATFORM_ID, Inject } from '@angular/core';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiserviceService } from '../apiservice.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { Router } from '@angular/router';
@@ -8,17 +8,17 @@ import { SharedataService } from '../sharedata.service';
 
 @Component({
   selector: 'app-log-in',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.scss'
 })
 export class LogInComponent implements OnInit {
-  constructor(private apiService:ApiserviceService,private containerRef:ViewContainerRef,private route:Router,@Inject(PLATFORM_ID) private platformId:Object
-  ,public shareData:SharedataService){}
-  @ViewChild('loaderContainer') loaderContainer!:ComponentRef<any>;
-  userForm:any;
-  register=false;
-  eyeOpen=false;
+  adminUser: boolean = false;
+  constructor(private apiService: ApiserviceService, private route: Router, @Inject(PLATFORM_ID) private platformId: Object
+    , public shareData: SharedataService) { }
+  userForm: any;
+  register = false;
+  eyeOpen = false;
   // cardList=[
   //   {
   //     name:"Gents Fashion",
@@ -41,76 +41,90 @@ export class LogInComponent implements OnInit {
   //     label:"Smooth"
   //    }
   // ]
-  onClickeye(){
+  onClickeye() {
     console.log("hit")
-    this.eyeOpen=!this.eyeOpen;
+    this.eyeOpen = !this.eyeOpen;
   }
   ngOnInit(): void {
-    this.userForm=new FormGroup({
-      username:new FormControl('',Validators.required),
-      password:new FormControl('',Validators.required),
-      phone:new FormControl('',Validators.required),
-      user:new FormControl('',Validators.required)
+    this.userForm = new FormGroup({
+      userMail: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
+      userName: new FormControl('', Validators.required)
     })
   }
-  onRegister(){
-    this.register=!this.register;
-        console.log(this.register,)
+  onRegister() {
+    this.register = !this.register;
+    this.adminUser = false;
   }
-  onSubmit=()=>{
-    this.showLoader();
+  onSubmit = () => {
+    this.shareData.loader = true;
     //This is only for Register users.
-    if(this.register){
-      this.apiService.registerUser(this.userForm.value).subscribe((res:any)=>{
-        this.hideLoader();
-        this.shareData.setLogInUserVal(this.userForm?.value?.user);
-        console.log(res)
-        if(res.status==200){
-           if(isPlatformBrowser(this.platformId)){
-            sessionStorage?.setItem('user',this.userForm?.value?.user);
-            sessionStorage?.setItem('password',this.userForm?.value?.password);
-            sessionStorage.setItem('userToken',res.userToken)
-           }
-          this.route.navigate(["/"]);
-          
+    console.log(this.userForm.value)
+    if (this.adminUser) {
+      this.apiService.getAdminUser(this.userForm.value?.userMail).subscribe((res: any) => {
+        console.log(res, "sssss");
+        this.shareData.loader = false;
+        if (isPlatformBrowser(this.platformId)) {
+          sessionStorage.clear();
+          sessionStorage.setItem('adminUser', 'true');
         }
-        if(res.status == 403){
-          alert(res.message+" Plesase login");
-        }
-      },
-      (error)=>{
-        this.hideLoader();
-        alert("Something went wrong!!!!!!!");
+        this.route.navigate(['/admin']);
+      }, er => {
+        this.shareData.loader = false;
       })
     }
-    //This is only for login users.
-    else{
-      this.apiService.loginUser(this.userForm.value).subscribe((res:any)=>{
-        this.hideLoader();
-        this.shareData.setLogInUserVal(res?.user);
-          if(res.status==200){
-           if(isPlatformBrowser(this.platformId)){
-            sessionStorage?.setItem('user',res?.user);
-            sessionStorage?.setItem('password',this.userForm?.value?.password);
-            sessionStorage.setItem('userToken',res.userToken)
-           }
+    else if (this.register && !this.adminUser) {
+      this.apiService.registerUser(this.userForm.value).subscribe((res: any) => {
+        this.shareData.loader = false;
+        this.shareData.setLogInUserVal(this.userForm?.value?.userName);
+        console.log(res)
+        if (res.status == 200) {
+          if (isPlatformBrowser(this.platformId)) {
+            sessionStorage?.setItem('user', this.userForm?.value?.userName);
+            sessionStorage?.setItem('password', this.userForm?.value?.password);
+            sessionStorage.setItem('userToken', res.userToken)
+          }
           this.route.navigate(["/"]);
-          }
-          else{
-             alert(res.message);
-          }
+
+        }
+        if (res.status == 403) {
+          alert(res.message + " Plesase login");
+        }
       },
-      (error)=>{
-        this.hideLoader();
-        alert("Something went wrong!!!!!!!");
-      }
-    )
+        (error) => {
+          this.shareData.loader = false;
+          alert("Something went wrong!!!!!!!");
+        })
+    }
+    //This is only for login users.
+    else {
+      this.apiService.loginUser(this.userForm.value).subscribe((res: any) => {
+        this.shareData.loader = false;
+        this.shareData.setLogInUserVal(res?.user);
+        if (res.status == 200) {
+          if (isPlatformBrowser(this.platformId)) {
+            sessionStorage?.setItem('user', res?.user);
+            sessionStorage?.setItem('password', this.userForm?.value?.password);
+            sessionStorage.setItem('userToken', res.userToken)
+          }
+          this.route.navigate(["/"]);
+        }
+        else {
+          alert(res.message);
+        }
+      },
+        (error) => {
+          this.shareData.loader = false;
+          alert("Something went wrong!!!!!!!");
+        }
+      )
     }
   }
-  showLoader=()=>{
-   this.loaderContainer=this.containerRef.createComponent(LoaderComponent) 
+  loginAdmin = () => {
+    this.adminUser = true;
   }
-  hideLoader=()=>{
-    this.loaderContainer.destroy();
+  normalUser = () => {
+    this.adminUser = false;
   }
 }

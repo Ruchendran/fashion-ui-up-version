@@ -1,8 +1,9 @@
-import { Component, OnInit, ComponentRef, ViewChild, ViewContainerRef,PLATFORM_ID, Inject } from '@angular/core';
+import { Component, OnInit, ComponentRef, PLATFORM_ID, Inject } from '@angular/core';
 import { ApiserviceService } from '../apiservice.service';
 import { LoaderComponent } from '../loader/loader.component';
-import { CommonModule,isPlatformBrowser } from '@angular/common';
-
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { SharedataService } from '../sharedata.service';
 @Component({
   selector: 'app-product',
   imports: [CommonModule],
@@ -10,40 +11,36 @@ import { CommonModule,isPlatformBrowser } from '@angular/common';
   styleUrl: './product.component.scss'
 })
 export class ProductComponent implements OnInit {
-  constructor(private apiService: ApiserviceService, private containerRef: ViewContainerRef,@Inject(PLATFORM_ID) private platformId:Object) {
+  constructor(private apiService: ApiserviceService, @Inject(PLATFORM_ID) private platformId: Object, private activateRoute: ActivatedRoute, private sharedData: SharedataService) {
 
   }
-   @ViewChild('loaderContainer', { read: ViewContainerRef }) loaderContainer!: ViewContainerRef;
   listOfProducts: any = [];
-   private loaderRef!: ComponentRef<LoaderComponent>;
-   userToken:any='';
+  userToken: any = '';
+  productFamily = '';
   ngOnInit(): void {
-    if(isPlatformBrowser(this.platformId)){
-      this.userToken=sessionStorage.getItem('userToken');
-    }
-    this.showLoader();
-    this.apiService.getAllProducts().subscribe((res) => {
-      this.hideLoader();
+    if (isPlatformBrowser(this.platformId)) {
+      this.userToken = sessionStorage.getItem('userToken');
+    };
+    this.activateRoute.params.subscribe((val) => {
+      this.productFamily = val['productFamily'];
+    })
+    this.sharedData.loader = true;
+    this.apiService.getAllProducts(this.productFamily).subscribe((res) => {
+      this.sharedData.loader = false;
       this.listOfProducts = res;
     },
       er => {
-        this.hideLoader();
+        this.sharedData.loader = false;
       })
   }
-  showLoader = () => {
-    this.loaderRef = this.containerRef.createComponent(LoaderComponent)
-  }
-  hideLoader = () => {
-      this.loaderRef.destroy();
-  }
-  addToCart=(product:any)=>{
-    this.showLoader();
-    this.apiService.saveToCart({...product,userToken:this.userToken,quantity:1}).subscribe((res:any)=>{
+  addToCart = (product: any) => {
+    this.sharedData.loader = true;
+    this.apiService.saveToCart({ ...product, userToken: this.userToken, quantity: 1 }).subscribe((res: any) => {
       alert(JSON.stringify(res.message))
-      this.hideLoader();
+      this.sharedData.loader = false;
     },
-    er=>{
-      this.hideLoader();
-    })
+      er => {
+        this.sharedData.loader = false;
+      })
   }
 }

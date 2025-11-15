@@ -1,18 +1,27 @@
-import { ComponentRef, Injectable, OnInit, signal, ViewContainerRef} from '@angular/core';
-import { LoaderComponent } from './loader/loader.component';
+import { Injectable, OnInit, signal,PLATFORM_ID, Inject} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedataService implements OnInit {
   
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId:Object) { }
+
   logInUser=signal('');
   ngOnInit(): void {
+
+  }
+  getAdminData=()=>{
+    if(isPlatformBrowser(this.platformId)){
+        return  sessionStorage.getItem('adminUser')=='true'?true:false;
+      }
+      else{
+        return false;
+      }
   }
   setLogInUserVal=(user:string)=>{
     this.logInUser.set(user);
   }
-
-  
+  loader=false;
 }

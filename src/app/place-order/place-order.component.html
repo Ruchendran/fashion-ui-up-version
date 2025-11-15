@@ -1,8 +1,4 @@
-<pre>
 
-
-
-</pre>
 <div class="container place-order-container"  *ngIf="orderDetails">
     <div class="row">
         <div class="col-md-6 col-12  flex mt-2">
@@ -22,18 +18,18 @@
                 Quantity:{{orderDetails?.quantity}}
             </p>
             <button class="btn m-1" (click)="deliveryAddress(orderDetails)">
-                Delivery Address
-            </button>
-            <button class="btn m-1" (click)="confirmOrder(orderDetails)">
                 Confirm Order
             </button>
+            <!-- <button class="btn m-1" (click)="confirmOrder(orderDetails)" [disabled]="this.addressForm.status == 'INVALID'">
+                Confirm Order
+            </button> -->
         </div>
     </div>
 </div>
 <ng-container *ngIf="deliveryAddressForm">
     <div class="payment-popup mt-3 mb-3 flex">
         <div class="payment-form flex">
-            <form class="product-details p-2">
+            <form class="product-details p-2" [formGroup]="addressForm" (ngSubmit)="onSubmitAddress()">
                 <i class="fa fa-window-close close-icon" aria-hidden="true" (click)="onCloseForm()"></i>
                 <div class="flex">
                     <h4>
@@ -41,28 +37,38 @@
                     </h4>
                 </div>
                 <div class="flex input-div">
-                    <label class="label-txt">
-                        Pincode
-                    </label>
-                    <input class="input-field input-height" placeholder="Enter the pincode" />
+                    <input class="input-field" type="number" placeholder="Enter the pincode" formControlName="pincode" />
                 </div>
                 <div class="flex input-div">
-                    <label class="label-txt">
-                        State
-                    </label>
-                    <select  class="input-field input-height">
-                        @for(state of stateList;track state){
+                    <input class="input-field" type="number" placeholder="Enter the phone" formControlName="phone" />
+                </div>
+                <div class="flex input-div">
+                    <select  class="input-field" formControlName="payOnDelivery">
                             <option>
-                                {{state}}
+                                Yes
+                            </option>
+                            <option>
+                                No
+                            </option>
+                    </select>
+                </div>
+                <div class="flex input-div">
+                    <select  class="input-field" formControlName="village">
+                        @for(village of villageList;track village){
+                            <option>
+                                {{village}}
                             </option>
                         }
                     </select>
                 </div>
+
                 <div class="flex input-div">
-                    <label class="label-txt">
-                        Address
-                    </label>
-                    <textarea class="input-field" placeholder="Enter the address..."></textarea>
+                    <textarea class="input-field" placeholder="Enter the address..."formControlName="address"></textarea>
+                </div>
+                <div class="flex">
+                    <button class="btn mt-4" type="submit">
+                    Submit
+                    </button>
                 </div>
             </form>
             <!-- <div class="razor-div">

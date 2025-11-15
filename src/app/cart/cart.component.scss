@@ -27,3 +27,14 @@ thead{
     // width: 20px;
     // height: 20px;
 }
+.mobile-cart-container{
+    display: none;
+}
+@media screen and (max-width:576px){
+    .cart-container{
+        display: none;
+    }
+    .mobile-cart-container{
+        display: block;
+    }
+}

@@ -50,9 +50,43 @@
             Log Out
         </label>
     </div>
-    <div class="mobile-nav-section">
+    <div class="mobile-nav-section" [ngClass]="appInitialized?(mobileNav?'mobile-nav-animation-on':'mobile-nav-animation-off'):''">
         <i class="fa-etch fa-solid fa-angle-up flex icon-font" (click)="clickMobileArrow()" *ngIf="!mobileNav"></i>
         <i class="fa-etch fa-solid fa-angle-down flex icon-font" *ngIf="mobileNav" (click)="clickMobileArrow()"></i>
+        <div class="mobile-nav-label-container flex-vertical" [ngClass]="mobileNav?'mobile-nav-slow-visible':'mobile-nav-hide'">
+            <label  (click)="routesClick()">
+                <b>Welcome {{ this.shareData.logInUser()}}</b>
+            </label>
+            <hr class="nav-line"/>
+            <label routerLink="/" class="mobile-nav-label" (click)="routesClick()">
+                Home
+            </label>
+            <hr class="nav-line"/>
+            <label routerLink="/products" class="mobile-nav-label"(click)="routesClick()" >
+                Products
+            </label>
+            <hr class="nav-line"/>
+            <label routerLink="/orders" class="mobile-nav-label" (click)="routesClick()">
+                Orders
+            </label>
+            <hr class="nav-line"/>
+            <label routerLink="/cart" class="mobile-nav-label" (click)="routesClick()">
+                Cart
+            </label>
+            <hr class="nav-line"/>
+            <label routerLink="/log-in" class="mobile-nav-label" (click)="routesClick()">
+                LogIn
+            </label>
+            <hr class="nav-line"/>
+            <label routerLink="/register" class="mobile-nav-label" (click)="routesClick()">
+                Register
+            </label>
+            <hr class="nav-line"/>
+            <label (click)="onLogOut()" (click)="routesClick()">
+                Log Out
+            </label>
+             <hr class="nav-line"/>
+        </div>
     </div>
     <div class="whatsapp-container"  *ngIf="headerHide">
     <div class="join-container" [ngClass]="openWhatsapp?'whats-animation-open':(whatsCount===1?'whats-animation-close':'')" >
@@ -65,3 +99,4 @@
     </div>
     <app-footer *ngIf="headerHide"></app-footer>
 </div>
+<app-loader *ngIf="shareData.loader"></app-loader>

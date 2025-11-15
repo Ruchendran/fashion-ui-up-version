@@ -24,3 +24,14 @@ thead{
     // width: 20px;
     // height: 20px;
 }
+.mobile-order-container{
+    display: none;
+}
+@media screen and (max-width:576px){
+    .order-container{
+        display: none;
+    }
+    .mobile-order-container{
+        display: block;
+    }
+}

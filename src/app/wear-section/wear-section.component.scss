@@ -1,4 +1,7 @@
 @import "../../styles.scss";
+.main-container{
+    height: transform;
+}
 .section-heading{
     color:$designColor;
     text-align: center;
@@ -37,6 +40,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    box-shadow: 0px 10px 10px 2px grey;
 }
 .avail-prod button{
     color:$text-color;
@@ -95,4 +99,15 @@
     height: 65%;
     z-index: 1;
     border-radius: 50%;
+}
+
+@media screen and (max-width:576px){
+    .avail-prod{
+        margin: 20px;
+        width: 280px !important;
+        height: 280px !important;
+    }
+    .wear-container {
+        flex-direction: column;
+    }
 }

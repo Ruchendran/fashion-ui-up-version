@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
+import { Routes,Route } from '@angular/router';
 import { authGuard } from './auth.guard';
-import path from 'path';
+import { adminGuard } from './admin.guard';
 
 export const routes: Routes = [
     {
@@ -14,13 +14,11 @@ export const routes: Routes = [
         loadComponent: () => import("../app/product/product.component").then(m => m.ProductComponent),
         title: "Products page",
         canActivate: [authGuard],
-        children:[
-            {
-                path:":productFamily",
-                loadComponent: () => import("../app/product/product.component").then(m => m.ProductComponent),
-                title:"Product Page"
-            }
-        ]
+    },
+    {
+        path:"products/:productFamily",
+        loadComponent: () => import("../app/product/product.component").then(m => m.ProductComponent),
+        title:"Product Page",
     },
     {
         path: 'orders',
@@ -53,12 +51,15 @@ export const routes: Routes = [
     {
         path: "admin",
         loadComponent: () => import("../app/admin-folder/admin/admin.component").then(s => s.AdminComponent),
-        title: "Admin Page"
+        title: "Admin Page",
+        canActivate: [adminGuard]
     },
     {
-        path: 'admin/upload',
+        path: "admin/upload",
         loadComponent: () => import("../app/admin-folder/admin-upload/admin-upload.component").then(s => s.AdminUploadComponent),
-        title: "Upload Page"
+        title: "Upload Page",
+        canActivate: [adminGuard],
+
     },
     {
         path: "track-order",

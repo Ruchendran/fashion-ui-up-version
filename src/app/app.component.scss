@@ -235,16 +235,75 @@ label{
         position: fixed;
         width: 100%;
         height: 40px;
-        background: $mobileBg;
-        opacity: 0.4;
+        background: $designColor;
+        // opacity: 0.4;
         bottom: 0px;
         left: 0px;
-        z-index: 1;
+        z-index: 2;
     }
  .icon-font{
+    color:$mobileBg;
     cursor: pointer;
     padding-top: 5px;
+    font-size: 30px;
+ }
+ .mobile-nav-animation-on{
+    animation: nav-motion-up 1.5s forwards linear;
+ }
+ @keyframes nav-motion-up {
+    0%{
+        height: 40px;
+    }
+    100%{
+        height: 100vh;
+    }
+ }
+ .mobile-nav-animation-off{
+     animation: nav-motion-down 1.5s forwards linear;
+ }
+ @keyframes nav-motion-down {
+    0%{
+        height: 100vh;
+    }
+    100%{
+        height: 40px;
+    }
+ }
+ .mobile-nav-label-container{
+    color:$mobileBg;
     font-size: 25px;
+    width: 100%;
+    height: 80%;
+    // background: trans;
+    justify-content: space-around;
+    font-weight: bold;
+    backdrop-filter: blur(20px);
+ }
+ .mobile-nav-slow-visible{
+    animation: slow-visible-content 2s forwards linear;
+    opacity: 0;
+ }
+ @keyframes slow-visible-content {
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+ }
+  .mobile-nav-hide{
+    animation: nav-hide 0.5s forwards linear;
+    opacity: 1;
+ }
+ @keyframes nav-hide {
+    100%{
+        opacity: 0;
+    }
+ }
+ .nav-line{
+    width: 80%;
+    height: 3px;
+    font-weight: bold;
  }
 
 }

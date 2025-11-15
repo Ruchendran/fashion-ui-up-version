@@ -1,0 +1,35 @@
+@import "../../styles.scss";
+.order-id-span{
+    color:$designColor;
+}
+.tracking-container{
+    
+}
+.track-stage{
+   margin: 10px;
+   position: relative;
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+}
+.unactive-track-stages{
+    background: transparent;
+    border: 2px solid $designColor;
+}
+.active-track-stages{
+    background: $designColor;
+    border: none;
+}
+.track-line{
+    width: 3px;
+    height: 100px;
+    background: $designColor;
+}
+.bold-text-odd{
+    position: absolute;
+    left: -100px;
+}
+.bold-text-even{
+    position: absolute;
+    left:50px;
+}

@@ -1,3 +1,4 @@
+@import "../../styles.scss";
 .place-order-container{
     width: 100vw;
     height:transform;
@@ -21,6 +22,8 @@
     top: 0px;
     left: 0px;
     background-color:transparent;
+    align-items: start;
+    z-index: 2;
 }
 .payment-form{
   height: transform;
@@ -57,4 +60,15 @@
 }
 .input-height{
     height: 40px;
+}
+.input-field{
+    margin-top: 15px;
+    width: 380px;
+    height: 40px;
+    padding-left: 25px;
+    border-radius: 20px;
+    border: 2px solid grey;
+    outline: none;
+    box-shadow: inset 5px 5px 10px #a9b4b8;
+    font-size: 15px;
 }

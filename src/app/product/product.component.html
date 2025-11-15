@@ -1,25 +1,26 @@
 
-<div class="container-fluid">
-    <div class="row  justify-content-center">
-        <div class="col-md-3 product flex m-3" *ngFor="let data of listOfProducts">
-            <img [src]="data.productImg" class="image" />
-            <div>
-                <h5>
-                    {{data.productName}}
-                </h5>
-                <p>
-                    {{data.productDes}}
-                </p>
-                <p>
-                    {{data.productPrice | currency:'INR'}}
-                </p>
-                <button (click)="addToCart(data)" class="btn">
-                    Add Cart
-                </button>
+<div class="container">
+    <div class="row  justify-content-md-start justify-content-center">
+        <div class="col-10 col-md-4 p-3" *ngFor="let data of listOfProducts">
+            <div class="product flex">
+                <div class="col-4 flex">
+                    <img [src]="data.productImg" class="image" />
+                </div>
+                <div class="col-8 flex-vertical">
+                    <h5>
+                        {{data.productName}}
+                    </h5>
+                    <p>
+                        {{data.productDes}}
+                    </p>
+                    <p>
+                        {{data.productPrice | currency:'INR'}}
+                    </p>
+                    <button (click)="addToCart(data)" class="btn">
+                        Add Cart
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<ng-container #loaderContainer>
-
-</ng-container>

@@ -9,23 +9,25 @@
         </h2>
         <form class="login-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
             <div class="user-section">
-                <i class="fa-solid fa-user icon"></i>
-                <input placeholder="Enter Username as Mail"  htmlFor="username"  type="text" class="input-field" formControlName="username"/>
+                <i class="fa-regular fa-envelope icon"></i>
+                <input placeholder="Enter Username as Mail"  htmlFor="userMail"  type="text" class="input-field" formControlName="userMail"/>
             </div>
-            <div class="user-section">
+            <div class="user-section" *ngIf="!adminUser">
                 <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
                 <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i>
                 <input placeholder="Enter Password"   [type]="eyeOpen?'text':'password'"  class="input-field" formControlName="password"/>
             </div>
-            <div class="user-section" *ngIf="register">
+            <div class="user-section" *ngIf="register && !adminUser">
                 <i class="fa-solid fa-phone-flip icon"></i>
                 <input placeholder="Enter Phone"  htmlFor="phone"  type="text"  class="input-field" formControlName="phone"/>
             </div>
-            <div class="user-section" *ngIf="register">
-                <i class="fa-solid fa-phone-flip icon"></i>
-                <input placeholder="Enter Name"  htmlFor="phone"  type="text"  class="input-field" formControlName="user"/>
+            <div class="user-section" *ngIf="register  && !adminUser">
+                <i class="fa-solid fa-user icon"></i>
+                <input placeholder="Enter Name"  htmlFor="phone"  type="text"  class="input-field" formControlName="userName"/>
             </div>
             <div  class="forgot-section flex">
+                <a (click)="loginAdmin()" *ngIf="!adminUser">Login Admin</a>
+                <a *ngIf="adminUser" (click)="normalUser()">User</a>
                 <a>Forgot Password?</a>
             </div>
             <button class="submit-btn" type="submit">
@@ -41,11 +43,21 @@
         </form>
     </div>
     <div class="card-train flex" id="cards">
-            <div class="cards card1 flex">one</div>
-            <div class="cards card2 flex"> two</div>
-            <div class="cards card3 flex">three</div>
-            <div class="cards card4 flex">foure</div>
-            <div class="cards card5 flex">five</div>
+            <div class="cards card1 flex">
+                <img src="../../assets/brands/adidas.png" alt="adidas" class="brand-img">
+            </div>
+            <div class="cards card2 flex">
+                 <img src="../../assets/brands/allen.jpg" alt="allen" class="brand-img">
+            </div>
+            <div class="cards card3 flex">
+                 <img src="../../assets/brands/diesel.jpg" alt="diesel" class="brand-img">
+            </div>
+            <div class="cards card4 flex">
+                 <img src="../../assets/brands/nike.jpg" alt="nike" class="brand-img">
+            </div>
+            <div class="cards card5 flex">
+                 <img src="../../assets/brands/puma.jpg" alt="puma" class="brand-img">
+            </div>
     </div>
 </div>
 <ng-container #loaderContainer>

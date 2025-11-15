@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient,HttpParams} from '@angular/common/http';
 import { serverVal } from '../../environment';
 import { Observable } from 'rxjs';
 
@@ -19,7 +19,8 @@ export class ApiserviceService implements OnInit {
     appendOrder:serverVal.server+'/order/append',
     getOrderList:serverVal.server+'/order/list',
     getOrderDetail:serverVal.server+'/order',
-    getPlaceOrderDetail:serverVal.server+'/cart'
+    getPlaceOrderDetail:serverVal.server+'/cart',
+    getAdminUser:serverVal.server+'/auth/admin/verify'
   }
 
   ngOnInit(): void {
@@ -36,8 +37,9 @@ export class ApiserviceService implements OnInit {
   loginUser(data:any){
     return this.http.post(this.apiConstants.loginUser,data);
   }
-  getAllProducts(){
-    return this.http.get(this.apiConstants.getAllProducts);
+  getAllProducts(productFamily:String){
+    let group=productFamily??'all';
+    return this.http.get(this.apiConstants.getAllProducts+`/${group}`);
   }
   saveToCart(payload:any){
     return this.http.post(this.apiConstants.saveToCart,payload);
@@ -57,8 +59,16 @@ export class ApiserviceService implements OnInit {
     let url=this.apiConstants.getOrderDetail+"/"+orderId;
     return this.http.get(url);
   }
-  getPlaceOrderDetail(productId:any){
-    let url=this.apiConstants.getPlaceOrderDetail+"/place-order/"+productId;
-    return this.http.get(url);
+  getPlaceOrderDetail(productId:any,userId:any){
+    let placeOrderParams=new HttpParams();
+    // placeOrderParams.append('userId',userId);
+    // placeOrderParams.append('productId',productId)
+    // console.log(placeOrderParams.toString(),"data",productId,userId)
+    let url=this.apiConstants.getPlaceOrderDetail+"/place-order";
+    return this.http.get(url,{params:{userId:userId,productId:productId}});
+  }
+  getAdminUser(adminMail:any){
+    let url=this.apiConstants.getAdminUser;
+    return this.http.post(url,{userMail:adminMail});
   }
 }

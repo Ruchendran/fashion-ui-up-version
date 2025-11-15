@@ -8,7 +8,7 @@ body{
 $bgColor:#FFFFFF;
 $fontColor:#000000;
 $designColor:#f2b50c;
-$mobileBg:#ffffff;
+$mobileBg:#f2f2f2;
 $orange:#f2b50c;
 $text-color:#d5e3d9;
 $fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -32,6 +32,12 @@ $fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica N
     justify-content:center;
     align-items: center;
 }
+.flex-vertical{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+}
 body{
     font-family: $fontFamily;
 }
@@ -51,6 +57,10 @@ body{
 .btn:hover{
     color:$bgColor;
     background-color:$fontColor;
+}
+.brand-img{
+    width: 100%;
+    height: 100%;
 }
 @media screen and (max-width : 576px) {
 

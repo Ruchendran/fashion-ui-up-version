@@ -5,10 +5,11 @@ import { CommonModule, Location } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { SharedataService } from './sharedata.service';
+import { LoaderComponent } from './loader/loader.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,RouterModule,CommonModule,FooterComponent],
+  imports: [RouterOutlet,RouterModule,CommonModule,FooterComponent,LoaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -18,6 +19,7 @@ export class AppComponent implements OnInit  {
   openWhatsapp:any=false;
   whatsCount:any=0;
   userInitial:any;
+  appInitialized=false;
   constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object,private route:Router,public shareData:SharedataService){
 
   }
@@ -59,6 +61,7 @@ export class AppComponent implements OnInit  {
     signInHoverElement?.classList.add('sign-in-hover-label');
   }
   clickMobileArrow=()=>{
+    this.appInitialized=true
     this.mobileNav=!this.mobileNav;
   }
     whatsAppClick=()=>{
@@ -77,6 +80,10 @@ export class AppComponent implements OnInit  {
     sessionStorage?.removeItem('password');
     sessionStorage?.removeItem('userToken');
     this.route.navigate(['/log-in']);
+    sessionStorage.removeItem('adminUser');
+  }
+  routesClick=()=>{
+    this.mobileNav=false;
   }
 
 }

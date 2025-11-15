@@ -1,9 +1,5 @@
-<pre>
 
-
-
-</pre>
-<div class="container" *ngIf="orderList"> 
+<div class="container order-container" *ngIf="orderList"> 
   <div class="row">
     <table class="col-md-12 mt-3 mb-3">
         <thead>
@@ -56,5 +52,30 @@
         </tbody>
     </table>
   </div>
+</div>
+<div class="container mobile-order-container" *ngIf="orderList">
+        <div class="row  justify-content-md-start justify-content-center">
+        <div class="col-10 col-md-4 p-3" *ngFor="let data of orderList">
+            <div class="product flex">
+                <div class="col-4 flex">
+                    <img [src]="data.productImg" class="image" />
+                </div>
+                <div class="col-8 flex-vertical">
+                    <h5>
+                        {{data.productName}}
+                    </h5>
+                    <p>
+                        {{data.quantity}}
+                    </p>
+                    <p>
+                       {{data.productPrice*data.quantity | currency:'INR'}}
+                    </p>
+                    <button  (click)="trackOrder(data)" class="btn">
+                        Track Order
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <ng-container #loaderContainer></ng-container>
