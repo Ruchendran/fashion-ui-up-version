@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient,HttpParams} from '@angular/common/http';
-import { serverVal } from '../../environment';
+import { serverVal } from '../environment';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -20,7 +20,8 @@ export class ApiserviceService implements OnInit {
     getOrderList:serverVal.server+'/order/list',
     getOrderDetail:serverVal.server+'/order',
     getPlaceOrderDetail:serverVal.server+'/cart',
-    getAdminUser:serverVal.server+'/auth/admin/verify'
+    getAdminUser:serverVal.server+'/auth/admin/verify',
+    delFromCart:serverVal.server+'/cart/delete'
   }
 
   ngOnInit(): void {
@@ -38,7 +39,7 @@ export class ApiserviceService implements OnInit {
     return this.http.post(this.apiConstants.loginUser,data);
   }
   getAllProducts(productFamily:String){
-    let group=productFamily??'all';
+    let group=productFamily=='products'?'all':productFamily;
     return this.http.get(this.apiConstants.getAllProducts+`/${group}`);
   }
   saveToCart(payload:any){
@@ -71,4 +72,9 @@ export class ApiserviceService implements OnInit {
     let url=this.apiConstants.getAdminUser;
     return this.http.post(url,{userMail:adminMail});
   }
+  delFromCart(productId:any,userId:any){
+    let url=this.apiConstants.delFromCart+`/${productId}/${userId}`;
+    return this.http.delete(url);
+  }
 }
+

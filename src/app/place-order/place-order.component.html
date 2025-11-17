@@ -15,7 +15,27 @@
                 {{orderDetails?.productPrice | currency:'INR'}}
             </p>
             <p>
-                Quantity:{{orderDetails?.quantity}}
+                Quantity:{{orderDetails?.quantity}} 
+                @switch(orderDetails?.productFamily){
+                    @case('Wears'){
+                        <b>Piece</b>
+                    }
+                    @case('Gadgets'){
+                        <b>Piece</b>
+                    }
+                    @case('Asthetics'){
+                        <b>piece</b>
+                    }
+                    @case('Groceries'){
+                        <b>Kg</b>
+                    }
+                    @case('Utensils'){
+                        <b>Set</b>
+                    }
+                    @default{
+                        <b>default</b>
+                    }
+                }
             </p>
             <button class="btn m-1" (click)="deliveryAddress(orderDetails)">
                 Confirm Order
@@ -31,11 +51,12 @@
         <div class="payment-form flex">
             <form class="product-details p-2" [formGroup]="addressForm" (ngSubmit)="onSubmitAddress()">
                 <i class="fa fa-window-close close-icon" aria-hidden="true" (click)="onCloseForm()"></i>
-                <div class="flex">
+                <div class="flex-vertical">
                     <h4>
                         User Address
                     </h4>
                 </div>
+                    <p class="fields-para mt-3">***All are manditory fields***</p>
                 <div class="flex input-div">
                     <input class="input-field" type="number" placeholder="Enter the pincode" formControlName="pincode" />
                 </div>
@@ -44,6 +65,9 @@
                 </div>
                 <div class="flex input-div">
                     <select  class="input-field" formControlName="payOnDelivery">
+                        <option  [disabled]="true" >
+                            ---select-payon-delivery---
+                        </option>
                             <option>
                                 Yes
                             </option>
@@ -66,7 +90,7 @@
                     <textarea class="input-field" placeholder="Enter the address..."formControlName="address"></textarea>
                 </div>
                 <div class="flex">
-                    <button class="btn mt-4" type="submit">
+                    <button class="btn mt-2" type="submit">
                     Submit
                     </button>
                 </div>

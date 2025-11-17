@@ -3,19 +3,25 @@
     <div class="row  justify-content-md-start justify-content-center">
         <div class="col-10 col-md-4 p-3" *ngFor="let data of listOfProducts">
             <div class="product flex">
-                <div class="col-4 flex">
+                <div class="col-6 flex">
                     <img [src]="data.productImg" class="image" />
                 </div>
-                <div class="col-8 flex-vertical">
+                <div class="col-6 flex-vertical product-content ">
                     <h5>
                         {{data.productName}}
                     </h5>
-                    <p>
+                    <!-- <p>
                         {{data.productDes}}
-                    </p>
+                    </p> -->
                     <p>
                         {{data.productPrice | currency:'INR'}}
                     </p>
+                    <div class="star-container">
+                        <ng-container *ngFor="let star of (Array(5).fill(0));let i=index;">
+                            <i class="fa-solid fa-star icon" *ngIf="i<data.productRating"></i>
+                            <i class="fa-regular fa-star icon" *ngIf="i>=data.productRating"></i>
+                        </ng-container>
+                    </div>
                     <button (click)="addToCart(data)" class="btn">
                         Add Cart
                     </button>

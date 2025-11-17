@@ -21,8 +21,11 @@ export class CartComponent implements OnInit {
     this.sharedData.loader=true;
     if(isPlatformBrowser(this.platformId)){
       this.userToken=sessionStorage.getItem('userToken');
-    }
-    this.apiService.getCartProducts(this.userToken).subscribe((res:any)=>{
+    };
+    this.getCartDetails(this.userToken);
+  }
+  getCartDetails=(token:any)=>{
+    this.apiService.getCartProducts(token).subscribe((res:any)=>{
       this.cartList=res?.getCartData;
       this.sharedData.loader=false;
       console.log(this.cartList,"lis")
@@ -34,11 +37,23 @@ export class CartComponent implements OnInit {
     cart.quantity+=1;
   }
   reduceQuantity=(cart:any)=>{
-    if(cart.quantity>=1){
+    if(cart.quantity>=2){
       cart.quantity-=1;
     }
   }
   placeOrder=(cart:any)=>{
       this.route.navigate(['/place-order'],{queryParams:{productId:cart?.productId},state:{quantity:cart?.quantity}});
+  }
+  deleteFromCart=(cart:any)=>{
+    this.sharedData.loader=true;
+    this.apiService.delFromCart(cart.productId,cart.userId).subscribe((res:any)=>{
+      this.sharedData.setModalMsg(res.message)
+      this.sharedData.loader=false;
+      this.getCartDetails(this.userToken);
+    },
+  er=>{
+    this.sharedData.setModalMsg(er.message)
+    this.sharedData.loader=false;
+  })
   }
 }

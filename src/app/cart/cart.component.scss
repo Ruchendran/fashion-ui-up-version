@@ -1,4 +1,4 @@
-
+@import "../../styles.scss";
 .product{
     justify-content: space-around;
     box-shadow: 2px 2px 20px  grey ;
@@ -24,11 +24,23 @@ thead{
     height: 50px;
 }
 .quntity-btn{
-    // width: 20px;
-    // height: 20px;
+    width: 30px;
+    height: 30px;
+    color:$bgColor;
+    background: $designColor;
+    border: none;
+    font-weight: bold;
 }
 .mobile-cart-container{
     display: none;
+}
+.btn{
+    margin: 10px;
+    width: 130px;
+}
+p{
+    margin: 0px;
+    margin-top: 5px;
 }
 @media screen and (max-width:576px){
     .cart-container{
@@ -36,5 +48,15 @@ thead{
     }
     .mobile-cart-container{
         display: block;
+    }
+    .product{
+        position: relative;
+        overflow: hidden;
+    }
+    .icon{
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-size: 13px;
     }
 }

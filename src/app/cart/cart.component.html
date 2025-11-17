@@ -18,6 +18,9 @@
                 <th>
                     Order
                 </th>
+                <th>
+                    Delete
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +49,9 @@
                         Place Order
                     </button>
                 </td>
+                <td>
+                    <i class="fa-solid fa-trash icon" (click)="deleteFromCart(cart)"></i>
+                </td>
             </tr>      
         }
         </tbody>
@@ -57,6 +63,7 @@
     <div class="row  justify-content-md-start justify-content-center">
         <div class="col-10 col-md-4 p-3" *ngFor="let data of cartList">
             <div class="product flex">
+                <i class="fa-solid fa-trash icon" (click)="deleteFromCart(data)"></i>
                 <div class="col-4 flex">
                     <img [src]="data.productImg" class="image" />
                 </div>
@@ -64,13 +71,13 @@
                     <h5>
                         {{data.productName}}
                     </h5>
-                    <div>
-                        <button class="quntity-btn" (click)="addQuantity(data)">
-                            +
-                        </button>
-                        {{data.quantity}}
+                    <div class="mt-2">
                         <button class="quntity-btn" (click)="reduceQuantity(data)">
                             -
+                        </button>
+                        {{data.quantity}}
+                        <button class="quntity-btn" (click)="addQuantity(data)">
+                            +
                         </button>
                     </div>
                     <p>
@@ -79,6 +86,7 @@
                     <button (click)="placeOrder(data)" class="btn">
                         Place Order
                     </button>
+ 
                 </div>
             </div>
         </div>

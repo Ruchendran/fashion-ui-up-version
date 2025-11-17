@@ -12,6 +12,7 @@ export class SharedataService implements OnInit {
   ngOnInit(): void {
 
   }
+  inputMsg=signal('')
   getAdminData=()=>{
     if(isPlatformBrowser(this.platformId)){
         return  sessionStorage.getItem('adminUser')=='true'?true:false;
@@ -22,6 +23,9 @@ export class SharedataService implements OnInit {
   }
   setLogInUserVal=(user:string)=>{
     this.logInUser.set(user);
+  }
+  setModalMsg=(msg:string)=>{
+    this.inputMsg.set(msg);
   }
   loader=false;
 }

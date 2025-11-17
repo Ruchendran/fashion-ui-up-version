@@ -25,7 +25,7 @@ export class PlaceOrderComponent implements OnInit  {
       pincode:new FormControl('',Validators.required),
       village:new FormControl('Satrawada',Validators.required),
       phone:new FormControl('',Validators.required),
-      payOnDelivery:new FormControl('Yes',Validators.required)
+      payOnDelivery:new FormControl('---select-payon-delivery---',Validators.required)
     })
     if(isPlatformBrowser(this.platformId)){
       let state=window.history.state;
@@ -48,14 +48,15 @@ export class PlaceOrderComponent implements OnInit  {
     this.apiService.appendOrder(order).subscribe((res:any)=>{
        this.sharedData.loader=false;
        if(res.status == 409){
-          alert(res.message);
+            this.sharedData.setModalMsg(res.message)
        }
        else{
-          alert(res.message);
+             this.sharedData.setModalMsg(res.message)
        }
       //  this.hideLoader();
     },er=>{
       this.sharedData.loader=false;
+      this.sharedData.setModalMsg(er.message)
     }) 
   }
   deliveryAddress=(order:any)=>{
@@ -65,9 +66,10 @@ export class PlaceOrderComponent implements OnInit  {
     this.deliveryAddressForm=false;
   }
   onSubmitAddress=()=>{
-    if(this.addressForm.status!='INVALID'){
+    if(this.addressForm.status!='INVALID' && this.addressForm.value.payOnDelivery!='---select-payon-delivery---'){
       this.confirmOrder({...this.orderDetails,...this.addressForm.value});
       this.deliveryAddressForm=false;
+      this.route.navigate(['/orders']);
     }
     else{
       alert('Please fill the fields.')

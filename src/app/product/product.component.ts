@@ -14,16 +14,18 @@ export class ProductComponent implements OnInit {
   constructor(private apiService: ApiserviceService, @Inject(PLATFORM_ID) private platformId: Object, private activateRoute: ActivatedRoute, private sharedData: SharedataService) {
 
   }
+  public Array=Array;
   listOfProducts: any = [];
   userToken: any = '';
   productFamily = '';
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.userToken = sessionStorage.getItem('userToken');
+      this.productFamily=window.location.pathname.split("/").reverse()[0]
     };
-    this.activateRoute.params.subscribe((val) => {
-      this.productFamily = val['productFamily'];
-    })
+    // this.activateRoute.params.subscribe((val) => {
+    //   this.productFamily = val['productFamily'];
+    // })
     this.sharedData.loader = true;
     this.apiService.getAllProducts(this.productFamily).subscribe((res) => {
       this.sharedData.loader = false;
@@ -36,7 +38,7 @@ export class ProductComponent implements OnInit {
   addToCart = (product: any) => {
     this.sharedData.loader = true;
     this.apiService.saveToCart({ ...product, userToken: this.userToken, quantity: 1 }).subscribe((res: any) => {
-      alert(JSON.stringify(res.message))
+      this.sharedData.setModalMsg(res.message);
       this.sharedData.loader = false;
     },
       er => {

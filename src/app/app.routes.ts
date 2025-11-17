@@ -5,65 +5,90 @@ import { adminGuard } from './admin.guard';
 export const routes: Routes = [
     {
         path: '',
-        loadComponent: () => import("../app/home/home.component").then(m => m.HomeComponent),
+        loadComponent: () => import("./home/home.component").then(m => m.HomeComponent),
         title: "Landing page",
         canActivate: [authGuard]
     },
     {
         path: 'products',
-        loadComponent: () => import("../app/product/product.component").then(m => m.ProductComponent),
+        loadComponent: () => import("./product/product.component").then(m => m.ProductComponent),
         title: "Products page",
         canActivate: [authGuard],
     },
-    {
-        path:"products/:productFamily",
-        loadComponent: () => import("../app/product/product.component").then(m => m.ProductComponent),
+    // {
+    //     path:"products/:productFamily",
+    //     loadComponent: () => import("../app/product/product.component").then(m => m.ProductComponent),
+    //     title:"Product Page",
+    // },
+        {
+        path:"products/wears",
+        loadComponent: () => import("./product/product.component").then(m => m.ProductComponent),
+        title:"Product Page",
+    },
+            {
+        path:"products/gadgets",
+        loadComponent: () => import("./product/product.component").then(m => m.ProductComponent),
+        title:"Product Page",
+    },
+        {
+        path:"products/asthetics",
+        loadComponent: () => import("./product/product.component").then(m => m.ProductComponent),
+        title:"Product Page",
+    },
+            {
+        path:"products/utensils",
+        loadComponent: () => import("./product/product.component").then(m => m.ProductComponent),
+        title:"Product Page",
+    },
+            {
+        path:"products/groceries",
+        loadComponent: () => import("./product/product.component").then(m => m.ProductComponent),
         title:"Product Page",
     },
     {
         path: 'orders',
-        loadComponent: () => import("../app/order/order.component").then(m => m.OrderComponent),
+        loadComponent: () => import("./order/order.component").then(m => m.OrderComponent),
         title: "Orders page",
         canActivate: [authGuard]
     },
     {
         path: 'place-order',
-        loadComponent: () => import("../app/place-order/place-order.component").then(m => m.PlaceOrderComponent),
+        loadComponent: () => import("./place-order/place-order.component").then(m => m.PlaceOrderComponent),
         title: "Place Order",
         canActivate: [authGuard]
     },
     {
         path: 'cart',
-        loadComponent: () => import("../app/cart/cart.component").then(m => m.CartComponent),
+        loadComponent: () => import("./cart/cart.component").then(m => m.CartComponent),
         title: 'Cart Page',
         canActivate: [authGuard]
     },
     {
         path: 'log-in',
-        loadComponent: () => import("../app/log-in/log-in.component").then(s => s.LogInComponent),
+        loadComponent: () => import("./log-in/log-in.component").then(s => s.LogInComponent),
         title: "Login Page"
     },
     {
         path: 'register',
-        loadComponent: () => import("../app/register/register.component").then(s => s.RegisterComponent),
+        loadComponent: () => import("./register/register.component").then(s => s.RegisterComponent),
         title: "Register Page"
     },
     {
         path: "admin",
-        loadComponent: () => import("../app/admin-folder/admin/admin.component").then(s => s.AdminComponent),
+        loadComponent: () => import("./admin-folder/admin/admin.component").then(s => s.AdminComponent),
         title: "Admin Page",
         canActivate: [adminGuard]
     },
     {
         path: "admin/upload",
-        loadComponent: () => import("../app/admin-folder/admin-upload/admin-upload.component").then(s => s.AdminUploadComponent),
+        loadComponent: () => import("./admin-folder/admin-upload/admin-upload.component").then(s => s.AdminUploadComponent),
         title: "Upload Page",
         canActivate: [adminGuard],
 
     },
     {
         path: "track-order",
-        loadComponent: () => import("../app/track-order/track-order.component").then(s => s.TrackOrderComponent),
+        loadComponent: () => import("./track-order/track-order.component").then(s => s.TrackOrderComponent),
         title: "Track Order",
         canActivate: [authGuard]
     }

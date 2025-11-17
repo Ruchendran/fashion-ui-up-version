@@ -6,10 +6,11 @@ import { isPlatformBrowser } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { SharedataService } from './sharedata.service';
 import { LoaderComponent } from './loader/loader.component';
+import { MessageModalComponent } from './message-modal/message-modal.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,RouterModule,CommonModule,FooterComponent,LoaderComponent],
+  imports: [RouterOutlet,RouterModule,CommonModule,FooterComponent,LoaderComponent,MessageModalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

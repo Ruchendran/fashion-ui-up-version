@@ -1,0 +1,14 @@
+<div class="msg-modal flex">
+    <div class="modal-box">
+        <i class="fa-solid fa-xmark icon" (click)="closeModal()"></i>
+        <div class="flex-vertical">
+            <p>
+                {{messageVal}}
+            </p>
+            <button class="btn"  (click)="closeModal()">
+                Ok
+            </button>
+        </div>
+        
+    </div>
+</div>
