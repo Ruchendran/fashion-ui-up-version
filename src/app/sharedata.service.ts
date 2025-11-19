@@ -27,5 +27,6 @@ export class SharedataService implements OnInit {
   setModalMsg=(msg:string)=>{
     this.inputMsg.set(msg);
   }
-  loader=false;
+  loader=signal(false);
+
 }

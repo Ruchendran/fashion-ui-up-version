@@ -18,7 +18,7 @@ export class CartComponent implements OnInit {
   cartList:any;
   userToken:any='';
   ngOnInit(): void {
-    this.sharedData.loader=true;
+    this.sharedData.loader.set(true)
     if(isPlatformBrowser(this.platformId)){
       this.userToken=sessionStorage.getItem('userToken');
     };
@@ -27,10 +27,10 @@ export class CartComponent implements OnInit {
   getCartDetails=(token:any)=>{
     this.apiService.getCartProducts(token).subscribe((res:any)=>{
       this.cartList=res?.getCartData;
-      this.sharedData.loader=false;
+      this.sharedData.loader.set(false)
       console.log(this.cartList,"lis")
     },er=>{
-      this.sharedData.loader=false;
+      this.sharedData.loader.set(false)
     })
   }
   addQuantity=(cart:any)=>{
@@ -45,15 +45,15 @@ export class CartComponent implements OnInit {
       this.route.navigate(['/place-order'],{queryParams:{productId:cart?.productId},state:{quantity:cart?.quantity}});
   }
   deleteFromCart=(cart:any)=>{
-    this.sharedData.loader=true;
+    this.sharedData.loader.set(true)
     this.apiService.delFromCart(cart.productId,cart.userId).subscribe((res:any)=>{
       this.sharedData.setModalMsg(res.message)
-      this.sharedData.loader=false;
+      this.sharedData.loader.set(false)
       this.getCartDetails(this.userToken);
     },
   er=>{
     this.sharedData.setModalMsg(er.message)
-    this.sharedData.loader=false;
+    this.sharedData.loader.set(false)
   })
   }
 }

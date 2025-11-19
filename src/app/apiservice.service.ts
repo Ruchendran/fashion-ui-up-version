@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient,HttpParams} from '@angular/common/http';
 import { serverVal } from '../environment';
 import { Observable } from 'rxjs';
+import { group } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,10 @@ export class ApiserviceService implements OnInit {
     getOrderDetail:serverVal.server+'/order',
     getPlaceOrderDetail:serverVal.server+'/cart',
     getAdminUser:serverVal.server+'/auth/admin/verify',
-    delFromCart:serverVal.server+'/cart/delete'
+    delFromCart:serverVal.server+'/cart/delete',
+    getAllProductsByPrice:serverVal.server+'/products/filterPrice',
+    chatbotService:serverVal.server+'/chatbot/query-text',
+    resetPassword:serverVal.server+'/auth/reset'
   }
 
   ngOnInit(): void {
@@ -41,6 +45,10 @@ export class ApiserviceService implements OnInit {
   getAllProducts(productFamily:String){
     let group=productFamily=='products'?'all':productFamily;
     return this.http.get(this.apiConstants.getAllProducts+`/${group}`);
+  };
+  getAllProductsByPrice(productFamily:String,min:any,max:any){
+    let fam=productFamily=='products'?'all':productFamily;
+    return this.http.get(this.apiConstants.getAllProductsByPrice,{params:{minPrice:min,maxPrice:max,productFamily:fam.toString()}})
   }
   saveToCart(payload:any){
     return this.http.post(this.apiConstants.saveToCart,payload);
@@ -62,9 +70,6 @@ export class ApiserviceService implements OnInit {
   }
   getPlaceOrderDetail(productId:any,userId:any){
     let placeOrderParams=new HttpParams();
-    // placeOrderParams.append('userId',userId);
-    // placeOrderParams.append('productId',productId)
-    // console.log(placeOrderParams.toString(),"data",productId,userId)
     let url=this.apiConstants.getPlaceOrderDetail+"/place-order";
     return this.http.get(url,{params:{userId:userId,productId:productId}});
   }
@@ -75,6 +80,13 @@ export class ApiserviceService implements OnInit {
   delFromCart(productId:any,userId:any){
     let url=this.apiConstants.delFromCart+`/${productId}/${userId}`;
     return this.http.delete(url);
+  }
+  chatbotService(queryText:string){
+    let url=this.apiConstants.chatbotService;
+    return this.http.post(url,{queryText:queryText});
+  }
+  resetPassword(mail:string,pas:string){
+    return this.http.put(this.apiConstants.resetPassword,{userMail:mail,password:pas})
   }
 }
 

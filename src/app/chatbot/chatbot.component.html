@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 chatbot flex-vertical mb-3">
+            <div class="col-12 mb-3 chat" id="chat">
+                <ng-container *ngFor="let value of chatList">
+                    <div class="user-msg flex" *ngIf="value.user=='client'">
+                        <p class="client">{{value.msg}}</p>
+                    </div>
+                    <div class="server-msg flex" *ngIf="value.user=='server'">
+                        <p class="server">{{value.msg}}</p>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="col-12 flex mb-2">
+                <input type="text" placeholder="Type ai message ..." class="col-9 input-txt" [(ngModel)]="text" />
+                <button class="btn col-3" (click)="sendText()">
+                    send
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

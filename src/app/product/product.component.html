@@ -1,7 +1,58 @@
 
 <div class="container">
     <div class="row  justify-content-md-start justify-content-center">
-        <div class="col-10 col-md-4 p-3" *ngFor="let data of listOfProducts">
+        <div class="col-10 col-md-12 filters-container flex">
+            <div class="filters-inner-container w-100">
+                <div class=" col-12 col-md-2 flex filters-icon">
+                    <b class="filter-span">
+                        Filters
+                    </b>
+                    <i class="fa-solid fa-filter icon"></i>
+                </div>
+                <div class="line" ></div>
+                <div class="col-12 col-md-6 filters-icon flex" >
+                    <input placeholder="Search by products..." [(ngModel)]="searchInput" class="search-inp" type="text" (input)="searchProducts()" />
+                    <button class="search-btn">
+                        <i class="fa-solid fa-magnifying-glass icon-search icon" (click)="searchProducts()"></i>
+                    </button>
+                </div>
+                <div class="line" ></div>
+                <div class="col-12 price-ranges  col-md-3 flex-vertical">
+                    <div class="ranges-apply-section flex">
+                        <label>
+                            Price Ranges
+                        </label>
+                        <button class="btn btn-price" (click)="filterByPrice()">
+                            Go
+                        </button>
+                    </div>
+                    <div class="price-values flex col-md-10 ">
+                        <div class="flex">
+                            <span>
+                                Min : &nbsp;
+                            </span>
+                            <input type="number"  [(ngModel)]="minPrice" />
+                        </div>
+                        <div class="flex">
+                            <span>
+                                Max : &nbsp;
+                            </span>
+                            <input type="number"  [(ngModel)]="maxPrice" />
+                        </div>
+                    </div>
+                    <div class="range-section">
+                        <div class="progress">
+
+                        </div>
+                        <div class="range-inp">
+                            <input type="range" min="0" max="500" class="range-min"   [(ngModel)]="minPrice"/>
+                            <input type="range" min="0" max="500"  class="range-max"  [(ngModel)]="maxPrice"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-10 col-md-4 p-3" *ngFor="let data of filteredProducts">
             <div class="product flex">
                 <div class="col-6 flex">
                     <img [src]="data.productImg" class="image" />

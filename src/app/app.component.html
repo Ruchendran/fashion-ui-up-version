@@ -99,5 +99,5 @@
     </div>
     <app-footer *ngIf="headerHide"></app-footer>
 </div>
-<app-loader *ngIf="shareData.loader"></app-loader>
+<app-loader *ngIf="shareData.loader()"></app-loader>
 <app-message-modal *ngIf="shareData.inputMsg()" [inputMsg]="shareData.inputMsg()"></app-message-modal>

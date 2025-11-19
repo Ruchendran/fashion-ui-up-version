@@ -30,23 +30,23 @@ export class PlaceOrderComponent implements OnInit  {
     if(isPlatformBrowser(this.platformId)){
       let state=window.history.state;
       this.userToken=sessionStorage.getItem('userToken');
-      this.sharedData.loader=true;
+      this.sharedData.loader.set(true)
       this.activeRoute.queryParams.subscribe((data:any)=>{
         this.apiService.getPlaceOrderDetail(data?.productId,this.userToken).subscribe((res:any)=>{
-            this.sharedData.loader=false;
+            this.sharedData.loader.set(false)
             this.orderDetails=res?.orderDetails;
             this.orderDetails.quantity=state?.quantity;
             this.orderDetails.productPrice=this.orderDetails.productPrice*state?.quantity;
         },er=>{
-           this.sharedData.loader=false;
+           this.sharedData.loader.set(false)
         })
       })
     }
   }
   confirmOrder=(order:any)=>{
-     this.sharedData.loader=true;
+     this.sharedData.loader.set(true)
     this.apiService.appendOrder(order).subscribe((res:any)=>{
-       this.sharedData.loader=false;
+       this.sharedData.loader.set(false)
        if(res.status == 409){
             this.sharedData.setModalMsg(res.message)
        }
@@ -55,7 +55,7 @@ export class PlaceOrderComponent implements OnInit  {
        }
       //  this.hideLoader();
     },er=>{
-      this.sharedData.loader=false;
+      this.sharedData.loader.set(false)
       this.sharedData.setModalMsg(er.message)
     }) 
   }

@@ -52,6 +52,12 @@ export const routes: Routes = [
         canActivate: [authGuard]
     },
     {
+        path: 'chatbot',
+        loadComponent: () => import("./chatbot/chatbot.component").then(m=>m.ChatbotComponent),
+        title: "Orders page",
+        canActivate: [authGuard]
+    },
+    {
         path: 'place-order',
         loadComponent: () => import("./place-order/place-order.component").then(m => m.PlaceOrderComponent),
         title: "Place Order",

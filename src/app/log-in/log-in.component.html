@@ -12,11 +12,23 @@
                 <i class="fa-regular fa-envelope icon"></i>
                 <input placeholder="Enter Username as Mail"  htmlFor="userMail"  type="text" class="input-field" formControlName="userMail"/>
             </div>
-            <div class="user-section" *ngIf="!adminUser">
+            <div class="user-section" *ngIf="!adminUser && !forgotPassword">
                 <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
                 <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i>
                 <input placeholder="Enter Password"   [type]="eyeOpen?'text':'password'"  class="input-field" formControlName="password"/>
             </div>
+            <!--forgot password section-->
+            <div class="user-section" *ngIf="!adminUser && !register && forgotPassword" >
+                <!-- <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
+                <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i> -->
+                <input placeholder="New Password"   [type]="eyeOpen?'text':'password'"  class="input-field" formControlName="newPassword" />
+            </div>
+            <div class="user-section"   *ngIf="!adminUser && !register && forgotPassword" >
+                <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
+                <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i>
+                <input placeholder="Confirm Password"   [type]="eyeOpen?'text':'password'"  class="input-field"  formControlName="confirmPassword"/>
+            </div>
+                 <!--forgot password section-->
             <div class="user-section" *ngIf="register && !adminUser">
                 <i class="fa-solid fa-phone-flip icon"></i>
                 <input placeholder="Enter Phone"  htmlFor="phone"  type="text"  class="input-field" formControlName="phone"/>
@@ -28,7 +40,7 @@
             <div  class="forgot-section flex">
                 <a (click)="loginAdmin()" *ngIf="!adminUser">Login Admin</a>
                 <a *ngIf="adminUser" (click)="normalUser()">User</a>
-                <a>Forgot Password?</a>
+                <a (click)="forgotPas()" *ngIf="!register">Forgot Password?</a>
             </div>
             <button class="submit-btn" type="submit">
                 Submit
