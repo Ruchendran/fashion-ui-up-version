@@ -1,7 +1,13 @@
 
 <div class="container">
     <div class="row  justify-content-md-start justify-content-center">
-        <div class="col-10 col-md-12 filters-container flex">
+        <div class="col-10 mt-3 view-cart-section">
+            <div (click)="navToCart()" class="view-cart-section">
+                <b class="view-cart">View Cart</b>  
+                <i class="fa-solid fa-arrow-right icon"></i>
+             </div>
+        </div>
+        <div class="col-11 col-md-12 filters-container flex">
             <div class="filters-inner-container w-100">
                 <div class=" col-12 col-md-2 flex filters-icon">
                     <b class="filter-span">
@@ -52,7 +58,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-10 col-md-4 p-3" *ngFor="let data of filteredProducts">
+        <div class="col-11 col-md-4 p-3" *ngFor="let data of filteredProducts">
             <div class="product flex">
                 <div class="col-6 flex">
                     <img [src]="data.productImg" class="image" />

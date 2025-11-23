@@ -17,8 +17,11 @@
             <label id="sign-in" (pointerover)="pointHover()" class="label">
                 Sign In
             </label>
-            <div>
+            <div >
                 <i class="fa-solid fa-cart-shopping icon cart"  routerLink="/cart" ></i>
+                <label class="cart-label">
+                    {{shareData.cartCount()}}
+                </label>
             </div>
             <div class="flex">
                 <div class="user flex">
@@ -30,6 +33,9 @@
             </div>
         </div>
     </header>
+    <!-- <div class="back-next-section">
+
+    </div> -->
     <router-outlet>
 
     </router-outlet>

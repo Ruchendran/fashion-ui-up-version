@@ -7,7 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SharedataService } from './sharedata.service';
 import { LoaderComponent } from './loader/loader.component';
 import { MessageModalComponent } from './message-modal/message-modal.component';
-import { Title,Meta } from '@angular/platform-browser';
+import { ApiserviceService } from './apiservice.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit  {
   whatsCount:any=0;
   userInitial:any;
   appInitialized=false;
-  constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object,private route:Router,public shareData:SharedataService,private titleService:Title,private metaService:Meta){
+  constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object,private route:Router,public shareData:SharedataService,private apiService:ApiserviceService){
 
   }
   headerHide:boolean=true;
@@ -35,15 +35,19 @@ export class AppComponent implements OnInit  {
       signInHoverElement?.classList.add('sign-in-hover');
     }
   }
-  updMeta(){
-    this.titleService.setTitle("fashion-shopping-trend");
-    this.metaService.updateTag({property:'og:title',content:'fasion-ui-page'});
-    this.metaService.updateTag({property:'og:description',content:"these are igly trend products."});
-    this.metaService.updateTag({property:'og:image',content:'https://fashion-ui.netlify.app/assets/home-section/zoom/zoom-img.jpg'})
+  callCartCount=()=>{
+    this.shareData.loader.set(true);
+    this.apiService.getCartCount().subscribe((res:any)=>{
+      this.shareData.loader.set(false);
+      this.shareData.cartCount.set(res.cartCount);
+    },
+  er=>{
+    this.shareData.loader.set(false);
+  })
   }
   ngOnInit(): void {
+    this.callCartCount()
     if(isPlatformBrowser(this.platformId)){
-    this.updMeta();
     let data=sessionStorage.getItem('user');
     if(data){
       this.shareData.setLogInUserVal(data);

@@ -25,7 +25,8 @@ export class ApiserviceService implements OnInit {
     delFromCart:serverVal.server+'/cart/delete',
     getAllProductsByPrice:serverVal.server+'/products/filterPrice',
     chatbotService:serverVal.server+'/chatbot/query-text',
-    resetPassword:serverVal.server+'/auth/reset'
+    resetPassword:serverVal.server+'/auth/reset',
+    getCartCount:serverVal.server+'/cart/cart-count'
   }
 
   ngOnInit(): void {
@@ -87,6 +88,9 @@ export class ApiserviceService implements OnInit {
   }
   resetPassword(mail:string,pas:string){
     return this.http.put(this.apiConstants.resetPassword,{userMail:mail,password:pas})
+  }
+  getCartCount(){
+    return this.http.get(this.apiConstants.getCartCount);
   }
 }
 

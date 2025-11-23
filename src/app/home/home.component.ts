@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import {  Component,ElementRef,HostListener,OnInit,ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { WearSectionComponent } from '../wear-section/wear-section.component';
+import { Meta,Title } from '@angular/platform-browser'; 
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +16,21 @@ export class HomeComponent implements OnInit{
   @ViewChild('threeDImg1') threeDImg1!:ElementRef;
   @ViewChild('threeDImg3') threeDImg3!:ElementRef;
   contentAnimation=false;
-  constructor(private router:Router){
+  metaData: any;
+  constructor(private router:Router,private metaService:Meta,private titleService:Title,private activatedRoute:ActivatedRoute){
 
+  }
+    updMeta(){
+    this.titleService.setTitle("fashion-shopping-trend");
+    this.metaService.updateTag({property:'og:title',content:'fasion-ui-page'});
+    this.metaService.updateTag({property:'og:description',content:"these are igly trend products."});
+    this.metaService.updateTag({property:'og:image',content:'https://fashion-ui.netlify.app/assets/home-section/zoom/zoom-img.jpg'})
   }
   ngOnInit(): void {
       // window.location.reload();
+      this.metaData=this.activatedRoute.snapshot.data;
+      console.log(this.metaData,"ssss")
+      this.updMeta()
   }
   @HostListener('window:scroll')
   onScroll=()=>{

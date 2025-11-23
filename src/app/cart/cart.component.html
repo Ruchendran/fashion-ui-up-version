@@ -33,12 +33,12 @@
                     {{cart.productName}}
                 </td>
                 <td >
-                    <button class="quntity-btn" (click)="addQuantity(cart)">
-                        +
-                    </button>
-                    {{cart.quantity}}
                     <button class="quntity-btn" (click)="reduceQuantity(cart)">
                         -
+                    </button>
+                    {{cart.quantity}}
+                    <button class="quntity-btn" (click)="addQuantity(cart)">
+                        +
                     </button>
                 </td>
                 <td>
@@ -61,7 +61,7 @@
 <!---This is for mobile view-->
 <div class="container mobile-cart-container">
     <div class="row  justify-content-md-start justify-content-center">
-        <div class="col-10 col-md-4 p-3" *ngFor="let data of cartList">
+        <div class="col-11 col-md-4 p-3" *ngFor="let data of cartList">
             <div class="product flex">
                 <i class="fa-solid fa-trash icon" (click)="deleteFromCart(data)"></i>
                 <div class="col-4 flex">
@@ -72,12 +72,12 @@
                         {{data.productName}}
                     </h5>
                     <div class="mt-2">
-                        <button class="quntity-btn" (click)="reduceQuantity(data)">
-                            -
-                        </button>
-                        {{data.quantity}}
                         <button class="quntity-btn" (click)="addQuantity(data)">
                             +
+                        </button>
+                        {{data.quantity}}
+                        <button class="quntity-btn" (click)="reduceQuantity(data)">
+                            -
                         </button>
                     </div>
                     <p>

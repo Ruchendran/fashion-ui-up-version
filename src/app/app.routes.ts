@@ -1,13 +1,20 @@
 import { Routes,Route } from '@angular/router';
 import { authGuard } from './auth.guard';
 import { adminGuard } from './admin.guard';
+import { title } from 'process';
 
 export const routes: Routes = [
     {
         path: '',
         loadComponent: () => import("./home/home.component").then(m => m.HomeComponent),
         title: "Landing page",
-        canActivate: [authGuard]
+        canActivate: [authGuard],
+        data:{
+            title:"Landing page",
+            description:'This is landing page useful for view all the available products',
+            image:'',
+            
+        }
     },
     {
         path: 'products',

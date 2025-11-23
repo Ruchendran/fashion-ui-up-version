@@ -12,6 +12,7 @@ export class SharedataService implements OnInit {
   ngOnInit(): void {
 
   }
+  cartCount=signal(0);
   inputMsg=signal('')
   getAdminData=()=>{
     if(isPlatformBrowser(this.platformId)){

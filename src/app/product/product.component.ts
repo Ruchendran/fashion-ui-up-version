@@ -2,7 +2,7 @@ import { Component, OnInit, ComponentRef, PLATFORM_ID, Inject } from '@angular/c
 import { ApiserviceService } from '../apiservice.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute ,Router} from '@angular/router';
 import { SharedataService } from '../sharedata.service';
 import { FormsModule } from '@angular/forms';
 @Component({
@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './product.component.scss'
 })
 export class ProductComponent implements OnInit {
-  constructor(private apiService: ApiserviceService, @Inject(PLATFORM_ID) private platformId: Object, private activateRoute: ActivatedRoute, private sharedData: SharedataService) {
+  constructor(private apiService: ApiserviceService, @Inject(PLATFORM_ID) private platformId: Object, private activateRoute: ActivatedRoute, private sharedData: SharedataService,private route:Router) {
 
   }
   minPrice=20;
@@ -52,11 +52,22 @@ export class ProductComponent implements OnInit {
       this.sharedData.setModalMsg(er.message);
     })
   }
+    callCartCount=()=>{
+    this.sharedData.loader.set(true);
+    this.apiService.getCartCount().subscribe((res:any)=>{
+      this.sharedData.loader.set(false);
+      this.sharedData.cartCount.set(res.cartCount);
+    },
+  er=>{
+    this.sharedData.loader.set(false);
+  })
+  }
   addToCart = (product: any) => {
     this.sharedData.loader.set(true);
     this.apiService.saveToCart({ ...product, userToken: this.userToken, quantity: 1 }).subscribe((res: any) => {
       this.sharedData.setModalMsg(res.message);
-      this.sharedData.loader.set(false)
+      this.sharedData.loader.set(false);
+      this.callCartCount();
     },
       er => {
         this.sharedData.loader.set(false)
@@ -68,6 +79,9 @@ export class ProductComponent implements OnInit {
         return product;
       }
     });
+  }
+  navToCart=()=>{
+    this.route.navigate(['/cart'])
   }
 }
 

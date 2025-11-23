@@ -192,6 +192,14 @@ label{
     padding-left: 10px;
     text-transform: capitalize;
 }
+.back-next-section{
+    width: 100%;
+}
+.cart-label{
+    position: relative;
+    top: -10px;
+    left: 3px;
+}
 @media screen and (max-width : 576px) {
     .header{
         display: none;
