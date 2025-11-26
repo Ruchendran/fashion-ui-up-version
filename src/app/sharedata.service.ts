@@ -12,6 +12,7 @@ export class SharedataService implements OnInit {
   ngOnInit(): void {
 
   }
+  orderCount=signal(0);
   cartCount=signal(0);
   inputMsg=signal('')
   getAdminData=()=>{

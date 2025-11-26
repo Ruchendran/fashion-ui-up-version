@@ -38,6 +38,27 @@ export class LogInComponent implements OnInit {
     this.adminUser = false;
     this.forgotPassword=false;
   }
+  callCartCount=(userToken:any)=>{
+    this.shareData.loader.set(true);
+    this.apiService.getCartCount(userToken).subscribe((res:any)=>{
+      this.shareData.loader.set(false);
+      this.shareData.cartCount.set(res.cartCount);
+    },
+  er=>{
+    this.shareData.loader.set(false);
+  })
+  }
+  callOrderCount=(userToken:any)=>{
+    this.shareData.loader.set(true);
+    this.apiService.getOrderCount(userToken).subscribe((res:any)=>{
+      this.shareData.loader.set(false);
+      this.shareData.orderCount.set(res.orderCount);
+    },
+    er=>{
+      this.shareData.loader.set(false);
+    }
+  )
+  }
   onSubmit = () => {
     this.shareData.loader.set(true);
     //This is only for Register users.
@@ -65,7 +86,9 @@ export class LogInComponent implements OnInit {
             sessionStorage?.setItem('user', this.userForm?.value?.userName);
             sessionStorage?.setItem('password', this.userForm?.value?.password);
             sessionStorage.setItem('userToken', res.userToken)
-          }
+          };
+          this.callCartCount(res.userToken);
+          this.callOrderCount(res.userToken);
           this.route.navigate(["/"]);
 
         }
@@ -77,7 +100,7 @@ export class LogInComponent implements OnInit {
         (error) => {
           this.shareData.loader.set(false)
           alert("Something went wrong!!!!!!!");
-        })
+        });
     }
     //This is only for login users.
     else if(!this.register && !this.adminUser && !this.forgotPassword ) {
@@ -90,6 +113,8 @@ export class LogInComponent implements OnInit {
             sessionStorage?.setItem('password', this.userForm?.value?.password);
             sessionStorage.setItem('userToken', res.userToken)
           }
+          this.callCartCount(res.userToken);
+          this.callOrderCount(res.userToken);
           this.route.navigate(["/"]);
         }
         else {

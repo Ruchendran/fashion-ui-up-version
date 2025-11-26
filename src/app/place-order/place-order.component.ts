@@ -51,6 +51,7 @@ export class PlaceOrderComponent implements OnInit  {
             this.sharedData.setModalMsg(res.message)
        }
        else{
+            this.callOrderCount(this.userToken);
              this.sharedData.setModalMsg(res.message)
        }
       //  this.hideLoader();
@@ -64,6 +65,17 @@ export class PlaceOrderComponent implements OnInit  {
   }
   onCloseForm=()=>{
     this.deliveryAddressForm=false;
+  }
+    callOrderCount=(userToken:any)=>{
+    this.sharedData.loader.set(true);
+    this.apiService.getOrderCount(userToken).subscribe((res:any)=>{
+      this.sharedData.loader.set(false);
+      this.sharedData.orderCount.set(res.orderCount);
+    },
+    er=>{
+      this.sharedData.loader.set(false);
+    }
+  )
   }
   onSubmitAddress=()=>{
     if(this.addressForm.status!='INVALID' && this.addressForm.value.payOnDelivery!='---select-payon-delivery---'){

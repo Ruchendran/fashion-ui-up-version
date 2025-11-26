@@ -29,15 +29,15 @@ export class AppComponent implements OnInit  {
   @ViewChild('signInHover') signInHover!:ElementRef;
   @HostListener('click',['$event'])
   onClick=(outOfHover:Event)=>{
-    if(!this.signInHover.nativeElement.contains(outOfHover.target)){
+    if(!this.signInHover?.nativeElement.contains(outOfHover.target)){
       let signInHoverElement=document.getElementById('sign-in-hover');
       signInHoverElement?.classList.remove('sign-in-hover-label');
       signInHoverElement?.classList.add('sign-in-hover');
     }
   }
-  callCartCount=()=>{
+  callCartCount=(userToken:any)=>{
     this.shareData.loader.set(true);
-    this.apiService.getCartCount().subscribe((res:any)=>{
+    this.apiService.getCartCount(userToken).subscribe((res:any)=>{
       this.shareData.loader.set(false);
       this.shareData.cartCount.set(res.cartCount);
     },
@@ -45,10 +45,23 @@ export class AppComponent implements OnInit  {
     this.shareData.loader.set(false);
   })
   }
+    callOrderCount=(userToken:any)=>{
+    this.shareData.loader.set(true);
+    this.apiService.getOrderCount(userToken).subscribe((res:any)=>{
+      this.shareData.loader.set(false);
+      this.shareData.orderCount.set(res.orderCount);
+    },
+    er=>{
+      this.shareData.loader.set(false);
+    }
+  )
+  }
   ngOnInit(): void {
-    this.callCartCount()
     if(isPlatformBrowser(this.platformId)){
     let data=sessionStorage.getItem('user');
+    let userToken=sessionStorage.getItem('userToken');
+       this.callCartCount(userToken);
+       this.callOrderCount(userToken);
     if(data){
       this.shareData.setLogInUserVal(data);
     }

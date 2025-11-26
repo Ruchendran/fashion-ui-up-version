@@ -18,9 +18,15 @@
                 Sign In
             </label>
             <div >
-                <i class="fa-solid fa-cart-shopping icon cart"  routerLink="/cart" ></i>
+                <i class="fa-solid fa-cart-plus icon cart" routerLink="/cart"></i>
                 <label class="cart-label">
                     {{shareData.cartCount()}}
+                </label>
+            </div>
+            <div >
+                <i class="fa-solid fa-briefcase cart icon" routerLink="/orders"></i>
+                <label class="cart-label">
+                    {{shareData.orderCount()}}
                 </label>
             </div>
             <div class="flex">
@@ -33,9 +39,25 @@
             </div>
         </div>
     </header>
-    <!-- <div class="back-next-section">
-
-    </div> -->
+    <!--mobile-header-->
+    <div class="mobile-header flex" *ngIf="headerHide">
+          <i class="fa-solid fa-list icon cart menu" (click)="clickMobileArrow()"></i>
+        <div class="cart-order flex">
+            <div >
+                <i class="fa-solid fa-briefcase cart icon" routerLink="/orders"></i>
+                <label class="cart-label">
+                    {{shareData.orderCount()}}
+                </label>
+            </div>
+             <div >
+                <i class="fa-solid fa-cart-plus icon cart" routerLink="/cart"></i>
+                <label class="cart-label">
+                    {{shareData.cartCount()}}
+                </label>
+            </div>
+        </div>
+    </div>
+    <!--mobile header-->
     <router-outlet>
 
     </router-outlet>
@@ -56,10 +78,11 @@
             Log Out
         </label>
     </div>
-    <div class="mobile-nav-section" [ngClass]="appInitialized?(mobileNav?'mobile-nav-animation-on':'mobile-nav-animation-off'):''">
-        <i class="fa-etch fa-solid fa-angle-up flex icon-font" (click)="clickMobileArrow()" *ngIf="!mobileNav"></i>
-        <i class="fa-etch fa-solid fa-angle-down flex icon-font" *ngIf="mobileNav" (click)="clickMobileArrow()"></i>
-        <div class="mobile-nav-label-container flex-vertical" [ngClass]="mobileNav?'mobile-nav-slow-visible':'mobile-nav-hide'">
+    <div class="mobile-nav-section" *ngIf="headerHide" [ngClass]="appInitialized?(mobileNav?'mobile-nav-animation-on':'mobile-nav-animation-off'):''">
+        <i class="fa fa-window-close close-icon icon" (click)="clickMobileArrow()" ></i>
+        <!-- <i class="fa-etch fa-solid fa-angle-up flex icon-font" (click)="clickMobileArrow()" *ngIf="!mobileNav"></i>
+        <i class="fa-etch fa-solid fa-angle-down flex icon-font" *ngIf="mobileNav" (click)="clickMobileArrow()"></i> -->
+        <div class="mobile-nav-label-container flex-vertical" >
             <label  (click)="routesClick()">
                 <b>Welcome {{ this.shareData.logInUser()}}</b>
             </label>

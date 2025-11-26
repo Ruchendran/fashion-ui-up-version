@@ -52,9 +52,9 @@ export class ProductComponent implements OnInit {
       this.sharedData.setModalMsg(er.message);
     })
   }
-    callCartCount=()=>{
+  callCartCount=()=>{
     this.sharedData.loader.set(true);
-    this.apiService.getCartCount().subscribe((res:any)=>{
+    this.apiService.getCartCount(this.userToken).subscribe((res:any)=>{
       this.sharedData.loader.set(false);
       this.sharedData.cartCount.set(res.cartCount);
     },
