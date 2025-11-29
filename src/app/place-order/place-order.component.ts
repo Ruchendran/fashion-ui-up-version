@@ -22,10 +22,10 @@ export class PlaceOrderComponent implements OnInit  {
   ngOnInit(): void {
     this.addressForm=new FormGroup({
       address:new FormControl('',Validators.required),
-      pincode:new FormControl('',Validators.required),
-      village:new FormControl('Satrawada',Validators.required),
+      pincode:new FormControl('',[Validators.required]),
+      village:new FormControl('---select-the-area---',Validators.required),
       phone:new FormControl('',Validators.required),
-      payOnDelivery:new FormControl('---select-payon-delivery---',Validators.required)
+      payOnDelivery:new FormControl('---select-cashon-delivery---',Validators.required)
     })
     if(isPlatformBrowser(this.platformId)){
       window.scrollTo(0,0);
@@ -86,6 +86,21 @@ export class PlaceOrderComponent implements OnInit  {
     }
     else{
       alert('Please fill the fields.')
+    }
+  }
+  postalCode=()=>{
+    if(this.addressForm.value.pincode.length==6){
+      this.sharedData.loader.set(true)
+      this.apiService.postalCodeApi(this.addressForm.value.pincode).subscribe((res:any)=>{
+        this.sharedData.loader.set(false);
+        this.villageList=[];
+        res.postalList[0].PostOffice.forEach((postal:any)=>{
+          this.villageList.push(postal?.Name)
+        })
+      },er=>{
+        this.sharedData.loader.set(false);
+        this.sharedData.setModalMsg(er.message);
+      })
     }
   }
 }

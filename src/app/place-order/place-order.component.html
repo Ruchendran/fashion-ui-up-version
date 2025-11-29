@@ -58,7 +58,7 @@
                 </div>
                     <p class="fields-para mt-3">***All are manditory fields***</p>
                 <div class="flex input-div">
-                    <input class="input-field" type="number" placeholder="Enter the pincode" formControlName="pincode" />
+                    <input class="input-field" type="text" placeholder="Enter the six-digit pincode" formControlName="pincode" (input)="postalCode()" maxlength="6"/>
                 </div>
                 <div class="flex input-div">
                     <input class="input-field" type="number" placeholder="Enter the phone" formControlName="phone" />
@@ -66,7 +66,7 @@
                 <div class="flex input-div">
                     <select  class="input-field" formControlName="payOnDelivery">
                         <option  [disabled]="true" >
-                            ---select-payon-delivery---
+                            ---select-cashon-delivery---
                         </option>
                             <option>
                                 Yes
@@ -78,6 +78,9 @@
                 </div>
                 <div class="flex input-div">
                     <select  class="input-field" formControlName="village">
+                        <option  [disabled]="true" >
+                            ---select-the-area---
+                        </option>
                         @for(village of villageList;track village){
                             <option>
                                 {{village}}
@@ -90,7 +93,7 @@
                     <textarea class="input-field" placeholder="Enter the address..."formControlName="address"></textarea>
                 </div>
                 <div class="flex">
-                    <button class="btn mt-2" type="submit">
+                    <button class="btn mt-2 mb-2" type="submit">
                     Submit
                     </button>
                 </div>

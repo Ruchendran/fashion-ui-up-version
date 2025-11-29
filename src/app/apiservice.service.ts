@@ -27,7 +27,8 @@ export class ApiserviceService implements OnInit {
     chatbotService:serverVal.server+'/chatbot/query-text',
     resetPassword:serverVal.server+'/auth/reset',
     getCartCount:serverVal.server+'/cart/cart-count',
-    getOrderCount:serverVal.server+'/order/order-count'
+    getOrderCount:serverVal.server+'/order/order-count',
+    postalCodeApi:serverVal.server+'/generic/postal'
   }
 
   ngOnInit(): void {
@@ -95,6 +96,9 @@ export class ApiserviceService implements OnInit {
   }
   getOrderCount(token:any){
     return this.http.get(this.apiConstants.getOrderCount,{params:{userToken:token}});
+  }
+  postalCodeApi(code:any){
+    return this.http.get(this.apiConstants.postalCodeApi+`/${code}`);
   }
 }
 

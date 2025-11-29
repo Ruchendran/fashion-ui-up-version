@@ -41,7 +41,7 @@ updMeta(metaData:any){
   }
   @HostListener('window:scroll')
   onScroll=()=>{
-    console.log(window.scrollY)
+    // console.log(window.scrollY)
     if(window.scrollY>300 && window.scrollY<900){
       this.contentAnimation=true;
     }
@@ -49,7 +49,6 @@ updMeta(metaData:any){
       this.contentAnimation=false;
     }
     if(window.scrollY > 1300 && window.scrollY<1400){
-      console.log('cartds');
      let image1= this.threeDImg1.nativeElement as HTMLImageElement
      let image1Val=-50+(window.scrollY-1300)/5;
      if(image1Val<0){

@@ -1,7 +1,7 @@
 <div class="container pad-top-other">
     <div class="row">
-        <h4 class="col-12">
-            Order Id: <span class="order-id-span">{{orderId}}</span>
+        <h4 class="col-12 id">
+            Order Id -  <span class="order-id-span">{{orderId}}</span>
         </h4>
         <p>
             Expected on Today
@@ -9,12 +9,12 @@
         <div class="col-12 col-md-12 tracking-container flex-vertical">
             <ng-container *ngFor="let stage of trackingMapList;let i=index;let od=odd;" class="m-4">
                 <div class="track-stage flex" [ngClass]="i<activeTrackingIndex?'active-track-stages':'unactive-track-stages'">
-                    <b  [ngClass]="od?'bold-text-even':'bold-text-odd'">
+                    <b  [ngClass]="!od?'bold-text-even':'bold-text-odd'">
                         {{stage}}
                     </b>
 
                 </div>
-                <div class="track-line" *ngIf="i!=3">
+                <div class="track-line" *ngIf="i!=2">
                     
                 </div>
             </ng-container>
