@@ -18,6 +18,9 @@ $fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica N
 .m-top{
     margin-top: 80px;
 }
+.pad-top{
+    padding-top: 0px;
+}
 ::-webkit-scrollbar-thumb{
     background: $designColor;
     border-radius: 10px;
@@ -63,5 +66,10 @@ body{
     height: 100%;
 }
 @media screen and (max-width : 576px) {
-
+    .pad-top{
+        padding-top: 50px;
+    }
+    .pad-top-other{
+        padding-top: 80px;
+    }
 }

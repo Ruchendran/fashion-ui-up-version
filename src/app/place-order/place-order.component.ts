@@ -28,6 +28,7 @@ export class PlaceOrderComponent implements OnInit  {
       payOnDelivery:new FormControl('---select-payon-delivery---',Validators.required)
     })
     if(isPlatformBrowser(this.platformId)){
+      window.scrollTo(0,0);
       let state=window.history.state;
       this.userToken=sessionStorage.getItem('userToken');
       this.sharedData.loader.set(true)
@@ -71,6 +72,7 @@ export class PlaceOrderComponent implements OnInit  {
     this.apiService.getOrderCount(userToken).subscribe((res:any)=>{
       this.sharedData.loader.set(false);
       this.sharedData.orderCount.set(res.orderCount);
+       this.route.navigate(['/orders']);
     },
     er=>{
       this.sharedData.loader.set(false);
@@ -81,7 +83,6 @@ export class PlaceOrderComponent implements OnInit  {
     if(this.addressForm.status!='INVALID' && this.addressForm.value.payOnDelivery!='---select-payon-delivery---'){
       this.confirmOrder({...this.orderDetails,...this.addressForm.value});
       this.deliveryAddressForm=false;
-      this.route.navigate(['/orders']);
     }
     else{
       alert('Please fill the fields.')

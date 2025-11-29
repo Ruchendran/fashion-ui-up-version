@@ -53,9 +53,9 @@
     </table>
   </div>
 </div>
-<div class="container mobile-order-container" *ngIf="orderList">
+<div class="container mobile-order-container pad-top-other" *ngIf="orderList">
         <div class="row  justify-content-md-start justify-content-center">
-        <div class="col-10 col-md-4 p-3" *ngFor="let data of orderList">
+        <div class="col-11 col-md-4 p-3" *ngFor="let data of orderList">
             <div class="product flex">
                 <div class="col-4 flex">
                     <img [src]="data.productImg" class="image" />

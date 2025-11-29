@@ -57,6 +57,7 @@ export class AppComponent implements OnInit  {
   )
   }
   ngOnInit(): void {
+    this.shareData.loader.set(false);
     if(isPlatformBrowser(this.platformId)){
     let data=sessionStorage.getItem('user');
     let userToken=sessionStorage.getItem('userToken');
@@ -111,5 +112,7 @@ export class AppComponent implements OnInit  {
   routesClick=()=>{
     this.mobileNav=false;
   }
-
+  clickHome=()=>{
+    this.route.navigate(['/']);
+  }
 }

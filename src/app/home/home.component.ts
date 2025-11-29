@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import {  Component,ElementRef,HostListener,OnInit,ViewChild} from '@angular/core';
+import { CommonModule,isPlatformBrowser} from '@angular/common';
+import {  Component,ElementRef,HostListener,OnInit,ViewChild,PLATFORM_ID, Inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { WearSectionComponent } from '../wear-section/wear-section.component';
 import { Meta,Title } from '@angular/platform-browser'; 
@@ -17,20 +17,27 @@ export class HomeComponent implements OnInit{
   @ViewChild('threeDImg3') threeDImg3!:ElementRef;
   contentAnimation=false;
   metaData: any;
-  constructor(private router:Router,private metaService:Meta,private titleService:Title,private activatedRoute:ActivatedRoute){
+  constructor(private router:Router,private metaService:Meta,private titleService:Title,private activatedRoute:ActivatedRoute, @Inject(PLATFORM_ID) private platformId:Object){
 
   }
-    updMeta(){
-    this.titleService.setTitle("fashion-shopping-trend");
-    this.metaService.updateTag({property:'og:title',content:'fasion-ui-page'});
-    this.metaService.updateTag({property:'og:description',content:"these are igly trend products."});
-    this.metaService.updateTag({property:'og:image',content:'https://fashion-ui.netlify.app/assets/home-section/zoom/zoom-img.jpg'})
-  }
+updMeta(metaData:any){
+        // Ensure you're setting the correct <title> tag as well
+        this.titleService.setTitle(metaData.title); 
+        this.metaService.updateTag({property:'og:title',content:metaData.title});
+        this.metaService.updateTag({property:'og:description',content:metaData.description});
+        // Use the image from the resolved data if available, otherwise use a fallback
+        this.metaService.updateTag({property:'og:image',content:metaData.image || 'https://fashion-ui.netlify.app/assets/home-section/zoom/zoom-img.jpg'})
+    }
   ngOnInit(): void {
-      // window.location.reload();
-      this.metaData=this.activatedRoute.snapshot.data;
-      console.log(this.metaData,"ssss")
-      this.updMeta()
+    if (isPlatformBrowser(this.platformId)){
+      window.scrollTo(0,0);
+    }
+    // window.location.reload();
+    const resolvedSeoData = this.activatedRoute.snapshot.data['seoData'];
+    if (resolvedSeoData) {
+      this.metaData = resolvedSeoData;
+      this.updMeta(this.metaData);
+    }
   }
   @HostListener('window:scroll')
   onScroll=()=>{

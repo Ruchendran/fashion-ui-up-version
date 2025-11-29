@@ -59,7 +59,7 @@
   </div>
 </div>
 <!---This is for mobile view-->
-<div class="container mobile-cart-container">
+<div class="container mobile-cart-container pad-top-other">
     <div class="row  justify-content-md-start justify-content-center">
         <div class="col-11 col-md-4 p-3" *ngFor="let data of cartList">
             <div class="product flex">
@@ -92,4 +92,4 @@
         </div>
     </div>
 </div>
-<ng-container #loaderContainer></ng-container>
+<app-event-modal [inputMsg]="modalMsg" *ngIf="deleteModal" (sendEvent)="receiveEvent($event)"></app-event-modal>

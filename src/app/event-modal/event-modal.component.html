@@ -1,0 +1,19 @@
+<div class="msg-modal flex">
+    <div class="modal-box">
+        <i class="fa-solid fa-xmark icon" (click)="closeModal(false)"></i>
+        <div class="flex-vertical">
+            <p>
+                {{messageVal}}
+            </p>
+            <div class="flex">
+                <button class="btn m-2" (click)="eventDecision(true)" >
+                    Delete
+                </button>
+                <button class="btn m-2" (click)="eventDecision(false)">
+                    Cancel
+                </button>
+            </div>
+        </div>
+        
+    </div>
+</div>

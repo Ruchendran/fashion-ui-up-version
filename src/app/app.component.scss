@@ -102,7 +102,7 @@ label{
     height: auto;
     position: absolute;
     background-color:$designColor;
-    right: 20%;
+    right: 30%;
     font-weight: bold;
     flex-direction: column;
     display: flex;
@@ -211,6 +211,9 @@ label{
         box-shadow: 2px 2px 10px grey;
         display: flex;
         justify-content: space-between;
+        position: fixed;
+        background: $mobileBg;
+        z-index: 2;
     }
     .cart-label{
         color:$designColor;
@@ -218,7 +221,7 @@ label{
     }
     .cart-order{
         margin-right: 10px;
-        width: 20vw;
+        width: 25vw;
         justify-content: space-around;
     }
     .menu{
@@ -235,32 +238,6 @@ label{
         overflow-x: hidden !important;
         overflow-y: hidden !important;
     }
-    // .render-container::before{
-    //     content: '';
-    //     width: 100vw;
-    //     height: 20vh;
-    //     position: absolute;
-    //     background-color:$designColor;
-    //     border-bottom-right-radius:80px;
-    //     border-bottom-left-radius: 10% ;
-    //     box-shadow: 5px 5px 10px grey;
-    //     rotate: 15deg;
-    //     left: -5vw;
-    //     top: -12vh;
-    // }
-    // .render-container::after{
-    //     content: '';
-    //     width: 100vw;
-    //     height: 20vh;
-    //     position: absolute;
-    //     background-color:$designColor;
-    //     border-top-right-radius:10%;
-    //     border-top-left-radius: 80px;
-    //     right:-5vw;
-    //     rotate: 15deg;
-    //     bottom:-12vh;
-    //     box-shadow: -5px -5px 5px grey;
-    // }
     .mobile-nav-section{
         display: block;
         position: fixed;
@@ -268,7 +245,7 @@ label{
         height: 100vh;
         background: $mobileBg;
         top: 0px;
-        z-index: 2;
+        z-index: 3;
         padding-top: 10px;
         left: -60%;
     }
@@ -279,7 +256,7 @@ label{
     font-size: 30px;
  }
  .mobile-nav-animation-on{
-    animation: nav-motion-up 1.5s forwards linear;
+    animation: nav-motion-up 0.5s forwards linear;
  }
  @keyframes nav-motion-up {
     100%{
@@ -287,7 +264,7 @@ label{
     }
  }
  .mobile-nav-animation-off{
-     animation: nav-motion-down 1.5s forwards linear;
+     animation: nav-motion-down 0.5s forwards linear;
  }
  @keyframes nav-motion-down {
    0%{
@@ -308,14 +285,14 @@ label{
  .nav-line{
     color:$designColor !important;
     width: 80%;
-    height: 10px;
+    height: 3px;
     font-weight: bold;
-    z-index: 3;
+    // z-index: 3;
  }
  .close-icon{
     right: 10px;
     position: absolute;
-    z-index: 3;
+    // z-index: 3;
  }
 
 }

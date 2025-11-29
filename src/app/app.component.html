@@ -41,7 +41,10 @@
     </header>
     <!--mobile-header-->
     <div class="mobile-header flex" *ngIf="headerHide">
+        <div class="cart-order flex">
           <i class="fa-solid fa-list icon cart menu" (click)="clickMobileArrow()"></i>
+          <i class="fa-solid fa-house-crack icon" (click)="clickHome()"></i>
+        </div>
         <div class="cart-order flex">
             <div >
                 <i class="fa-solid fa-briefcase cart icon" routerLink="/orders"></i>
@@ -58,7 +61,7 @@
         </div>
     </div>
     <!--mobile header-->
-    <router-outlet>
+    <router-outlet >
 
     </router-outlet>
     <div class="sign-in-hover" id="sign-in-hover" #signInHover>
@@ -82,7 +85,7 @@
         <i class="fa fa-window-close close-icon icon" (click)="clickMobileArrow()" ></i>
         <!-- <i class="fa-etch fa-solid fa-angle-up flex icon-font" (click)="clickMobileArrow()" *ngIf="!mobileNav"></i>
         <i class="fa-etch fa-solid fa-angle-down flex icon-font" *ngIf="mobileNav" (click)="clickMobileArrow()"></i> -->
-        <div class="mobile-nav-label-container flex-vertical" >
+        <div class="mobile-nav-label-container flex-vertical mt-3" >
             <label  (click)="routesClick()">
                 <b>Welcome {{ this.shareData.logInUser()}}</b>
             </label>
