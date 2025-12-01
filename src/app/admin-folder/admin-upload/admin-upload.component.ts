@@ -22,7 +22,8 @@ export class AdminUploadComponent implements OnInit {
     prodName:new FormControl('',Validators.required),
     prodPrice:new FormControl('',Validators.required),
     prodDes:new FormControl('',Validators.required),
-    productFamily:new FormControl('Wear',Validators.required)
+    productFamily:new FormControl('Wear',Validators.required),
+    productRating:new FormControl('',Validators.required)
   })
   ngOnInit(): void {
     if(this.productData.valid){

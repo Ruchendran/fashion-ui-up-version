@@ -28,7 +28,8 @@ export class ApiserviceService implements OnInit {
     resetPassword:serverVal.server+'/auth/reset',
     getCartCount:serverVal.server+'/cart/cart-count',
     getOrderCount:serverVal.server+'/order/order-count',
-    postalCodeApi:serverVal.server+'/generic/postal'
+    postalCodeApi:serverVal.server+'/generic/postal',
+    getUserAddress:serverVal.server+'/auth/get-address',
   }
 
   ngOnInit(): void {
@@ -99,6 +100,9 @@ export class ApiserviceService implements OnInit {
   }
   postalCodeApi(code:any){
     return this.http.get(this.apiConstants.postalCodeApi+`/${code}`);
+  }
+  getUserAddress(token:any){
+    return this.http.get(this.apiConstants.getUserAddress+`/${token}`);
   }
 }
 

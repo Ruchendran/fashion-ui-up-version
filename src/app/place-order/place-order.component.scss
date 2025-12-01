@@ -12,6 +12,7 @@
     flex-direction: column;
 }
 .btn{
+    margin-bottom: 30px;
     width: 200px;
 }
 .payment-popup{
@@ -26,15 +27,16 @@
     z-index: 2;
 }
 .payment-form{
-  height: transform;
+//   height: transform;
   box-shadow: 0px 2px 5px grey;
-  overflow-y: scroll;
 }
 .product-details{
-    width: fit-content;
-    height: 500px;
+    width: 350px;
+    height:500px;
     background: #ffffff;
     position: relative;
+     flex-direction: column;
+     overflow-y: scroll;
 }
 .close-icon{
     cursor: pointer;
@@ -76,4 +78,23 @@
 .fields-para{
     color:red;
     text-align: center;
+    padding: 0px !important;
+}
+.existing-address{
+    align-items: start;
+}
+.existing-address b{
+    width: 300px;
+    color:$designColor;
+    padding: 3px;
+}
+.address{
+    cursor: pointer;
+    width: 100%;
+    border: 2px solid;
+    padding: 3px;
+}
+.address-active{
+    color:green;
+    border: 2px solid green;
 }

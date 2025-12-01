@@ -19,14 +19,8 @@ export class PlaceOrderComponent implements OnInit  {
   deliveryAddressForm:boolean=false;
   addressForm:any;
   villageList=["Satrawada","Nagari","Chindalpet","Pudhupet","Ekambarakuppam"]
+  addressList:any=[];
   ngOnInit(): void {
-    this.addressForm=new FormGroup({
-      address:new FormControl('',Validators.required),
-      pincode:new FormControl('',[Validators.required]),
-      village:new FormControl('---select-the-area---',Validators.required),
-      phone:new FormControl('',Validators.required),
-      payOnDelivery:new FormControl('---select-cashon-delivery---',Validators.required)
-    })
     if(isPlatformBrowser(this.platformId)){
       window.scrollTo(0,0);
       let state=window.history.state;
@@ -43,6 +37,23 @@ export class PlaceOrderComponent implements OnInit  {
         })
       })
     }
+    this.addressForm=new FormGroup({
+      address:new FormControl('',Validators.required),
+      pincode:new FormControl('',[Validators.required]),
+      village:new FormControl('---select-the-area---',Validators.required),
+      phone:new FormControl('',Validators.required),
+      payOnDelivery:new FormControl('---select-cashon-delivery---',Validators.required)
+    });
+    this.sharedData.loader.set(true);
+    this.apiService.getUserAddress(this.userToken).subscribe((res:any)=>{
+      console.log(res,"sss")
+      if(res.address?.length){
+        res.address.forEach((val:any)=>{
+          let obj={active:false,addressVal:val};
+          this.addressList.push(obj);
+        })
+      }
+    })
   }
   confirmOrder=(order:any)=>{
      this.sharedData.loader.set(true)
@@ -88,7 +99,7 @@ export class PlaceOrderComponent implements OnInit  {
       alert('Please fill the fields.')
     }
   }
-  postalCode=()=>{
+  postalCode=(village?:any)=>{
     if(this.addressForm.value.pincode.length==6){
       this.sharedData.loader.set(true)
       this.apiService.postalCodeApi(this.addressForm.value.pincode).subscribe((res:any)=>{
@@ -96,11 +107,30 @@ export class PlaceOrderComponent implements OnInit  {
         this.villageList=[];
         res.postalList[0].PostOffice.forEach((postal:any)=>{
           this.villageList.push(postal?.Name)
-        })
+        });
+        if(village){
+        this.addressForm.patchValue({
+          village:village.includes('-')?village.split('-').join(" "):village
+        });
+        }
       },er=>{
         this.sharedData.loader.set(false);
         this.sharedData.setModalMsg(er.message);
       })
     }
+  }
+  selectAddress=(address:any)=>{
+    this.addressList.forEach((value:any)=>{
+      value.active=false;
+    });
+    address.active=true;
+    const parseAddress=address.addressVal.split(" ");
+    this.addressForm.patchValue({
+      pincode:parseAddress[2],
+      address:parseAddress[0],
+      phone:parseAddress[4],
+      payOnDelivery:parseAddress[3]
+    });
+    this.postalCode(parseAddress[1].trim());
   }
 }
