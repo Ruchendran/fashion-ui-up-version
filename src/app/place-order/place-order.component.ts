@@ -127,7 +127,7 @@ export class PlaceOrderComponent implements OnInit  {
     const parseAddress=address.addressVal.split(" ");
     this.addressForm.patchValue({
       pincode:parseAddress[2],
-      address:parseAddress[0],
+      address:parseAddress[0].split('-').join(" "),
       phone:parseAddress[4],
       payOnDelivery:parseAddress[3]
     });
