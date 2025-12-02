@@ -98,3 +98,12 @@
     color:green;
     border: 2px solid green;
 }
+@media screen and (max-width:576px){
+    .product-details{
+        width: 90vw;
+        overflow-x: hidden;
+    }
+    .input-div{
+        width: 95%;
+    }
+}

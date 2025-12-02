@@ -98,7 +98,6 @@ export class AppComponent implements OnInit  {
 
 
   MsgThroughWts=()=>{
-    console.log("hit")
     window.open("https://wa.me/+918074178839",'_blank');
   }
 
