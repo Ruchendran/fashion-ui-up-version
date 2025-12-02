@@ -106,7 +106,7 @@ export class AppComponent implements OnInit  {
     sessionStorage?.removeItem('user');
     sessionStorage?.removeItem('password');
     sessionStorage?.removeItem('userToken');
-    this.route.navigate(['/log-in']);
+    this.route.navigate(['/sign-in']);
     sessionStorage.removeItem('adminUser');
   }
   routesClick=()=>{
