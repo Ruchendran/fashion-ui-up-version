@@ -68,7 +68,7 @@ export class AppComponent implements OnInit  {
     }
     }
     this.location.onUrlChange((url)=>{
-      if(url == '/register' || url == '/log-in'){
+      if( url == '/sign-in'){
         this.headerHide=false;
       }
       else{

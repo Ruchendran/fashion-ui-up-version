@@ -91,12 +91,12 @@ export class PlaceOrderComponent implements OnInit  {
   )
   }
   onSubmitAddress=()=>{
-    if(this.addressForm.status!='INVALID' && this.addressForm.value.payOnDelivery!='---select-payon-delivery---'){
+    if(this.addressForm.status!='INVALID' && this.addressForm.value.payOnDelivery!='---select-cashon-delivery---' && this.addressForm.value.village!='---select-the-area---'){
       this.confirmOrder({...this.orderDetails,...this.addressForm.value});
       this.deliveryAddressForm=false;
     }
     else{
-      alert('Please fill the fields.')
+      this.sharedData.setModalMsg('Please fill the fields.')
     }
   }
   postalCode=(village?:any)=>{
@@ -128,8 +128,7 @@ export class PlaceOrderComponent implements OnInit  {
     this.addressForm.patchValue({
       pincode:parseAddress[2],
       address:parseAddress[0].split('-').join(" "),
-      phone:parseAddress[4],
-      payOnDelivery:parseAddress[3]
+      phone:parseAddress[3],
     });
     this.postalCode(parseAddress[1].trim());
   }

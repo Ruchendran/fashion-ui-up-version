@@ -69,16 +69,16 @@
             Admin
         </label>
         <hr class="line" />
-        <label routerLink="/register">
+        <!-- <label routerLink="/register">
             Register
-        </label>
-        <hr class="line" />
+        </label> -->
+        <!-- <hr class="line" />
         <label routerLink="/log-in">
             Log In
-        </label>
-        <hr class="line" />
+        </label> -->
+        <!-- <hr class="line" /> -->
         <label (click)="onLogOut()">
-            Log Out
+            Sign Out
         </label>
     </div>
     <div class="mobile-nav-section" *ngIf="headerHide" [ngClass]="appInitialized?(mobileNav?'mobile-nav-animation-on':'mobile-nav-animation-off'):''">

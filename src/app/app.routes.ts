@@ -160,22 +160,9 @@ export const routes: Routes = [
         }
     },
     {
-        path: 'log-in',
+        path: 'sign-in',
         loadComponent: () => import("./log-in/log-in.component").then(s => s.LogInComponent),
         title: "Login Page",
-        data: {
-            title: "",
-            description: '',
-            image: '',
-        },
-                resolve:{
-            seoData:seoResolver
-        }
-    },
-    {
-        path: 'register',
-        loadComponent: () => import("./register/register.component").then(s => s.RegisterComponent),
-        title: "Register Page",
         data: {
             title: "",
             description: '',

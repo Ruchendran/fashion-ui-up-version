@@ -86,9 +86,11 @@ label{
     display: none;
 }
 .line{
+    margin: 0px;
     width: 100%;
 }
 .sign-in-hover label{
+    margin: 10px;
     height: 40px;
     display: flex;
     align-items: center;
@@ -96,18 +98,20 @@ label{
 }
 .sign-in-hover-label{
     top: 50px;
-    display: block;
     color:$bgColor;
     width:200px;
     height: auto;
     position: absolute;
     background-color:$designColor;
-    right: 30%;
+    right: 25%;
     font-weight: bold;
     flex-direction: column;
     display: flex;
     overflow: hidden;
     z-index: 2;
+    border: 2px solid $bgColor;
+    box-shadow: 2px 2px 20px  grey ;
+    // justify-content: space-around;
 }
 .mobile-nav-section{
     display: none;

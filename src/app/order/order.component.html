@@ -64,10 +64,10 @@
                     <h5>
                         {{data.productName}}
                     </h5>
-                    <p>
-                        {{data.quantity}}
+                    <p >
+                        Quantity-{{data.quantity}}
                     </p>
-                    <p>
+                    <p >
                        {{data.productPrice*data.quantity | currency:'INR'}}
                     </p>
                     <button  (click)="trackOrder(data)" class="btn">
