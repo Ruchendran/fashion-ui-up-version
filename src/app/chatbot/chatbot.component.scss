@@ -10,6 +10,7 @@
     align-items: flex-end;
 }
 .input-txt{
+    padding-left:5px;
     height: 40px;
 }
 .btn{
@@ -26,10 +27,10 @@
 }
 .client{
     padding-left: 10px;
-    width: 40%;
+    width: 50%;
     background: $designColor;
 }
 .server{
-  width: 50%;
+  width: 70%;
   background: $mobileBg;
 }

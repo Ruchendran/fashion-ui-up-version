@@ -9,7 +9,7 @@ export const routes: Routes = [
         path: '',
         loadComponent: () => import("./home/home.component").then(m => m.HomeComponent),
         title: "Landing page",
-        canActivate: [authGuard],
+        // canActivate: [authGuard],
         data: {
             title: "Shop the Latest Fashion & Essentials",
             description: 'Discover thousands of products from the best brands. Shop exclusive collections, get fast shipping, and enjoy easy returns. Start saving today!',
@@ -23,7 +23,7 @@ export const routes: Routes = [
         path: 'products',
         loadComponent: () => import("./product/product.component").then(m => m.ProductComponent),
         title: "Products page",
-        canActivate: [authGuard],
+        // canActivate: [authGuard],
         data: {
             title: "New Arrivals & Best Sellers",
             description: 'Browse our curated collection of [Category Name]. Find the perfect style, compare prices, and read verified reviews. Free shipping on orders over $50!',
@@ -121,7 +121,7 @@ export const routes: Routes = [
         path: 'chatbot',
         loadComponent: () => import("./chatbot/chatbot.component").then(m => m.ChatbotComponent),
         title: "Orders page",
-        canActivate: [authGuard],
+        // canActivate: [authGuard],
         data: {
             title: "",
             description: '',

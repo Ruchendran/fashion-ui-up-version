@@ -29,7 +29,7 @@
                     {{shareData.orderCount()}}
                 </label>
             </div>
-            <div class="flex">
+            <div class="flex" *ngIf="this.shareData.logInUser()">
                 <div class="user flex">
                     {{this.shareData.logInUser()[0] }}
                 </div>
@@ -72,10 +72,10 @@
         <!-- <label routerLink="/register">
             Register
         </label> -->
-        <!-- <hr class="line" />
-        <label routerLink="/log-in">
+        <hr class="line" />
+        <label routerLink="/sign-in">
             Log In
-        </label> -->
+        </label>
         <!-- <hr class="line" /> -->
         <label (click)="onLogOut()">
             Sign Out
