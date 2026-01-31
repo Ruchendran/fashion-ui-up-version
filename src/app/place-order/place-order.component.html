@@ -1,49 +1,56 @@
 
 <div class="container place-order-container pad-top-other"  *ngIf="orderDetails">
     <div class="row">
-        <div class="col-md-6 col-12  flex mt-2">
-            <img [src]="orderDetails?.productImg" alt="order-image" class="order-img" />
+        <div class="col-12 flex-end">
+                <button class="btn m-3" (click)="deliveryAddress()">
+                    Confirm Order
+                </button>
         </div>
-        <div class="col-md-6 col-12  flex mt-2 order-product-det">
-            <h4>
-                {{orderDetails?.productName}}
-            </h4>
-            <p>
-                {{orderDetails?.productDes}}
-            </p>
-            <p>
-                {{orderDetails?.productPrice | currency:'INR'}}
-            </p>
-            <p>
-                Quantity:{{orderDetails?.quantity}} 
-                @switch(orderDetails?.productFamily){
-                    @case('Wears'){
-                        <b>Piece</b>
+        <ng-container *ngFor="let order of orderDetails">
+            <div class="col-md-6 col-12  flex mt-2">
+                <img [src]="order?.productImg" alt="order-image" class="order-img" />
+            </div>
+            <div class="col-md-6 col-12  flex mt-2 order-product-det">
+                <h4>
+                    {{order?.productName}}
+                </h4>
+                <p>
+                    {{order?.productDes}}
+                </p>
+                <p>
+                    {{order?.productPrice | currency:'INR'}}
+                </p>
+                <p>
+                    Quantity:{{order?.quantity}} 
+                    @switch(order?.productFamily){
+                        @case('Wears'){
+                            <b>Piece</b>
+                        }
+                        @case('Gadgets'){
+                            <b>Piece</b>
+                        }
+                        @case('Asthetics'){
+                            <b>piece</b>
+                        }
+                        @case('Groceries'){
+                            <b>Kg</b>
+                        }
+                        @case('Utensils'){
+                            <b>Set</b>
+                        }
+                        @default{
+                            <b>default</b>
+                        }
                     }
-                    @case('Gadgets'){
-                        <b>Piece</b>
-                    }
-                    @case('Asthetics'){
-                        <b>piece</b>
-                    }
-                    @case('Groceries'){
-                        <b>Kg</b>
-                    }
-                    @case('Utensils'){
-                        <b>Set</b>
-                    }
-                    @default{
-                        <b>default</b>
-                    }
-                }
-            </p>
-            <button class="btn m-3" (click)="deliveryAddress(orderDetails)">
-                Confirm Order
-            </button>
-            <!-- <button class="btn m-1" (click)="confirmOrder(orderDetails)" [disabled]="this.addressForm.status == 'INVALID'">
-                Confirm Order
-            </button> -->
-        </div>
+                </p>
+                <!-- <button class="btn m-3" (click)="deliveryAddress(order)">
+                    Confirm Order
+                </button> -->
+                <!-- <button class="btn m-1" (click)="confirmOrder(order)" [disabled]="this.addressForm.status == 'INVALID'">
+                    Confirm Order
+                </button> -->
+            </div>
+        </ng-container>
     </div>
 </div>
 <ng-container *ngIf="deliveryAddressForm">

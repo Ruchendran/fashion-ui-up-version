@@ -25,29 +25,33 @@
             </tr>
         </thead>
         <tbody>
-        @for (order of orderList; track order._id) {
-            <tr>
-                <td>
-                    {{$index+1}}
+        @for (order of orderList; track order._id;let indexOut=$index) {
+           
+               @for (product of order.orderedProducts;track product.productId;let isFirst=$first){
+                <tr>
+                <td [attr.rowspan]="order.orderedProducts.length" *ngIf="isFirst">
+                    {{indexOut+1}}
                 </td>
                 <td>
-                  <img [src]="order.productImg" class="image" />
+                  <img [src]="product.productImg" class="image" />
                 </td>
                 <td>
-                    {{order.productName}}
+                    {{product.productName}}
                 </td>
                 <td >
-                    {{order.quantity}}
+                    {{product.quantity}}
                 </td>
                 <td>
-                     {{order.productPrice | currency:'INR'}}
+                     {{product.productPrice | currency:'INR'}}
                 </td>
-                <td>
+                <td [attr.rowspan]="order.orderedProducts.length"  *ngIf="isFirst">
                     <button  class="btn" (click)="trackOrder(order)">
                         Track Order
                     </button>
                 </td>
-            </tr>      
+            </tr>
+            }
+                
         }
         </tbody>
     </table>

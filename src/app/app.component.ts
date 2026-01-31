@@ -57,6 +57,7 @@ export class AppComponent implements OnInit  {
   )
   }
   ngOnInit(): void {
+    // document.documentElement.style.setProperty('--designColorBlue','green')
     this.shareData.loader.set(false);
     if(isPlatformBrowser(this.platformId)){
     let data=sessionStorage.getItem('user');

@@ -1,8 +1,16 @@
 <div class="container cart-container">
   <div class="row">
+    <div class="col-12 flex-end">
+        <button  class="btn" (click)="placeOrder()">
+            Place Order
+        </button>
+    </div>
     <table class="col-md-12 mt-3 mb-3">
         <thead>
             <tr>
+                <th>
+                    Checkbox
+                </th>
                 <th>
                     Image
                 </th>
@@ -15,9 +23,9 @@
                 <th>
                     Price
                 </th>
-                <th>
+                <!-- <th>
                     Order
-                </th>
+                </th> -->
                 <th>
                     Delete
                 </th>
@@ -26,6 +34,12 @@
         <tbody>
         @for (cart of cartList; track cart._id) {
             <tr>
+                <td>
+                    <label class="container-box ">
+                        <input type="checkbox" class="checkbox" (change)="onChecked($event,cart)" />
+                        <span class="checkspan"></span>
+                    </label>
+                </td>
                 <td>
                   <img [src]="cart.productImg" class="image" />
                 </td>
@@ -44,11 +58,11 @@
                 <td>
                      {{cart.productPrice*cart.quantity | currency:'INR'}}
                 </td>
-                <td>
+                <!-- <td>
                     <button  class="btn" (click)="placeOrder(cart)">
                         Place Order
                     </button>
-                </td>
+                </td> -->
                 <td>
                     <i class="fa-solid fa-trash icon" (click)="deleteFromCart(cart)"></i>
                 </td>

@@ -23,19 +23,19 @@ export class PlaceOrderComponent implements OnInit  {
   ngOnInit(): void {
     if(isPlatformBrowser(this.platformId)){
       window.scrollTo(0,0);
-      let state=window.history.state;
       this.userToken=sessionStorage.getItem('userToken');
-      this.sharedData.loader.set(true)
-      this.activeRoute.queryParams.subscribe((data:any)=>{
-        this.apiService.getPlaceOrderDetail(data?.productId,this.userToken).subscribe((res:any)=>{
-            this.sharedData.loader.set(false)
-            this.orderDetails=res?.orderDetails;
-            this.orderDetails.quantity=state?.quantity;
-            this.orderDetails.productPrice=this.orderDetails.productPrice*state?.quantity;
-        },er=>{
-           this.sharedData.loader.set(false)
-        })
-      })
+      // this.sharedData.loader.set(true)
+      // this.activeRoute.queryParams.subscribe((data:any)=>{
+      //   this.apiService.getPlaceOrderDetail(data?.productId,this.userToken).subscribe((res:any)=>{
+      //       this.sharedData.loader.set(false)
+      //       this.orderDetails=res?.orderDetails;
+      //       this.orderDetails.quantity=state?.quantity;
+      //       this.orderDetails.productPrice=this.orderDetails.productPrice*state?.quantity;
+      //   },er=>{
+      //      this.sharedData.loader.set(false)
+      //   })
+      // })
+      this.orderDetails=history.state.placeOrderList;
     }
     this.addressForm=new FormGroup({
       address:new FormControl('',Validators.required),
@@ -47,15 +47,18 @@ export class PlaceOrderComponent implements OnInit  {
     this.sharedData.loader.set(true);
     this.apiService.getUserAddress(this.userToken).subscribe((res:any)=>{
       console.log(res,"sss")
+       this.sharedData.loader.set(false);
       if(res.address?.length){
         res.address.forEach((val:any)=>{
           let obj={active:false,addressVal:val};
           this.addressList.push(obj);
         })
       }
+    },er=>{
+       this.sharedData.loader.set(false);
     })
   }
-  confirmOrder=(order:any)=>{
+  confirmOrder=(order?:any)=>{
      this.sharedData.loader.set(true)
     this.apiService.appendOrder(order).subscribe((res:any)=>{
        this.sharedData.loader.set(false)
@@ -72,7 +75,7 @@ export class PlaceOrderComponent implements OnInit  {
       this.sharedData.setModalMsg(er.message)
     }) 
   }
-  deliveryAddress=(order:any)=>{
+  deliveryAddress=(order?:any)=>{
     this.deliveryAddressForm=true;
   }
   onCloseForm=()=>{
@@ -92,7 +95,7 @@ export class PlaceOrderComponent implements OnInit  {
   }
   onSubmitAddress=()=>{
     if(this.addressForm.status!='INVALID' && this.addressForm.value.payOnDelivery!='---select-cashon-delivery---' && this.addressForm.value.village!='---select-the-area---'){
-      this.confirmOrder({...this.orderDetails,...this.addressForm.value});
+      this.confirmOrder({orderDetails:this.orderDetails,destinatonAddress:this.addressForm.value});
       this.deliveryAddressForm=false;
     }
     else{

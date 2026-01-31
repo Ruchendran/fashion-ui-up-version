@@ -13,6 +13,7 @@ import { Meta, Title } from '@angular/platform-browser';
 })
 export class ProductComponent implements OnInit {
   metaData: any;
+  user: any;
   constructor(private apiService: ApiserviceService, @Inject(PLATFORM_ID) private platformId: Object, private activateRoute: ActivatedRoute, private sharedData: SharedataService, private route: Router, private metaService: Meta, private titleService: Title) {
 
   }
@@ -41,6 +42,7 @@ export class ProductComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       window.scrollTo(0,0);
       this.userToken = sessionStorage.getItem('userToken');
+      this.user=sessionStorage.getItem('user')
       this.productFamily = window.location.pathname.split("/").reverse()[0]
     };
     // this.activateRoute.params.subscribe((val) => {
@@ -78,15 +80,21 @@ export class ProductComponent implements OnInit {
       })
   }
   addToCart = (product: any) => {
-    this.sharedData.loader.set(true);
-    this.apiService.saveToCart({ ...product, userToken: this.userToken, quantity: 1 }).subscribe((res: any) => {
-      this.sharedData.setModalMsg(res.message);
-      this.sharedData.loader.set(false);
-      this.callCartCount();
-    },
-      er => {
-        this.sharedData.loader.set(false)
-      })
+    if(this.user && this.userToken){
+      this.sharedData.loader.set(true);
+      this.apiService.saveToCart({ ...product, userToken: this.userToken, quantity: 1 }).subscribe((res: any) => {
+        this.sharedData.setModalMsg(res.message);
+        this.sharedData.loader.set(false);
+        this.callCartCount();
+      },
+        er => {
+          this.sharedData.loader.set(false)
+        })
+    }
+    else{
+      this.sharedData.setModalMsg('Please register or sign in')
+      this.route.navigate(['/'])
+    }
   }
   searchProducts = () => {
     this.filteredProducts = this.listOfProducts.filter((product: any) => {

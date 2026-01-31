@@ -5,13 +5,19 @@ body{
     padding: 0px;
     overflow-x: hidden;
 }
-$bgColor:#FFFFFF;
+$bgColor:#ffffff;
 $fontColor:#000000;
+:host{
+// --designColorBlue:red;
+display: block;
+}
 $designColor:#f2b50c;
 $mobileBg:#f2f2f2;
 $orange:#f2b50c;
 $text-color:#d5e3d9;
 $fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$headingFontFamily:'Gotham-Medium';
+$paraFontFamily:'Gotham-book';
 ::-webkit-scrollbar{
     width: 5px;
 }
@@ -41,6 +47,11 @@ $fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica N
     align-items: center;
     flex-direction: column;
 }
+.flex-end{
+    display: flex;
+    justify-content:end;
+    align-items: center;
+}
 body{
     font-family: $fontFamily;
 }
@@ -64,6 +75,19 @@ body{
 .brand-img{
     width: 100%;
     height: 100%;
+}
+.generic-heading{
+    color:$designColor;
+    // color:var(--designColorBlue,'blue');
+
+}
+.h2-font{
+    font-size: 30px;
+    font-family: $headingFontFamily;
+}
+.generic-para{
+    font-size: 14px;
+    font-family: $paraFontFamily;
 }
 @media screen and (max-width : 576px) {
     .pad-top{

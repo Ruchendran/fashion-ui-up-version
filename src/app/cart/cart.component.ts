@@ -23,6 +23,7 @@ export class CartComponent implements OnInit {
   userToken:any='';
   modalMsg:string='';
   cartData:any=false;
+  placeOrdersList:any=[];
 updMeta(metaData:any){
         // Ensure you're setting the correct <title> tag as well
         this.titleService.setTitle(metaData.title); 
@@ -73,8 +74,9 @@ updMeta(metaData:any){
       cart.quantity-=1;
     }
   }
-  placeOrder=(cart:any)=>{
-      this.route.navigate(['/place-order'],{queryParams:{productId:cart?.productId},state:{quantity:cart?.quantity}});
+  placeOrder=(cart?:any)=>{
+    console.log(this.placeOrdersList,"list")
+      this.route.navigate(['/place-order'],{state:{placeOrderList:this.placeOrdersList}});
   }
   receiveEvent=(eventValEmit:any)=>{
     if(eventValEmit){
@@ -107,5 +109,16 @@ updMeta(metaData:any){
       this.sharedData.loader.set(false)
       this.closeDeleteModal();
       })
+  }
+  onChecked=(event:any,cart:any)=>{
+    if(event.target.checked){
+      this.placeOrdersList.push(cart)
+    }
+    else{
+      const filterData=this.placeOrdersList.filter((listVal:any)=>{
+        return listVal.productId!=cart.productId;
+      });
+      this.placeOrdersList=filterData;
+    }
   }
 }
