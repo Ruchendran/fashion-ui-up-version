@@ -7,49 +7,57 @@
                 </button>
         </div>
         <ng-container *ngFor="let order of orderDetails">
-            <div class="col-md-6 col-12  flex mt-2">
-                <img [src]="order?.productImg" alt="order-image" class="order-img" />
-            </div>
-            <div class="col-md-6 col-12  flex mt-2 order-product-det">
-                <h4>
-                    {{order?.productName}}
-                </h4>
-                <p>
-                    {{order?.productDes}}
-                </p>
-                <p>
-                    {{order?.productPrice | currency:'INR'}}
-                </p>
-                <p>
-                    Quantity:{{order?.quantity}} 
-                    @switch(order?.productFamily){
-                        @case('Wears'){
-                            <b>Piece</b>
+            <!-- <div class="flex">
+                <div class="col-md-6 col-12  flex mt-2">
+                    <img [src]="order?.productImg" alt="order-image" class="order-img" />
+                </div>
+                <div class="col-md-6 col-12  flex mt-2 order-product-det">
+                    <h4>
+                        {{order?.productName}}
+                    </h4>
+                    <p>
+                        {{order?.productDes}}
+                    </p>
+                    <p>
+                        {{order?.productPrice | currency:'INR'}}
+                    </p>
+                    <p>
+                        Quantity:{{order?.quantity}} 
+                        @switch(order?.productFamily){
+                            @case('Wears'){
+                                <b>Piece</b>
+                            }
+                            @case('Gadgets'){
+                                <b>Piece</b>
+                            }
+                            @case('Asthetics'){
+                                <b>piece</b>
+                            }
+                            @case('Groceries'){
+                                <b>Kg</b>
+                            }
+                            @case('Utensils'){
+                                <b>Set</b>
+                            }
+                            @default{
+                                <b>default</b>
+                            }
                         }
-                        @case('Gadgets'){
-                            <b>Piece</b>
-                        }
-                        @case('Asthetics'){
-                            <b>piece</b>
-                        }
-                        @case('Groceries'){
-                            <b>Kg</b>
-                        }
-                        @case('Utensils'){
-                            <b>Set</b>
-                        }
-                        @default{
-                            <b>default</b>
-                        }
-                    }
-                </p>
-                <!-- <button class="btn m-3" (click)="deliveryAddress(order)">
-                    Confirm Order
-                </button> -->
-                <!-- <button class="btn m-1" (click)="confirmOrder(order)" [disabled]="this.addressForm.status == 'INVALID'">
-                    Confirm Order
-                </button> -->
-            </div>
+                    </p>
+                </div>
+            </div> -->
+            <app-generic-accordian 
+            [reqProps]="{
+                contentColor:'#f2b50c',
+                accordianWidth:'100%',
+                heading:order?.productName,
+                description:order?.productDes,
+                price:order?.productPrice*order?.quantity,
+                img:order?.productImg,
+                quantity:order?.quantity
+            }">
+
+            </app-generic-accordian>
         </ng-container>
     </div>
 </div>

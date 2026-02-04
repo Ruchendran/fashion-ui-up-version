@@ -20,7 +20,10 @@ export class AppComponent implements OnInit  {
   mobileNav:boolean=false;
   openWhatsapp:any=false;
   whatsCount:any=0;
-  userInitial:any;
+  userExist:any={
+    user:null,
+    userToken:null
+  };
   appInitialized=false;
   constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object,private route:Router,public shareData:SharedataService,private apiService:ApiserviceService){
 
@@ -62,8 +65,10 @@ export class AppComponent implements OnInit  {
     if(isPlatformBrowser(this.platformId)){
     let data=sessionStorage.getItem('user');
     let userToken=sessionStorage.getItem('userToken');
-       this.callCartCount(userToken);
-       this.callOrderCount(userToken);
+    this.userExist.user=data;
+    this.userExist.userToken=userToken;
+    this.callCartCount(userToken);
+    this.callOrderCount(userToken);
     if(data){
       this.shareData.setLogInUserVal(data);
     }
@@ -84,9 +89,14 @@ export class AppComponent implements OnInit  {
     })
     
   }
-  pointHover=()=>{
-    let signInHoverElement=document.getElementById('sign-in-hover');
-    signInHoverElement?.classList.add('sign-in-hover-label');
+  pointerClick=(value:string)=>{
+    if(value==='log-out'){
+      this.onLogOut();
+    }
+    else{
+      this.route.navigate(['/sign-in'])
+    }
+
   }
   clickMobileArrow=()=>{
     this.appInitialized=true

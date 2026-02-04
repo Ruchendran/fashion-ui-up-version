@@ -4,9 +4,10 @@ import { ApiserviceService } from '../apiservice.service';
 import { CommonModule,isPlatformBrowser} from '@angular/common';
 import { ReactiveFormsModule,FormGroup,FormControl, Validators} from '@angular/forms';
 import { SharedataService } from '../sharedata.service';
+import { GenericAccordianComponent } from '../generic-accordian/generic-accordian.component';
 @Component({
   selector: 'app-place-order',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,GenericAccordianComponent],
   templateUrl: './place-order.component.html',
   styleUrl: './place-order.component.scss'
 })

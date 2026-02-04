@@ -14,8 +14,8 @@
             <label routerLink="/cart" class="label" routerLinkActive="header-label">
                 Cart
             </label>
-            <label id="sign-in" (pointerover)="pointHover()" class="label">
-                Sign In
+            <label id="sign-in" (click)="pointerClick(userExist.user && userExist.userToken ? 'log-out' : 'sign-in')" class="label">
+                {{userExist.user && userExist.userToken ? 'Log Out' : 'Sign In'}}
             </label>
             <div >
                 <i class="fa-solid fa-cart-plus icon cart" routerLink="/cart"></i>
@@ -64,20 +64,6 @@
     <router-outlet >
 
     </router-outlet>
-    <div class="sign-in-hover" id="sign-in-hover" #signInHover>
-        <label routerLink="/admin">
-            Admin
-        </label>
-        <hr class="line" />
-        <hr class="line" />
-        <label routerLink="/sign-in">
-            Log In
-        </label>
-        <!-- <hr class="line" /> -->
-        <label (click)="onLogOut()">
-            Sign Out
-        </label>
-    </div>
     <div class="mobile-nav-section" *ngIf="headerHide" [ngClass]="appInitialized?(mobileNav?'mobile-nav-animation-on':'mobile-nav-animation-off'):''">
         <i class="fa fa-window-close close-icon icon" (click)="clickMobileArrow()" ></i>
         <div class="mobile-nav-label-container flex-vertical mt-3" >

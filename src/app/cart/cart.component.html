@@ -1,7 +1,7 @@
 <div class="container cart-container">
   <div class="row">
     <div class="col-12 flex-end">
-        <button  class="btn" (click)="placeOrder()">
+        <button  class="btn" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
             Place Order
         </button>
     </div>

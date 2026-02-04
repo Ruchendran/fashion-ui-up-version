@@ -53,7 +53,7 @@ $paraFontFamily:'Gotham-book';
     align-items: center;
 }
 body{
-    font-family: $fontFamily;
+    // font-family: $fontFamily;
 }
 .icon-font,.icon{
     cursor: pointer;
@@ -83,10 +83,14 @@ body{
 }
 .h2-font{
     font-size: 30px;
-    font-family: $headingFontFamily;
 }
 .generic-para{
     font-size: 14px;
+}
+h1,h2,h3,h4,h5,h6,label,button,strong,b,th{
+    font-family: $headingFontFamily;
+}
+p,span,input,td{
     font-family: $paraFontFamily;
 }
 @media screen and (max-width : 576px) {

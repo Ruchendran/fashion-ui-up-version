@@ -96,23 +96,6 @@ label{
     align-items: center;
     align-self: center;
 }
-.sign-in-hover-label{
-    top: 50px;
-    color:$bgColor;
-    width:200px;
-    height: auto;
-    position: absolute;
-    background-color:$designColor;
-    right: 25%;
-    font-weight: bold;
-    flex-direction: column;
-    display: flex;
-    overflow: hidden;
-    z-index: 2;
-    border: 2px solid $bgColor;
-    box-shadow: 2px 2px 20px  grey ;
-    // justify-content: space-around;
-}
 .mobile-nav-section{
     display: none;
 }
