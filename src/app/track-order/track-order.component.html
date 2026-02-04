@@ -7,14 +7,14 @@
             Expected on Today
         </p>
         <div class="col-12 col-md-12 tracking-container flex-vertical">
-            <ng-container *ngFor="let stage of trackingMapList;let i=index;let od=odd;" class="m-4">
+            <ng-container *ngFor="let stage of trackingMapList;let i=index;let od=odd;let end=last" class="m-4">
                 <div class="track-stage flex" [ngClass]="i<activeTrackingIndex?'active-track-stages':'unactive-track-stages'">
                     <b  [ngClass]="!od?'bold-text-even':'bold-text-odd'">
                         {{stage}}
                     </b>
 
                 </div>
-                <div class="track-line" *ngIf="i!=2">
+                <div class="track-line" *ngIf="!end">
                     
                 </div>
             </ng-container>
