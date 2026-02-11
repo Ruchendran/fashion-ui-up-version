@@ -65,7 +65,9 @@ export class AppComponent implements OnInit  {
     if(isPlatformBrowser(this.platformId)){
     let data=sessionStorage.getItem('user');
     let userToken=sessionStorage.getItem('userToken');
-    this.userExist.user=data;
+    // this.userExist.user=data;
+      this.userExist.user=this.shareData.logInUser();
+      console.log(this.shareData.logInUser())
     this.userExist.userToken=userToken;
     this.callCartCount(userToken);
     this.callOrderCount(userToken);
@@ -92,6 +94,7 @@ export class AppComponent implements OnInit  {
   pointerClick=(value:string)=>{
     if(value==='log-out'){
       this.onLogOut();
+      this.shareData.setLogInUserVal('');
     }
     else{
       this.route.navigate(['/sign-in'])

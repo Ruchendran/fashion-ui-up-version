@@ -2,8 +2,9 @@
 .product{
     justify-content: space-around;
     box-shadow: 2px 2px 20px  grey ;
-    padding: 10px;
+    padding: 30px 10px 20px 10px;
     box-sizing: border-box;
+    position: relative;
 }
 .image{
     height: 100px;
@@ -65,13 +66,14 @@ p{
     height: 20px;
     width: 20px;
     background-color: #eee;
+    border: 2px solid $designColor;
 }
 .checkspan::after{
     content: "";
         position: absolute;
         display: none;
-        left: 9px;
-        top: 5px;
+        left: 6px;
+        top: 3px;
         width: 5px;
         height: 10px;
         border: solid white;
@@ -103,5 +105,10 @@ p{
         top: 8px;
         right: 8px;
         font-size: 13px;
+    }
+    .container-box {
+        position: absolute;
+        top: 15px;
+        left: 10px;
     }
 }

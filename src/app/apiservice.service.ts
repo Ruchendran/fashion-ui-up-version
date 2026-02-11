@@ -23,13 +23,14 @@ export class ApiserviceService implements OnInit {
     getPlaceOrderDetail:serverVal.server+'/cart',
     getAdminUser:serverVal.server+'/auth/admin/verify',
     delFromCart:serverVal.server+'/cart/delete',
-    getAllProductsByPrice:serverVal.server+'/products/filterPrice',
+    // getAllProductsByPrice:serverVal.server+'/products/filterPrice',
     chatbotService:serverVal.server+'/chatbot/query-text',
     resetPassword:serverVal.server+'/auth/reset',
     getCartCount:serverVal.server+'/cart/cart-count',
     getOrderCount:serverVal.server+'/order/order-count',
     postalCodeApi:serverVal.server+'/generic/postal',
     getUserAddress:serverVal.server+'/auth/get-address',
+    getTotalRecord:serverVal.server+'/products/totalRecords'
   }
 
   ngOnInit(): void {
@@ -46,14 +47,14 @@ export class ApiserviceService implements OnInit {
   loginUser(data:any){
     return this.http.post(this.apiConstants.loginUser,data);
   }
-  getAllProducts(productFamily:String){
+  getAllProducts(productFamily:String,page:number){
     let group=productFamily=='products'?'all':productFamily;
-    return this.http.get(this.apiConstants.getAllProducts+`/${group}`);
+    return this.http.get(this.apiConstants.getAllProducts+`/${group}/${page}`);
   };
-  getAllProductsByPrice(productFamily:String,min:any,max:any){
-    let fam=productFamily=='products'?'all':productFamily;
-    return this.http.get(this.apiConstants.getAllProductsByPrice,{params:{minPrice:min,maxPrice:max,productFamily:fam.toString()}})
-  }
+  // getAllProductsByPrice(productFamily:String,min:any,max:any){
+  //   let fam=productFamily=='products'?'all':productFamily;
+  //   return this.http.get(this.apiConstants.getAllProductsByPrice,{params:{minPrice:min,maxPrice:max,productFamily:fam.toString()}})
+  // }
   saveToCart(payload:any){
     return this.http.post(this.apiConstants.saveToCart,payload);
   }
@@ -104,5 +105,8 @@ export class ApiserviceService implements OnInit {
   getUserAddress(token:any){
     return this.http.get(this.apiConstants.getUserAddress+`/${token}`);
   }
+  getTotalRecords(productFamily:string){
+    let group=productFamily=='products'?'all':productFamily;
+    return this.http.get(this.apiConstants.getTotalRecord+`/${group}`);
+  }
 }
-

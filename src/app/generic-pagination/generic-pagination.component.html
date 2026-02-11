@@ -1,0 +1,26 @@
+@if(paginationDetails){
+<div class="flex gap-10 m-10">
+    <div class="flex pointer" (click)="decreasePage()" [style.color]="paginationDetails.styles.normalColor">
+        <i class="fa fa-angle-left" ></i>
+        <i class="fa fa-angle-left" ></i>
+        <i class="fa fa-angle-left" ></i>
+    </div>
+    <div class="pages-container flex">
+        @for(page of getPages;track $index){
+            <button class="page flex pointer" 
+            [style.border-color]="paginationDetails.styles.normalColor" 
+            [style.color]="page==activePage?paginationDetails.styles.activeColor:paginationDetails.styles.normalColor"
+            [style.background-color]="page==activePage?paginationDetails.styles.normalColor:paginationDetails.styles.activeColor"
+            (click)="selectPage(page)"
+            [disabled]="page>maxPage">
+                {{page}} 
+            </button>
+        }
+    </div>
+    <div class="flex pointer" (click)="increasePage()" [style.color]="paginationDetails.styles.normalColor">
+        <i class="fa fa-angle-right" ></i>
+        <i class="fa fa-angle-right" ></i>
+        <i class="fa fa-angle-right" ></i>
+    </div>
+</div>
+}

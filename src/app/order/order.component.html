@@ -57,8 +57,8 @@
     </table>
   </div>
 </div>
-<div class="container mobile-order-container pad-top-other" *ngIf="orderList">
-        <div class="row  justify-content-md-start justify-content-center">
+<div class="container mobile-order-container flex-vertical pad-top-other" *ngIf="mobileAccordianDetails">
+    <!-- <div class="row  justify-content-md-start justify-content-center">
         <div class="col-11 col-md-4 p-3" *ngFor="let data of orderList">
             <div class="product flex">
                 <div class="col-4 flex">
@@ -80,6 +80,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
+    <ng-container *ngFor="let order of mobileAccordianDetails">
+        <app-parent-child-accordian [parentProps]="order" (emitOrderTrack)="getOrderTrack($event)">
+    
+        </app-parent-child-accordian>
+    </ng-container>
 </div>
 <ng-container #loaderContainer></ng-container>

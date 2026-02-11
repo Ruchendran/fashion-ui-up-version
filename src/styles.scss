@@ -24,6 +24,9 @@ $paraFontFamily:'Gotham-book';
 .m-top{
     margin-top: 80px;
 }
+.m-10{
+    margin: 10px;
+}
 .pad-top{
     padding-top: 0px;
 }
@@ -92,6 +95,32 @@ h1,h2,h3,h4,h5,h6,label,button,strong,b,th{
 }
 p,span,input,td{
     font-family: $paraFontFamily;
+}
+.gap-10{
+    gap: 10px;
+}
+.pointer{
+    cursor: pointer;
+}
+.y-flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.flex-end{
+    justify-content: flex-end;
+}
+.w-100{
+    width: 100%;
+}
+.w-95{
+    width: 95%;
+}
+.d-none{
+    display: none;
+}
+.d-flex{
+    display: flex;
 }
 @media screen and (max-width : 576px) {
     .pad-top{

@@ -4,9 +4,10 @@ import { LoaderComponent } from '../loader/loader.component';
 import { ApiserviceService } from '../apiservice.service';
 import { Router,ActivatedRoute} from '@angular/router';
 import { Meta,Title } from '@angular/platform-browser';
+import { ParentChildAccordianComponent } from '../parent-child-accordian/parent-child-accordian.component';
 @Component({
   selector: 'app-order',
-  imports: [CommonModule],
+  imports: [CommonModule,ParentChildAccordianComponent],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss'
 })
@@ -18,6 +19,7 @@ export class OrderComponent implements OnInit {
   private loaderRef!: ComponentRef<LoaderComponent>;
   orderList:any=[];
   metaData:any;
+  mobileAccordianDetails:any=[];
   updMeta(metaData:any){
         // Ensure you're setting the correct <title> tag as well
         this.titleService.setTitle(metaData.title); 
@@ -40,6 +42,32 @@ export class OrderComponent implements OnInit {
     this.apiService.getOrderList(this.userToken).subscribe((res:any)=>{
       console.log(res,"lis")
       this.orderList=res?.getOrderData;
+      res.getOrderData.forEach((order:any,index:any)=>{
+        let mobileOrderData:any={};
+        mobileOrderData['parentHeading']=`Order ${index+1}`;
+        mobileOrderData['parentWidth']='100%';
+        mobileOrderData['btnText']='Track Order';
+        mobileOrderData['btnShow']=true;
+        mobileOrderData['orderId']=order._id;
+        let mobileProductList:any=[];
+        order.orderedProducts.forEach((product:any)=>{
+          let productObject:any={};
+          productObject['contentColor']='';
+          productObject['accordianWidth']='95%';
+          productObject['heading']=product.productName;
+          productObject['description']=product.productDes;
+          productObject['content']='';
+          productObject['img']=product.productImg;
+          productObject['accordianShow']=false;
+          productObject['notInitial']=false;
+          productObject['quantity']=product.quantity;
+          productObject['price']=product.productPrice;
+          mobileProductList.push(productObject);
+        });
+        mobileOrderData['childProps']=mobileProductList;
+        this.mobileAccordianDetails.push(mobileOrderData);
+      })
+      console.log(this.mobileAccordianDetails,'sss')
       this.hideLoader();
     })
   }
@@ -54,5 +82,8 @@ export class OrderComponent implements OnInit {
   }
   trackOrder=(order:any)=>{
      this.route.navigate(['/track-order'],{queryParams:{orderId:order?._id}});
+  }
+  getOrderTrack=(id:string)=>{
+    this.route.navigate(['/track-order'],{queryParams:{orderId:id}});
   }
 }

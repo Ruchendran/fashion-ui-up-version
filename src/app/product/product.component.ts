@@ -5,9 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SharedataService } from '../sharedata.service';
 import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
+import { GenericPaginationComponent } from '../generic-pagination/generic-pagination.component';
 @Component({
   selector: 'app-product',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,GenericPaginationComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
@@ -45,29 +46,47 @@ export class ProductComponent implements OnInit {
       this.user=sessionStorage.getItem('user')
       this.productFamily = window.location.pathname.split("/").reverse()[0]
     };
+    this.getTotalRecords();
     // this.activateRoute.params.subscribe((val) => {
     //   this.productFamily = val['productFamily'];
     // })
+  };
+  getTotalRecords=()=>{
     this.sharedData.loader.set(true);
-    this.apiService.getAllProducts(this.productFamily).subscribe((res) => {
+    this.apiService.getTotalRecords(this.productFamily).subscribe((res:any)=>{
+      console.log(res)
+      this.sharedData.loader.set(false);
+      this.paginationDetails.totalRecords=res?.totalRecords;
+    },
+  er=>{
+     this.sharedData.loader.set(false);
+  })
+  }
+  getProducts=(page:number)=>{
+    this.sharedData.loader.set(true);
+    this.apiService.getAllProducts(this.productFamily,page).subscribe((res) => {
       this.sharedData.loader.set(false)
       this.listOfProducts = res;
       this.filteredProducts = res;
     },
-      er => {
-        this.sharedData.loader.set(false);
-      })
-  };
+    er => {
+      this.sharedData.loader.set(false);
+    })
+  }
   filterByPrice = () => {
     this.sharedData.loader.set(true)
-    this.apiService.getAllProductsByPrice(this.productFamily, this.minPrice, this.maxPrice).subscribe((res) => {
-      this.sharedData.loader.set(false)
-      this.listOfProducts = res;
-      this.filteredProducts = res;
-    }, er => {
-      this.sharedData.loader.set(false)
-      this.sharedData.setModalMsg(er.message);
+    // this.apiService.getAllProductsByPrice(this.productFamily, this.minPrice, this.maxPrice).subscribe((res) => {
+    //   this.sharedData.loader.set(false)
+    //   this.listOfProducts = res;
+    //   this.filteredProducts = res;
+    // }, er => {
+    //   this.sharedData.loader.set(false)
+    //   this.sharedData.setModalMsg(er.message);
+    // })
+    this.filteredProducts=this.listOfProducts.filter((product:any)=>{
+      return product.productPrice>this.minPrice && product.productPrice<this.maxPrice 
     })
+    this.sharedData.loader.set(false);
   }
   callCartCount = () => {
     this.sharedData.loader.set(true);
@@ -105,6 +124,17 @@ export class ProductComponent implements OnInit {
   }
   navToCart = () => {
     this.route.navigate(['/cart'])
+  }
+  paginationDetails={
+    totalRecords:null,
+    styles:{
+      normalColor:'#f2b50c',
+      activeColor:'#ffffff',
+    }
+  }
+  capturePage=(page:any)=>{
+    // console.log(page,"triggered");
+    this.getProducts(page);
   }
 }
 

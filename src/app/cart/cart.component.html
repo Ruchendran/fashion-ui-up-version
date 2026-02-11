@@ -75,8 +75,17 @@
 <!---This is for mobile view-->
 <div class="container mobile-cart-container pad-top-other">
     <div class="row  justify-content-md-start justify-content-center">
+         <div class="col-12 flex-end">
+            <button  class="btn" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
+                Place Order
+            </button>
+        </div>
         <div class="col-11 col-md-4 p-3" *ngFor="let data of cartList">
             <div class="product flex">
+                <label class="container-box ">
+                        <input type="checkbox" class="checkbox" (change)="onChecked($event,data)" />
+                        <span class="checkspan"></span>
+                </label>
                 <i class="fa-solid fa-trash icon" (click)="deleteFromCart(data)"></i>
                 <div class="col-4 flex">
                     <img [src]="data.productImg" class="image" />
@@ -86,20 +95,20 @@
                         {{data.productName}}
                     </h5>
                     <div class="mt-2">
-                        <button class="quntity-btn" (click)="addQuantity(data)">
-                            +
-                        </button>
-                        {{data.quantity}}
                         <button class="quntity-btn" (click)="reduceQuantity(data)">
                             -
+                        </button>
+                        {{data.quantity}}
+                        <button class="quntity-btn" (click)="addQuantity(data)">
+                            +
                         </button>
                     </div>
                     <p>
                        {{data.productPrice*data.quantity | currency:'INR'}}
                     </p>
-                    <button (click)="placeOrder(data)" class="btn">
+                    <!-- <button (click)="placeOrder(data)" class="btn">
                         Place Order
-                    </button>
+                    </button> -->
  
                 </div>
             </div>

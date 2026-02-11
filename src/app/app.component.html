@@ -14,8 +14,8 @@
             <label routerLink="/cart" class="label" routerLinkActive="header-label">
                 Cart
             </label>
-            <label id="sign-in" (click)="pointerClick(userExist.user && userExist.userToken ? 'log-out' : 'sign-in')" class="label">
-                {{userExist.user && userExist.userToken ? 'Log Out' : 'Sign In'}}
+            <label id="sign-in" (click)="pointerClick(shareData.logInUser() ? 'log-out' : 'sign-in')" class="label">
+                {{shareData.logInUser() ? 'Log Out' : 'Sign In'}}
             </label>
             <div >
                 <i class="fa-solid fa-cart-plus icon cart" routerLink="/cart"></i>
@@ -87,8 +87,8 @@
                 Cart
             </label>
             <hr class="nav-line"/>
-            <label (click)="onLogOut()" (click)="routesClick()">
-                Sign Out
+            <label (click)="pointerClick(shareData.logInUser() ? 'log-out' : 'sign-in');routesClick()" >
+                {{shareData.logInUser() ? 'Log Out' : 'Sign In'}}
             </label>
              <hr class="nav-line"/>
         </div>

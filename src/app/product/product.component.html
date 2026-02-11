@@ -87,3 +87,8 @@
         </div>
     </div>
 </div>
+<ng-container *ngIf="paginationDetails.totalRecords">
+    <app-generic-pagination (eventPageEmit)="capturePage($event)" [paginationDetails]="paginationDetails">
+
+    </app-generic-pagination>
+</ng-container>
