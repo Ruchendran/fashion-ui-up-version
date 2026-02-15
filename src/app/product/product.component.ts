@@ -6,9 +6,10 @@ import { SharedataService } from '../sharedata.service';
 import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { GenericPaginationComponent } from '../generic-pagination/generic-pagination.component';
+import { UnitPipe } from '../unit.pipe';
 @Component({
   selector: 'app-product',
-  imports: [CommonModule, FormsModule,GenericPaginationComponent],
+  imports: [CommonModule, FormsModule,GenericPaginationComponent,UnitPipe],
   templateUrl: './product.component.html',
   styleUrl: './product.component.scss'
 })
@@ -88,23 +89,13 @@ export class ProductComponent implements OnInit {
     })
     this.sharedData.loader.set(false);
   }
-  callCartCount = () => {
-    this.sharedData.loader.set(true);
-    this.apiService.getCartCount(this.userToken).subscribe((res: any) => {
-      this.sharedData.loader.set(false);
-      this.sharedData.cartCount.set(res.cartCount);
-    },
-      er => {
-        this.sharedData.loader.set(false);
-      })
-  }
   addToCart = (product: any) => {
     if(this.user && this.userToken){
       this.sharedData.loader.set(true);
       this.apiService.saveToCart({ ...product, userToken: this.userToken, quantity: 1 }).subscribe((res: any) => {
         this.sharedData.setModalMsg(res.message);
         this.sharedData.loader.set(false);
-        this.callCartCount();
+        this.sharedData.callCartCount(this.userToken);
       },
         er => {
           this.sharedData.loader.set(false)

@@ -49,10 +49,11 @@ export class OrderComponent implements OnInit {
         mobileOrderData['btnText']='Track Order';
         mobileOrderData['btnShow']=true;
         mobileOrderData['orderId']=order._id;
+        mobileOrderData['contentColor']='#f2b50c';
         let mobileProductList:any=[];
+        let totalPrice=0;
         order.orderedProducts.forEach((product:any)=>{
           let productObject:any={};
-          productObject['contentColor']='';
           productObject['accordianWidth']='95%';
           productObject['heading']=product.productName;
           productObject['description']=product.productDes;
@@ -62,8 +63,10 @@ export class OrderComponent implements OnInit {
           productObject['notInitial']=false;
           productObject['quantity']=product.quantity;
           productObject['price']=product.productPrice;
+          totalPrice+=product.productPrice;
           mobileProductList.push(productObject);
         });
+        mobileOrderData['totalPrice']=totalPrice;
         mobileOrderData['childProps']=mobileProductList;
         this.mobileAccordianDetails.push(mobileOrderData);
       })

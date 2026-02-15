@@ -1,4 +1,4 @@
-<div class="accordian-container flex" [style.width]="reqProps.parentWidth" (click)="parentAccordianEvent()">
+<div class="accordian-container flex" [style.color]="reqProps.contentColor" [style.width]="reqProps.parentWidth" (click)="parentAccordianEvent()">
         <h1 class="heading">
             {{reqProps.parentHeading}}
         </h1>
@@ -6,23 +6,25 @@
 </div>
  <div class="panel y-flex" [style.width]="reqProps.parentWidth" [ngClass]="parentAccordianShow?'panel-open':parentNotInitial?'panel-close':''">
      @if(reqProps.btnText && reqProps.btnShow){
-    <div class="flex flex-end w-95 m-10" [ngClass]="parentAccordianShow?'d-flex':'d-none'">
+    <div class="flex space-between w-95 m-10" [ngClass]="parentAccordianShow?'d-flex':'d-none'">
+        <p class="m-0 f-bold">
+            Total:<span class="span-design-color">{{reqProps.totalPrice | currency:'INR'}}</span>
+        </p>
         <button class="btn" (click)="emitOrder(reqProps.orderId)">
                 {{reqProps.btnText}}
         </button>
     </div>
     }
     @for(accordian of reqProps.childProps;track $index;){
-    
-    <div class="accordian-container align-self-center flex" [style.width]="accordian.accordianWidth" (click)="accordianEvent(accordian)">
+    <div class="accordian-container align-self-center flex" [style.color]="reqProps.contentColor" [ngClass]="parentAccordianShow?'d-flex':'d-none'" [style.width]="accordian.accordianWidth" (click)="accordianEvent(accordian)">
         <h1 class="heading">
             {{accordian.heading}}
         </h1>
         <i class="fa fa-angle-up" [ngClass]="accordian.accordianShow?'icon-rotate-forward':accordian.notInitial?'icon-rotate-rev':''"></i>
     </div>
-     <div class="panel flex-space-around" [style.width]="accordian.accordianWidth" [ngClass]="accordian.accordianShow?'panel-open':accordian.notInitial?'panel-close':''">
+     <div class="panel flex-space-around"[ngClass]="parentAccordianShow?'d-flex':'d-none'" [style.width]="accordian.accordianWidth" [ngClass]="accordian.accordianShow?'panel-open':accordian.notInitial?'panel-close':''">
         <img [src]="accordian.img" class="image" />
-        <div class="flex-vertical">
+        <div class="flex-vertical" style="align-items: start;">
             <p>
                 {{accordian.description}}
             </p>
@@ -30,7 +32,7 @@
                Quantity : {{accordian.quantity}}
             </p>
             <p>
-               Price : {{accordian.price}}
+               Price : {{accordian.price | currency:'INR'}}
             </p>
         </div>
     </div>

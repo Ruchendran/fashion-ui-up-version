@@ -68,6 +68,7 @@ export class PlaceOrderComponent implements OnInit  {
        }
        else{
             this.callOrderCount(this.userToken);
+            this.sharedData.callCartCount(this.userToken)
              this.sharedData.setModalMsg(res.message)
        }
       //  this.hideLoader();

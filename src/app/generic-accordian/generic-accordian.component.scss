@@ -3,9 +3,9 @@
     margin-top: 10px;
     margin-bottom: 10px;
     box-shadow: 0.5px 1px 10px grey;
-    height: fit-content;
+    min-height: 50px;
     padding:10px;
-      justify-content: space-between !important;
+    justify-content: space-between !important;
 }
 .heading{
     margin: 0px;
@@ -49,15 +49,15 @@
     justify-content: space-around;
 }
 .panel-open{
-    animation: panel-open 1.5s forwards ease;
+    animation: panel-open 1s forwards ease;
     
 }
 @keyframes panel-open{
     0%{
         height: 0px;
     }
-    80%{
-        opacity: 0.1;
+    30%{
+        opacity: 0;
     }
     100%{
         opacity: 1;

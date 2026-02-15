@@ -13,12 +13,11 @@
     flex-direction: column;
 }
 .btn{
-    margin-bottom: 30px;
-    width: 200px;
+    width: fit-content;
 }
 .payment-popup{
     width: 100vw;
-    height: 100vh;
+    height: fit-content;
     position: absolute;
     backdrop-filter:blur(5px);
     top: 0px;
@@ -43,7 +42,7 @@
     cursor: pointer;
     position: absolute;
     top: 5px;
-    right: 3px;
+    right: 5px;
 }
 .razor-div{
     width: 400px;
@@ -67,10 +66,10 @@
 }
 .input-field{
     margin-top: 15px;
-    width: 380px;
+    width: 100%;
     height: 40px;
-    padding-left: 25px;
-    border-radius: 20px;
+    padding-left: 10px;
+    // border-radius: 20px;
     border: 2px solid grey;
     outline: none;
     box-shadow: inset 5px 5px 10px #a9b4b8;

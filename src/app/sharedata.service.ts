@@ -1,12 +1,13 @@
 import { Injectable, OnInit, signal,PLATFORM_ID, Inject} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { ApiserviceService } from './apiservice.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedataService implements OnInit {
   
-  constructor(@Inject(PLATFORM_ID) private platformId:Object) { }
+  constructor(@Inject(PLATFORM_ID) private platformId:Object,private apiService:ApiserviceService) { }
 
   logInUser=signal('');
   ngOnInit(): void {
@@ -30,5 +31,15 @@ export class SharedataService implements OnInit {
     this.inputMsg.set(msg);
   }
   loader=signal(false);
-
+  //cart count method.
+   callCartCount = (userToken:any) => {
+    this.loader.set(true);
+    this.apiService.getCartCount(userToken).subscribe((res: any) => {
+      this.loader.set(false);
+      this.cartCount.set(res.cartCount);
+    },
+      er => {
+        this.loader.set(false);
+      })
+  }
 }

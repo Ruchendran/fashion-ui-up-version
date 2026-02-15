@@ -2,7 +2,7 @@
 <div class="container place-order-container pad-top-other"  *ngIf="orderDetails">
     <div class="row">
         <div class="col-12 flex-end">
-                <button class="btn m-3" (click)="deliveryAddress()">
+                <button class="btn" (click)="deliveryAddress()">
                     Confirm Order
                 </button>
         </div>
@@ -64,7 +64,7 @@
     <div class="payment-popup mt-3 mb-3 flex">
         <div class="payment-form flex">
             <form class="product-details p-2" [formGroup]="addressForm" (ngSubmit)="onSubmitAddress()">
-                <i class="fa fa-window-close close-icon" aria-hidden="true" (click)="onCloseForm()"></i>
+                <i class="fa fa-window-close close-icon icon" aria-hidden="true" (click)="onCloseForm()"></i>
                 <div class="flex-vertical">
                     <h4>
                         User Address
@@ -117,9 +117,9 @@
                 <div class="flex input-div">
                     <textarea class="input-field" placeholder="Enter the address..."formControlName="address"></textarea>
                 </div>
-                <div class="flex">
-                    <button class="btn mt-2" type="submit">
-                    Submit
+                <div class="flex input-div " style="justify-content: flex-end ;">
+                    <button class="btn m-top-bot-15" type="submit">
+                        Submit
                     </button>
                 </div>
             </form>

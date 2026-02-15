@@ -70,8 +70,8 @@
                     <!-- <p>
                         {{data.productDes}}
                     </p> -->
-                    <p>
-                        {{data.productPrice | currency:'INR'}}
+                    <p class="f-bold">
+                        {{data.productPrice | currency:'INR' | unit:data.productFamily}}
                     </p>
                     <div class="star-container">
                         <ng-container *ngFor="let star of (Array(5).fill(0));let i=index;">

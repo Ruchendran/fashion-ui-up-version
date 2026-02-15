@@ -24,8 +24,19 @@ $paraFontFamily:'Gotham-book';
 .m-top{
     margin-top: 80px;
 }
+.m-0{
+    margin: 0px;
+}
+.m-bot-top-10{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
 .m-10{
     margin: 10px;
+}
+.m-top-bot-15{
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 .pad-top{
     padding-top: 0px;
@@ -55,8 +66,8 @@ $paraFontFamily:'Gotham-book';
     justify-content:end;
     align-items: center;
 }
-body{
-    // font-family: $fontFamily;
+.space-between{
+    justify-content: space-between;
 }
 .icon-font,.icon{
     cursor: pointer;
@@ -121,6 +132,15 @@ p,span,input,td{
 }
 .d-flex{
     display: flex;
+}
+.f-bold{
+    font-weight: 500;
+}
+.span-design-color{
+    color:$designColor;
+}
+.icon{
+    color:$designColor;
 }
 @media screen and (max-width : 576px) {
     .pad-top{

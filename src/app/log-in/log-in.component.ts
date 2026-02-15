@@ -13,7 +13,6 @@ import { SharedataService } from '../sharedata.service';
   styleUrl: './log-in.component.scss'
 })
 export class LogInComponent implements OnInit {
-  adminUser: boolean = false;
   constructor(private apiService: ApiserviceService, private route: Router, @Inject(PLATFORM_ID) private platformId: Object
     , public shareData: SharedataService) { }
   userForm: any;
@@ -35,7 +34,6 @@ export class LogInComponent implements OnInit {
   }
   onRegister() {
     this.register = !this.register;
-    this.adminUser = false;
     this.forgotPassword=false;
   }
   callCartCount=(userToken:any)=>{
@@ -62,21 +60,8 @@ export class LogInComponent implements OnInit {
   onSubmit = () => {
     this.shareData.loader.set(true);
     //This is only for Register users.
-    console.log(this.userForm.value)
-    if (this.adminUser) {
-      this.apiService.getAdminUser(this.userForm.value?.userMail).subscribe((res: any) => {
-        console.log(res, "sssss");
-        this.shareData.loader.set(false)
-        if (isPlatformBrowser(this.platformId)) {
-          sessionStorage.clear();
-          sessionStorage.setItem('adminUser', 'true');
-        }
-        this.route.navigate(['/admin']);
-      }, er => {
-        this.shareData.loader.set(false)
-      })
-    }
-    else if (this.register && !this.adminUser && !this.forgotPassword) {
+
+    if (this.register && !this.forgotPassword) {
       this.apiService.registerUser(this.userForm.value).subscribe((res: any) => {
         this.shareData.loader.set(true)
         this.shareData.setLogInUserVal(this.userForm?.value?.userName);
@@ -103,7 +88,7 @@ export class LogInComponent implements OnInit {
         });
     }
     //This is only for login users.
-    else if(!this.register && !this.adminUser && !this.forgotPassword ) {
+    else if(!this.register  && !this.forgotPassword ) {
       this.apiService.loginUser(this.userForm.value).subscribe((res: any) => {
         this.shareData.loader.set(false)
         this.shareData.setLogInUserVal(res?.user);
@@ -142,12 +127,6 @@ export class LogInComponent implements OnInit {
         this.shareData.setModalMsg("pls make the password match!");
       }
     }
-  }
-  loginAdmin = () => {
-    this.adminUser = true;
-  }
-  normalUser = () => {
-    this.adminUser = false;
   }
   forgotPas=()=>{
     this.forgotPassword=true;

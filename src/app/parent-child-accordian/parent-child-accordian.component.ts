@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export interface Props{
+  contentColor:string,
   parentHeading:string,
   parentWidth:string,
   childProps:
     {
-    contentColor:string,
     accordianWidth:string,
     heading:string,
     description:string,
@@ -19,7 +19,8 @@ export interface Props{
     }[],
     btnText:string,
     btnShow:boolean,
-    orderId:string
+    orderId:string,
+    totalPrice:number
   
 }
 
