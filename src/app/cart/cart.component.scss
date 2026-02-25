@@ -2,7 +2,7 @@
 .product{
     justify-content: space-around;
     box-shadow: 2px 2px 20px  grey ;
-    padding: 30px 10px 20px 10px;
+    padding: 30px 10px 10px 10px;
     box-sizing: border-box;
     position: relative;
 }
@@ -63,6 +63,7 @@ p{
 .checkspan{
     position: absolute;
     top: -10px;
+    left: 40%;
     height: 20px;
     width: 20px;
     background-color: #eee;
@@ -88,7 +89,9 @@ p{
 .checkbox:checked ~ .checkspan::after{
     display: block;
 }
-
+.saved-products{
+    color:$designColor;
+}
 @media screen and (max-width:576px){
     .cart-container{
         display: none;
@@ -99,6 +102,7 @@ p{
     .product{
         position: relative;
         overflow: hidden;
+        // height: 300px;
     }
     .icon{
         position: absolute;
@@ -110,5 +114,18 @@ p{
         position: absolute;
         top: 15px;
         left: 10px;
+    }
+    .save-later-mobile{
+       display: none;
+    }
+    .product:hover .save-later-mobile{
+        display: block;
+    }
+    .save-later-btn{
+        width: 100%;
+    }
+    .s-icon{
+        color:$text-color;
+        padding-right: 10px;
     }
 }

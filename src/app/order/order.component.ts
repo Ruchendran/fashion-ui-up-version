@@ -5,17 +5,19 @@ import { ApiserviceService } from '../apiservice.service';
 import { Router,ActivatedRoute} from '@angular/router';
 import { Meta,Title } from '@angular/platform-browser';
 import { ParentChildAccordianComponent } from '../parent-child-accordian/parent-child-accordian.component';
+import { NoRecordsFoundComponent } from '../no-records-found/no-records-found.component';
+import { SharedataService } from '../sharedata.service';
 @Component({
   selector: 'app-order',
-  imports: [CommonModule,ParentChildAccordianComponent],
+  imports: [CommonModule,ParentChildAccordianComponent,NoRecordsFoundComponent],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss'
 })
 export class OrderComponent implements OnInit {
-  constructor(@Inject(PLATFORM_ID) private platformId:Object,private containerRef: ViewContainerRef,private apiService:ApiserviceService,private route:Router,private activatedRoute:ActivatedRoute,private metaService:Meta,private titleService:Title){
+  constructor(@Inject(PLATFORM_ID) private platformId:Object,private containerRef: ViewContainerRef,private apiService:ApiserviceService,private route:Router,private activatedRoute:ActivatedRoute,private metaService:Meta,private titleService:Title,private sharedData:SharedataService){
 
   }
-  userToken:any='';
+  userToken:any=''
   private loaderRef!: ComponentRef<LoaderComponent>;
   orderList:any=[];
   metaData:any;
@@ -36,9 +38,9 @@ export class OrderComponent implements OnInit {
     }
     if(isPlatformBrowser(this.platformId)){
       window.scrollTo(0,0);
-      this.userToken=sessionStorage.getItem('userToken');
+      // this.userToken=sessionStorage.getItem('userToken');
     };
-     this.showLoader();
+    this.userToken=this.sharedData.userToken();
     this.apiService.getOrderList(this.userToken).subscribe((res:any)=>{
       console.log(res,"lis")
       this.orderList=res?.getOrderData;
@@ -88,5 +90,12 @@ export class OrderComponent implements OnInit {
   }
   getOrderTrack=(id:string)=>{
     this.route.navigate(['/track-order'],{queryParams:{orderId:id}});
+  }
+  getTotalPrice=(order:any)=>{
+     let total=0;
+     order.forEach((product:any)=>{
+      total=total+product.productPrice;
+     })
+     return total;
   }
 }

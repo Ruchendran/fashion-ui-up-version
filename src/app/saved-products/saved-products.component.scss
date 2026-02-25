@@ -1,0 +1,149 @@
+@import "../../styles.scss";
+
+.view-cart-section{
+    display: none;
+}
+
+.product{
+    justify-content: space-around;
+    box-shadow: 2px 2px 20px  grey ;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 200px;
+    position: relative;
+}
+.image{
+    height: 100px;
+}
+.product-content{
+    align-items: start;
+}
+.icon{
+    margin: 2px;
+    font-size: 15px;
+}
+p{
+    margin-bottom: 5px;
+}
+.star-container{
+    margin-bottom: 5px;
+}
+.icon{
+    font-size: 15px;
+    padding-right: 5px;
+}
+.line{
+    width: 2px;
+    height: 80%;
+    background: $designColor;
+}
+.search-inp{
+    width: 70%;
+    height: 40px;
+    padding-left: 10px;
+    border-bottom-left-radius: 15px;
+    border: 2px solid $designColor;
+}
+.price-values{
+    margin-top: 10px;
+    justify-content: space-between;
+}
+.price-values input{
+    width: 50px;
+} 
+.price-values input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+} 
+.price-ranges{
+    height: 100%;
+    position: relative;
+    // justify-content: space-around;
+}
+.range-section{
+    margin-top: 20px;
+    position: relative;
+    // top: 5px;
+    width: 100%;
+    background: #ddd;
+    border-radius: 5px;
+    height: 5px;
+}
+.range-section .progress{
+    width: 80%;
+    height: 5px;
+    position: absolute;
+    border-radius: 5px;
+    left: 10%;
+    background: $designColor;
+    right: 10%;
+}
+.range-min{
+    position: absolute;
+}
+.range-max{
+    position: absolute;
+    left: -5px;
+}
+.range-inp{
+    position: relative;
+}
+.range-inp input{
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    height: 5px;
+    -webkit-appearance:none;
+    background: none;
+    pointer-events: none;
+}
+input[type="range"]::-webkit-slider-thumb{
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    -webkit-appearance: none;
+    background: $designColor;
+    pointer-events: auto;
+}
+.btn-price{
+    width: 50px;
+    font-size: 14px;
+}
+.ranges-apply-section label{
+    padding-right: 10px;
+}
+.icon{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 13px;
+}
+@media screen and (max-width:576px){
+ .line{
+    width: 90%;
+    height: 2px;
+     background: $designColor;
+ }
+ .price-ranges{
+    padding-bottom: 10px;
+    height: fit-content;
+ }
+ .range-section{
+    width: 90%;
+ }
+ .price-values{
+    width: 70%;
+ }
+ .view-cart{
+    color:$designColor;
+ }
+ .view-cart-section{
+    display: block;
+ }
+ .view-cart-section{
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+ }
+}

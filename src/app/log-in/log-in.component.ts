@@ -72,6 +72,7 @@ export class LogInComponent implements OnInit {
             sessionStorage?.setItem('password', this.userForm?.value?.password);
             sessionStorage.setItem('userToken', res.userToken)
           };
+          this.shareData.setUserToken(res?.userToken);
           this.callCartCount(res.userToken);
           this.callOrderCount(res.userToken);
           this.route.navigate(["/"]);
@@ -98,6 +99,7 @@ export class LogInComponent implements OnInit {
             sessionStorage?.setItem('password', this.userForm?.value?.password);
             sessionStorage.setItem('userToken', res.userToken)
           }
+          this.shareData.setUserToken(res?.userToken);
           this.callCartCount(res.userToken);
           this.callOrderCount(res.userToken);
           this.route.navigate(["/"]);

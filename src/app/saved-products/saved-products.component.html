@@ -1,0 +1,32 @@
+<ng-container *ngIf="savedProductsList.length">
+    <div class="container pad-top-other">
+        <div class="row  justify-content-md-start justify-content-center">
+            <div class="col-11 col-md-4 p-3" *ngFor="let data of savedProductsList">
+                <div class="product flex">
+                    <i class="fa-solid fa-trash icon" (click)="deleteFromSave(data)"></i>
+                    <div class="col-6 flex">
+                        <img [src]="data.productImg" class="image" />
+                    </div>
+                    <div class="col-6 flex-vertical product-content ">
+                        <h5>
+                            {{data.productName}}
+                        </h5>
+                        <!-- <p>
+                            {{data.productDes}}
+                        </p> -->
+                        <p class="f-bold">
+                            {{data.productPrice | currency:'INR' | unit:data.productFamily}}
+                        </p>
+                        <button  class="btn" (click)="addToCart(data)">
+                            Add Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-event-modal [inputMsg]="modalMsg" *ngIf="deleteModal" (sendEvent)="receiveEvent($event)"></app-event-modal>
+</ng-container>
+<ng-container *ngIf="!savedProductsList.length">
+    <app-no-records-found></app-no-records-found>
+</ng-container>

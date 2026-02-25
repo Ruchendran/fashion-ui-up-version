@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { HttpClient,HttpParams} from '@angular/common/http';
 import { serverVal } from '../environment';
 import { Observable } from 'rxjs';
+import { ProductInterface } from './generic-interfaces/interfaces-model';
 
 
 @Injectable({
@@ -30,7 +31,12 @@ export class ApiserviceService implements OnInit {
     getOrderCount:serverVal.server+'/order/order-count',
     postalCodeApi:serverVal.server+'/generic/postal',
     getUserAddress:serverVal.server+'/auth/get-address',
-    getTotalRecord:serverVal.server+'/products/totalRecords'
+    getTotalRecord:serverVal.server+'/products/totalRecords',
+    saveLaterRequest:serverVal.server+'/save-later/save',
+    saveLaterFlagUpdCart:serverVal.server+'/cart/save-later-flag/upd',
+    getSavedProducts:serverVal.server+'/save-later/get-save-later',
+    getSaveProdFromProductsModel:serverVal.server+'/save-later/get-from-products-model',
+    deleteFromSavedProducts:serverVal.server+'/save-later/delete-product'
   }
 
   ngOnInit(): void {
@@ -47,9 +53,9 @@ export class ApiserviceService implements OnInit {
   loginUser(data:any){
     return this.http.post(this.apiConstants.loginUser,data);
   }
-  getAllProducts(productFamily:String,page:number){
+  getAllProducts(productFamily:String,page:number):Observable<ProductInterface[]>{
     let group=productFamily=='products'?'all':productFamily;
-    return this.http.get(this.apiConstants.getAllProducts+`/${group}/${page}`);
+    return this.http.get<ProductInterface[]>(this.apiConstants.getAllProducts+`/${group}/${page}`);
   };
   // getAllProductsByPrice(productFamily:String,min:any,max:any){
   //   let fam=productFamily=='products'?'all':productFamily;
@@ -108,5 +114,20 @@ export class ApiserviceService implements OnInit {
   getTotalRecords(productFamily:string){
     let group=productFamily=='products'?'all':productFamily;
     return this.http.get(this.apiConstants.getTotalRecord+`/${group}`);
+  }
+  saveLaterRequest(saveLaterProduct:any){
+    return this.http.post(this.apiConstants.saveLaterRequest,{productId:saveLaterProduct.productId,userId:saveLaterProduct.userId})
+  }
+  saveLaterFlagUpdCart(saveLaterProduct:any){
+    return this.http.put(this.apiConstants.saveLaterFlagUpdCart,{productId:saveLaterProduct.productId,userId:saveLaterProduct.userId})
+  }
+  getSavedProducts(userToken:any){
+    return this.http.get(this.apiConstants.getSavedProducts,{params:{userId:userToken}});
+  }
+  getSaveProdFromProductsModel(userToken:any){
+    return this.http.get(this.apiConstants.getSaveProdFromProductsModel,{params:{userId:userToken}});
+  }
+  deleteFromSavedProducts(userToken:any,productId:any){
+    return this.http.delete(this.apiConstants.deleteFromSavedProducts,{params:{userId:userToken,productId:productId}});
   }
 }

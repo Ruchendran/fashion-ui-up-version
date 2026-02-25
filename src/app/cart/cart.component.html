@@ -1,118 +1,156 @@
-<div class="container cart-container">
-  <div class="row">
-    <div class="col-12 flex-end">
-        <button  class="btn" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
-            Place Order
-        </button>
-    </div>
-    <table class="col-md-12 mt-3 mb-3">
-        <thead>
-            <tr>
-                <th>
-                    Checkbox
-                </th>
-                <th>
-                    Image
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Quantity
-                </th>
-                <th>
-                    Price
-                </th>
-                <!-- <th>
-                    Order
-                </th> -->
-                <th>
-                    Delete
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        @for (cart of cartList; track cart._id) {
-            <tr>
-                <td>
-                    <label class="container-box ">
-                        <input type="checkbox" class="checkbox" (change)="onChecked($event,cart)" />
-                        <span class="checkspan"></span>
-                    </label>
-                </td>
-                <td>
-                  <img [src]="cart.productImg" class="image" />
-                </td>
-                <td>
-                    {{cart.productName}}
-                </td>
-                <td >
-                    <button class="quntity-btn" (click)="reduceQuantity(cart)">
-                        -
-                    </button>
-                    {{cart.quantity}}
-                    <button class="quntity-btn" (click)="addQuantity(cart)">
-                        +
-                    </button>
-                </td>
-                <td>
-                     {{cart.productPrice*cart.quantity | currency:'INR'}}
-                </td>
-                <!-- <td>
-                    <button  class="btn" (click)="placeOrder(cart)">
-                        Place Order
-                    </button>
-                </td> -->
-                <td>
-                    <i class="fa-solid fa-trash icon" (click)="deleteFromCart(cart)"></i>
-                </td>
-            </tr>      
-        }
-        </tbody>
-    </table>
-  </div>
-</div>
-<!---This is for mobile view-->
-<div class="container mobile-cart-container pad-top-other">
-    <div class="row  justify-content-md-start justify-content-center">
-         <div class="col-11 flex-end">
-            <button  class="btn m-bot-top-10" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
+<ng-container *ngIf="cartList.length">
+    <div class="container cart-container">
+    <div class="row">
+        <div class="col-12 flex-end p-0">
+            <button  class="btn p-0 m-0" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
                 Place Order
             </button>
         </div>
-        <div class="col-11 col-md-4 p-3" *ngFor="let data of cartList">
-            <div class="product flex">
-                <label class="container-box ">
-                        <input type="checkbox" class="checkbox" (change)="onChecked($event,data)" />
-                        <span class="checkspan"></span>
-                </label>
-                <i class="fa-solid fa-trash icon" (click)="deleteFromCart(data)"></i>
-                <div class="col-4 flex">
-                    <img [src]="data.productImg" class="image" />
-                </div>
-                <div class="col-8 flex-vertical">
-                    <h5>
-                        {{data.productName}}
-                    </h5>
-                    <div class="mt-2">
-                        <button class="quntity-btn" (click)="reduceQuantity(data)">
+        <table class="col-md-12 mt-3 mb-3">
+            <thead>
+                <tr>
+                    <th>
+                        Select
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <!-- <th>
+                        Order
+                    </th> -->
+                    <th>
+                        Delete
+                    </th>
+                    <th>
+                        Save
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @for (cart of cartList; track cart._id) {
+                <tr>
+                    <td>
+                        <label class="container-box ">
+                            <input type="checkbox" class="checkbox" (change)="onChecked($event,cart)" />
+                            <span class="checkspan"></span>
+                        </label>
+                    </td>
+                    <td>
+                    <img [src]="cart.productImg" class="image" />
+                    </td>
+                    <td>
+                        {{cart.productName}}
+                    </td>
+                    <td >
+                        <button class="quntity-btn hover-text" [style.--hover-text]="'\'Reduce Quantity\''" (click)="reduceQuantity(cart)">
                             -
                         </button>
-                        {{data.quantity}}
-                        <button class="quntity-btn" (click)="addQuantity(data)">
+                        {{cart.quantity}}
+                        <button class="quntity-btn hover-text" [style.--hover-text]="'\'Add Quanity\''" (click)="addQuantity(cart)">
                             +
                         </button>
+                    </td>
+                    <td>
+                        {{cart.productPrice*cart.quantity | currency:'INR'}}
+                    </td>
+                    <!-- <td>
+                        <button  class="btn" (click)="placeOrder(cart)">
+                            Place Order
+                        </button>
+                    </td> -->
+                    <td>
+                        <i class="fa-solid fa-trash icon" (click)="deleteFromCart(cart)" ></i>
+                    </td>
+                    <td>
+                        <div [class.hover-text]="cart.saveLater" [style.--hover-text]="'\'Already Saved\''">
+                            <button class="btn" (click)="saveItLater(cart)" [disabled]="cart.saveLater">
+                                Save
+                            </button>
+                        </div>
+                    </td>
+                </tr>      
+            }
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <!---This is for mobile view-->
+    <div class="container mobile-cart-container pad-top-other">
+        <div class="row  justify-content-md-start justify-content-center">
+            <div class="col-11 flex-end">
+                <button  class="btn m-bot-top-10" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
+                    Place Order
+                </button>
+            </div>
+            <div class="col-11 col-md-4 p-3" *ngFor="let data of cartList">
+                <div class="product">
+                    <div class="flex">
+                        <label class="container-box ">
+                                <input type="checkbox" class="checkbox" (change)="onChecked($event,data)" />
+                                <span class="checkspan"></span>
+                        </label>
+                        <i class="fa-solid fa-trash icon" (click)="deleteFromCart(data)"></i>
+                        <div class="col-4 flex">
+                            <img [src]="data.productImg" class="image" />
+                        </div>
+                        <div class="col-8 flex-vertical">
+                            <h5>
+                                {{data.productName}}
+                            </h5>
+                            <div class="mt-2">
+                                <button class="quntity-btn"  (click)="reduceQuantity(data)">
+                                    -
+                                </button>
+                                {{data.quantity}}
+                                <button class="quntity-btn"  (click)="addQuantity(data)">
+                                    +
+                                </button>
+                            </div>
+                            <p>
+                            {{data.productPrice*data.quantity | currency:'INR'}}
+                            </p>
+                            <!-- <button (click)="placeOrder(data)" class="btn">
+                                Place Order
+                            </button> -->
+        
+                        </div>
                     </div>
-                    <p>
-                       {{data.productPrice*data.quantity | currency:'INR'}}
-                    </p>
-                    <!-- <button (click)="placeOrder(data)" class="btn">
-                        Place Order
-                    </button> -->
- 
+                    <div class="save-later-mobile m-bot-top-10" [class.hover-text]="data.saveLater" [style.--hover-text]="'\'Already Saved\''">
+                        <button class="btn save-later-btn flex m-0" (click)="saveItLater(data)" [disabled]="data.saveLater">
+                            <i class="fas fa-save s-icon"></i>
+                            Save It Later
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<app-event-modal [inputMsg]="modalMsg" *ngIf="deleteModal" (sendEvent)="receiveEvent($event)"></app-event-modal>
+    <div class="saved-products flex m-bot-top-10 pointer" (click)="navToSavedProucts()">
+        <div>
+            <i class="fa fa-angle-left" ></i>
+            <i class="fa fa-angle-left" ></i>
+            <i class="fa fa-angle-left" ></i>
+        </div>
+        <strong>
+            Go To Saved Products
+        </strong>
+        <div>
+            <i class="fa fa-angle-right" ></i>
+            <i class="fa fa-angle-right" ></i>
+            <i class="fa fa-angle-right" ></i>
+        </div>
+    </div>
+    <app-event-modal [inputMsg]="modalMsg" *ngIf="deleteModal" (sendEvent)="receiveEvent($event)"></app-event-modal>
+</ng-container>
+<ng-container *ngIf="!cartList.length">
+    <app-no-records-found ></app-no-records-found>
+</ng-container>

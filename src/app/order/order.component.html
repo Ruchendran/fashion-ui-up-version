@@ -1,90 +1,100 @@
-
-<div class="container order-container" *ngIf="orderList"> 
-  <div class="row">
-    <table class="col-md-12 mt-3 mb-3">
-        <thead>
-            <tr>
-                <th>
-                    Index
-                </th>
-                <th>
-                    Image
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Quantity
-                </th>
-                <th>
-                    Price
-                </th>
-                <th>
-                    Order
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-        @for (order of orderList; track order._id;let indexOut=$index) {
-           
-               @for (product of order.orderedProducts;track product.productId;let isFirst=$first){
+<ng-container *ngIf="orderList.length || mobileAccordianDetails.length">
+    <div class="container order-container" *ngIf="orderList"> 
+    <div class="row">
+        <table class="col-md-12 mt-3 mb-3">
+            <thead>
                 <tr>
-                <td [attr.rowspan]="order.orderedProducts.length" *ngIf="isFirst">
-                    {{indexOut+1}}
-                </td>
-                <td>
-                  <img [src]="product.productImg" class="image" />
-                </td>
-                <td>
-                    {{product.productName}}
-                </td>
-                <td >
-                    {{product.quantity}}
-                </td>
-                <td>
-                     {{product.productPrice | currency:'INR'}}
-                </td>
-                <td [attr.rowspan]="order.orderedProducts.length"  *ngIf="isFirst">
-                    <button  class="btn" (click)="trackOrder(order)">
-                        Track Order
-                    </button>
-                </td>
-            </tr>
+                    <th>
+                        Index
+                    </th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                    Unit Price
+                    </th>
+                    <th>
+                        Total Price
+                    </th>
+                    <th>
+                        Order
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            @for (order of orderList; track order._id;let indexOut=$index) {
+            
+                @for (product of order.orderedProducts;track product.productId;let isFirst=$first){
+                    <tr>
+                    <td [attr.rowspan]="order.orderedProducts.length" *ngIf="isFirst">
+                        {{indexOut+1}}
+                    </td>
+                    <td>
+                    <img [src]="product.productImg" class="image" />
+                    </td>
+                    <td>
+                        {{product.productName}}
+                    </td>
+                    <td >
+                        {{product.quantity}}
+                    </td>
+                    <td>
+                        {{product.productPrice | currency:'INR'}}
+                    </td>
+                    <td [attr.rowspan]="order.orderedProducts.length" *ngIf="isFirst">
+                    {{ getTotalPrice(order.orderedProducts) | currency:'INR'}}
+                    </td>
+                    <td [attr.rowspan]="order.orderedProducts.length"  *ngIf="isFirst">
+                        <button  class="btn" (click)="trackOrder(order)">
+                            Track Order
+                        </button>
+                    </td>
+                </tr>
+                }
+                    
             }
-                
-        }
-        </tbody>
-    </table>
-  </div>
-</div>
-<div class="container mobile-order-container flex-vertical pad-top-other" *ngIf="mobileAccordianDetails">
-    <!-- <div class="row  justify-content-md-start justify-content-center">
-        <div class="col-11 col-md-4 p-3" *ngFor="let data of orderList">
-            <div class="product flex">
-                <div class="col-4 flex">
-                    <img [src]="data.productImg" class="image" />
-                </div>
-                <div class="col-8 flex-vertical">
-                    <h5>
-                        {{data.productName}}
-                    </h5>
-                    <p >
-                        Quantity-{{data.quantity}}
-                    </p>
-                    <p >
-                       {{data.productPrice*data.quantity | currency:'INR'}}
-                    </p>
-                    <button  (click)="trackOrder(data)" class="btn">
-                        Track Order
-                    </button>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <div class="container mobile-order-container flex-vertical pad-top-other" *ngIf="mobileAccordianDetails">
+        <!-- <div class="row  justify-content-md-start justify-content-center">
+            <div class="col-11 col-md-4 p-3" *ngFor="let data of orderList">
+                <div class="product flex">
+                    <div class="col-4 flex">
+                        <img [src]="data.productImg" class="image" />
+                    </div>
+                    <div class="col-8 flex-vertical">
+                        <h5>
+                            {{data.productName}}
+                        </h5>
+                        <p >
+                            Quantity-{{data.quantity}}
+                        </p>
+                        <p >
+                        {{data.productPrice*data.quantity | currency:'INR'}}
+                        </p>
+                        <button  (click)="trackOrder(data)" class="btn">
+                            Track Order
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div> -->
-    <ng-container *ngFor="let order of mobileAccordianDetails">
-        <app-parent-child-accordian [parentProps]="order" (emitOrderTrack)="getOrderTrack($event)">
-    
-        </app-parent-child-accordian>
-    </ng-container>
-</div>
-<ng-container #loaderContainer></ng-container>
+        </div> -->
+        <ng-container *ngFor="let order of mobileAccordianDetails">
+            <app-parent-child-accordian [parentProps]="order" (emitOrderTrack)="getOrderTrack($event)">
+        
+            </app-parent-child-accordian>
+        </ng-container>
+    </div>
+    <ng-container #loaderContainer></ng-container>
+</ng-container>
+<ng-container *ngIf="!(orderList.length || mobileAccordianDetails.length)">
+    <app-no-records-found></app-no-records-found>
+</ng-container>

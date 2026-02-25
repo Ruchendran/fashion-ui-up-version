@@ -63,20 +63,22 @@ export class AppComponent implements OnInit  {
     // document.documentElement.style.setProperty('--designColorBlue','green')
     this.shareData.loader.set(false);
     if(isPlatformBrowser(this.platformId)){
-    let data=sessionStorage.getItem('user');
-    let userToken=sessionStorage.getItem('userToken');
-    // this.userExist.user=data;
+      let data=sessionStorage.getItem('user');
+      let userToken=sessionStorage.getItem('userToken');
+      // this.userExist.user=data;
       this.userExist.user=this.shareData.logInUser();
-      console.log(this.shareData.logInUser())
-    this.userExist.userToken=userToken;
-    this.callCartCount(userToken);
-    this.callOrderCount(userToken);
-    if(data){
-      this.shareData.setLogInUserVal(data);
-    }
+      this.userExist.userToken=userToken;
+      this.callCartCount(userToken);
+      this.callOrderCount(userToken);
+      if(userToken){
+        this.shareData.setUserToken(userToken);
+      }
+      if(data){
+        this.shareData.setLogInUserVal(data);
+      }
     }
     this.location.onUrlChange((url)=>{
-      if( url == '/sign-in' || url=='/admin' || url=='/admin/upload'){
+      if( url == '/sign-in' || url== '/page-not-found'){
         this.headerHide=false;
       }
       else{

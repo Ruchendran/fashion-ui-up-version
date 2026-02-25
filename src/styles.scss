@@ -34,12 +34,27 @@ $paraFontFamily:'Gotham-book';
 .m-10{
     margin: 10px;
 }
+.m-left-0{
+    margin-left: 0px;
+}
+.m-right{
+    margin-right: 0px;
+}
+.p-left{
+    padding-left: 0px;
+}
+.p-right{
+    padding-right: 0px;
+}
 .m-top-bot-15{
     margin-bottom: 15px;
     margin-top: 15px;
 }
 .pad-top{
     padding-top: 0px;
+}
+.p-0{
+    padding: 0px;
 }
 ::-webkit-scrollbar-thumb{
     background: $designColor;
@@ -58,6 +73,12 @@ $paraFontFamily:'Gotham-book';
 .flex-vertical{
     display: flex;
     justify-content:center;
+    align-items: center;
+    flex-direction: column;
+}
+.flex-vertical-space-around{
+    display: flex;
+    justify-content:space-around;
     align-items: center;
     flex-direction: column;
 }
@@ -141,6 +162,38 @@ p,span,input,td{
 }
 .icon{
     color:$designColor;
+}
+/// hover functionality
+.hover-text{
+    position: relative;
+    font-weight: normal !important;
+}
+.hover-text:hover::before{
+    content: var(--hover-text);
+    min-width:150px;
+    position: absolute;
+    color:#000000;
+    top: -45px;
+    left: 10px;
+    background: #ffffff;
+    box-shadow: 0px 5px 10px grey;
+    height: fit-content;
+    padding: 10px;
+    z-index: 1;
+}
+.hover-text:hover::after{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height:20px;
+    background-image:linear-gradient(to right,transparent,#ffffff);
+    top: -20px;
+    rotate: 45deg;
+    z-index: 2;
+    left: 80px;
+}
+.h-100{
+    height: 100%;
 }
 @media screen and (max-width : 576px) {
     .pad-top{

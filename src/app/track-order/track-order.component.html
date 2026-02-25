@@ -1,10 +1,10 @@
 <div class="container pad-top-other">
     <div class="row">
         <h4 class="col-12 id">
-            Order Id -  <span class="order-id-span">{{orderId}}</span>
+            Order Id -  <span class="order-id-span"><strong>{{orderId}}</strong></span>
         </h4>
         <p>
-            Expected on Today
+           Expected:{{expectedTime}}
         </p>
         <div class="col-12 col-md-12 tracking-container flex-vertical">
             <ng-container *ngFor="let stage of trackingMapList;let i=index;let od=odd;let end=last" class="m-4">

@@ -1,6 +1,5 @@
 import { Routes, Route } from '@angular/router';
 import { authGuard } from './auth.guard';
-import { adminGuard } from './admin.guard';
 import { title } from 'process';
 import { seoResolver } from './seo.resolver';
 
@@ -173,35 +172,6 @@ export const routes: Routes = [
         }
     },
     {
-        path: "admin",
-        loadComponent: () => import("./admin-folder/admin/admin.component").then(s => s.AdminComponent),
-        title: "Admin Page",
-        canActivate: [adminGuard],
-        data: {
-            title: "",
-            description: '',
-            image: '',
-        },
-                resolve:{
-            seoData:seoResolver
-        }
-    },
-    {
-        path: "admin/upload",
-        loadComponent: () => import("./admin-folder/admin-upload/admin-upload.component").then(s => s.AdminUploadComponent),
-        title: "Upload Page",
-        canActivate: [adminGuard],
-        data: {
-            title: "",
-            description: '',
-            image: '',
-        },
-                resolve:{
-            seoData:seoResolver
-        }
-
-    },
-    {
         path: "track-order",
         loadComponent: () => import("./track-order/track-order.component").then(s => s.TrackOrderComponent),
         title: "Track Order",
@@ -214,5 +184,27 @@ export const routes: Routes = [
                 resolve:{
             seoData:seoResolver
         }
+    },
+    {
+        path: 'saved-products',
+        loadComponent: () => import("./saved-products/saved-products.component").then(s=>s.SavedProductsComponent),
+        title: 'Saved Prducts Pge',
+        canActivate: [authGuard],
+        data: {
+            title: "Your Shopping Cart: Ready to Check Out?",
+            description: 'Dont miss out! Your items are waiting. Complete your order now to secure your purchases and get free express shipping.',
+            image: '',
+        },
+                resolve:{
+            seoData:seoResolver
+        }
+    },
+    {
+        path:'page-not-found',
+         loadComponent:()=>import("./page-not-found/page-not-found.component").then(s=>s.PageNotFoundComponent)
+    },
+    {
+        path:"**",
+        redirectTo:'page-not-found',
     }
 ];

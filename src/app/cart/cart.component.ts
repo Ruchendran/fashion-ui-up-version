@@ -6,10 +6,12 @@ import { LoaderComponent } from '../loader/loader.component';
 import { Router,ActivatedRoute} from '@angular/router';
 import { Meta,Title } from '@angular/platform-browser';
 import { EventModalComponent } from '../event-modal/event-modal.component';
+import { lastValueFrom } from 'rxjs';
+import { NoRecordsFoundComponent } from '../no-records-found/no-records-found.component';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule,EventModalComponent],
+  imports: [CommonModule,EventModalComponent,NoRecordsFoundComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
@@ -24,6 +26,7 @@ export class CartComponent implements OnInit {
   modalMsg:string='';
   cartData:any=false;
   placeOrdersList:any=[];
+  savedProducts:any=[];
 updMeta(metaData:any){
         // Ensure you're setting the correct <title> tag as well
         this.titleService.setTitle(metaData.title); 
@@ -47,24 +50,59 @@ updMeta(metaData:any){
   ngOnInit(): void {
     if(isPlatformBrowser(this.platformId)){
       window.scrollTo(0,0);
-      this.userToken=sessionStorage.getItem('userToken');
+      // this.userToken=sessionStorage.getItem('userToken');
     };
-        const resolvedSeoData = this.activatedRoute.snapshot.data['seoData'];
+    this.userToken=this.sharedData.userToken();
+    const resolvedSeoData = this.activatedRoute.snapshot.data['seoData'];
     if (resolvedSeoData) {
       this.metaData = resolvedSeoData;
       this.updMeta(this.metaData);
     }
-    this.sharedData.loader.set(true)
-    this.getCartDetails(this.userToken);
+    this.sharedData.loader.set(true);
+    this.initializeData();
   }
-  getCartDetails=(token:any)=>{
-    this.apiService.getCartProducts(token).subscribe((res:any)=>{
-      this.cartList=res?.getCartData;
-      this.sharedData.loader.set(false)
-      console.log(this.cartList,"lis")
-    },er=>{
-      this.sharedData.loader.set(false)
-    })
+  async initializeData(){
+    await this.getSavedProducts(this.userToken);
+    await this.getCartDetails(this.userToken);
+    if(this.savedProducts.length && this.cartList.length){
+      this.savedProducts.forEach((saveProd:any)=>{
+        const cartFind=this.cartList.find((cart:any)=>{
+         return cart.productId == saveProd.productId
+        });
+        if(cartFind){
+          cartFind.saveLater=true;
+        }
+      })
+    }
+  }
+  getSavedProducts=async (token:string)=>{
+    this.sharedData.loader.set(true);
+    try{
+    const res=await lastValueFrom(this.apiService.getSavedProducts(token));
+    this.savedProducts=res;
+    this.sharedData.loader.set(false);
+    }
+    catch(e){
+      this.sharedData.loader.set(false);
+    }
+  }
+  getCartDetails=async(token:string)=>{
+    this.sharedData.loader.set(true);
+    try{
+    const res:any=await lastValueFrom(this.apiService.getCartProducts(token));
+    this.cartList=res.getCartData;
+      this.sharedData.loader.set(false);
+    }
+    catch(e){
+      this.sharedData.loader.set(false);
+    }
+    // this.apiService.getCartProducts(token).subscribe((res:any)=>{
+    //   this.cartList=res?.getCartData;
+    //   this.sharedData.loader.set(false);
+    //   console.log(this.cartList,"lis")
+    // },er=>{
+    //   this.sharedData.loader.set(false)
+    // })
   }
   addQuantity=(cart:any)=>{
     cart.quantity+=1;
@@ -97,11 +135,12 @@ updMeta(metaData:any){
     this.openDeleteModal('Are you sure want to delete from cart!');
   }
   deleteProductFromCart=(cart:any)=>{
-      this.sharedData.loader.set(true)
+      this.sharedData.loader.set(true);
       this.apiService.delFromCart(cart.productId,cart.userId).subscribe((res:any)=>{
         this.sharedData.setModalMsg(res.message)
         this.sharedData.loader.set(false)
-        this.getCartDetails(this.userToken);
+        // this.getCartDetails(this.userToken);
+        this.initializeData();
         this.callCartCount();
       },
     er=>{
@@ -120,5 +159,34 @@ updMeta(metaData:any){
       });
       this.placeOrdersList=filterData;
     }
+  }
+   saveLaterMethod=async(cart:any)=>{
+    try{
+     this.sharedData.loader.set(true);
+     const res:any=await lastValueFrom(this.apiService.saveLaterRequest(cart));
+      this.sharedData.loader.set(false);
+      this.sharedData.setModalMsg(res.message);
+    }
+    catch(e){
+      this.sharedData.loader.set(false);
+    }
+  }
+  updSavLaterFlagInCart=async(cart:any)=>{
+      this.sharedData.loader.set(true);
+      try{
+      const res:any=await lastValueFrom(this.apiService.saveLaterFlagUpdCart(cart));
+      this.sharedData.loader.set(false);
+      }
+      catch(e){
+        this.sharedData.loader.set(false);
+      }
+  }
+ async saveItLater(cart:any){
+    await this.saveLaterMethod(cart);
+    await this.updSavLaterFlagInCart(cart);
+    this.getCartDetails(this.userToken);
+  }
+  navToSavedProucts=()=>{
+    this.route.navigate(['/saved-products']);
   }
 }

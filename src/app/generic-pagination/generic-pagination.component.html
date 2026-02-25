@@ -5,9 +5,11 @@
         <i class="fa fa-angle-left" ></i>
         <i class="fa fa-angle-left" ></i>
     </div>
-    <div class="pages-container flex">
+    <div class="pages-container  flex">
         @for(page of getPages;track $index){
             <button class="page flex pointer" 
+            [ngClass]="page>maxPage?'hover-text':''"
+            [style.--hover-text]="'\'Page Disabled\''"
             [style.border-color]="paginationDetails.styles.normalColor" 
             [style.color]="page==activePage?paginationDetails.styles.activeColor:paginationDetails.styles.normalColor"
             [style.background-color]="page==activePage?paginationDetails.styles.normalColor:paginationDetails.styles.activeColor"

@@ -45,7 +45,7 @@ export class ParentChildAccordianComponent {
     accordian.notInitial=true
   }
   emitOrder=(orderId:any)=>{
-    console.log(orderId,"sss")
+    // console.log(orderId,"sss")
     this.emitOrderTrack.emit(orderId);
   }
 }

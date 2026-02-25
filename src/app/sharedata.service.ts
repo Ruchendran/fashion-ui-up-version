@@ -15,7 +15,8 @@ export class SharedataService implements OnInit {
   }
   orderCount=signal(0);
   cartCount=signal(0);
-  inputMsg=signal('')
+  inputMsg=signal('');
+  userToken=signal('');
   getAdminData=()=>{
     if(isPlatformBrowser(this.platformId)){
         return  sessionStorage.getItem('adminUser')=='true'?true:false;
@@ -41,5 +42,8 @@ export class SharedataService implements OnInit {
       er => {
         this.loader.set(false);
       })
+  }
+  setUserToken=(token:string)=>{
+    this.userToken.set(token);
   }
 }

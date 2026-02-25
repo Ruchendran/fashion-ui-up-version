@@ -18,6 +18,7 @@ export class TrackOrderComponent implements OnInit {
   activeTrackingIndex=1;
   trackingMapList=[];
   orderId:any=null;
+  expectedTime!:string;
   updMeta(metaData:any){
         // Ensure you're setting the correct <title> tag as well
         this.titleService.setTitle(metaData.title); 
@@ -40,6 +41,7 @@ export class TrackOrderComponent implements OnInit {
       this.sharedData.loader.set(false)
       this.trackingMapList=res?.orderDetails?.trackerMap;
       this.activeTrackingIndex=res?.orderDetails?.activeTrackingIndex+1;
+      this.expectedTime=res?.orderDetails?.expectedTime
     },er=>{
       this.sharedData.loader.set(false)
     })

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { Meta, Title } from '@angular/platform-browser';
 import { GenericPaginationComponent } from '../generic-pagination/generic-pagination.component';
 import { UnitPipe } from '../unit.pipe';
+import { ProductInterface } from '../generic-interfaces/interfaces-model';
 @Component({
   selector: 'app-product',
   imports: [CommonModule, FormsModule,GenericPaginationComponent,UnitPipe],
@@ -22,10 +23,10 @@ export class ProductComponent implements OnInit {
   minPrice = 20;
   maxPrice = 100;
   public Array = Array;
-  listOfProducts: any = [];
+  listOfProducts: ProductInterface[] = [];
   userToken: any = '';
   productFamily = '';
-  filteredProducts: any = [];
+  filteredProducts: ProductInterface[] = [];
   searchInput = '';
   updMeta(metaData: any) {
     // Ensure you're setting the correct <title> tag as well
@@ -55,7 +56,6 @@ export class ProductComponent implements OnInit {
   getTotalRecords=()=>{
     this.sharedData.loader.set(true);
     this.apiService.getTotalRecords(this.productFamily).subscribe((res:any)=>{
-      console.log(res)
       this.sharedData.loader.set(false);
       this.paginationDetails.totalRecords=res?.totalRecords;
     },
@@ -65,7 +65,8 @@ export class ProductComponent implements OnInit {
   }
   getProducts=(page:number)=>{
     this.sharedData.loader.set(true);
-    this.apiService.getAllProducts(this.productFamily,page).subscribe((res) => {
+    this.apiService.getAllProducts(this.productFamily,page).subscribe((res:ProductInterface[]) => {
+      // console.log(res,"ssss")
       this.sharedData.loader.set(false)
       this.listOfProducts = res;
       this.filteredProducts = res;

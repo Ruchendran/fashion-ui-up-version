@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdminUploadComponent } from './admin-upload.component';
+import { SavedProductsComponent } from './saved-products.component';
 
-describe('AdminUploadComponent', () => {
-  let component: AdminUploadComponent;
-  let fixture: ComponentFixture<AdminUploadComponent>;
+describe('SavedProductsComponent', () => {
+  let component: SavedProductsComponent;
+  let fixture: ComponentFixture<SavedProductsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminUploadComponent]
+      imports: [SavedProductsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdminUploadComponent);
+    fixture = TestBed.createComponent(SavedProductsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -24,7 +24,7 @@ export class PlaceOrderComponent implements OnInit  {
   ngOnInit(): void {
     if(isPlatformBrowser(this.platformId)){
       window.scrollTo(0,0);
-      this.userToken=sessionStorage.getItem('userToken');
+      // this.userToken=sessionStorage.getItem('userToken');
       // this.sharedData.loader.set(true)
       // this.activeRoute.queryParams.subscribe((data:any)=>{
       //   this.apiService.getPlaceOrderDetail(data?.productId,this.userToken).subscribe((res:any)=>{
@@ -38,6 +38,7 @@ export class PlaceOrderComponent implements OnInit  {
       // })
       this.orderDetails=history.state.placeOrderList;
     }
+    this.userToken=this.sharedData.userToken();
     this.addressForm=new FormGroup({
       address:new FormControl('',Validators.required),
       pincode:new FormControl('',[Validators.required]),
