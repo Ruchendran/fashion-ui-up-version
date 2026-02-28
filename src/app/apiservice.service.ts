@@ -36,7 +36,8 @@ export class ApiserviceService implements OnInit {
     saveLaterFlagUpdCart:serverVal.server+'/cart/save-later-flag/upd',
     getSavedProducts:serverVal.server+'/save-later/get-save-later',
     getSaveProdFromProductsModel:serverVal.server+'/save-later/get-from-products-model',
-    deleteFromSavedProducts:serverVal.server+'/save-later/delete-product'
+    deleteFromSavedProducts:serverVal.server+'/save-later/delete-product',
+    updUserFeedback:serverVal.server+'/products/upd-product-feedback',
   }
 
   ngOnInit(): void {
@@ -129,5 +130,8 @@ export class ApiserviceService implements OnInit {
   }
   deleteFromSavedProducts(userToken:any,productId:any){
     return this.http.delete(this.apiConstants.deleteFromSavedProducts,{params:{userId:userToken,productId:productId}});
+  }
+  updUserFeedback(feedbackProduct:any){
+    return this.http.post(this.apiConstants.updUserFeedback,feedbackProduct);
   }
 }

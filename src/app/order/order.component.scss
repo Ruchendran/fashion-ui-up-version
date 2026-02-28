@@ -1,5 +1,8 @@
 
 @import "../../styles.scss";
+.mobile-heading{
+    color:$mobileHeader;
+}
 .product{
     justify-content: space-around;
     box-shadow: 2px 2px 20px  grey ;
@@ -8,7 +11,8 @@
     overflow: hidden;
 }
 .image{
-    height: 100px;
+    padding-top: 10px;
+    height: 80px;
 }
 th,td{
     border: 2px solid $designColor;

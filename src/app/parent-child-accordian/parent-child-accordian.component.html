@@ -15,6 +15,22 @@
         </button>
     </div>
     }
+    <!--feedback section-->
+    @if(reqProps.delivered && !reqProps.feedBack){
+
+        <app-show-msg  style="width: 95%;"
+        msgText="Please Provide feedBack of the products u ordered that will helps to others reach out the product!
+        Once u gven feedbac delivered Orders does not show in view.Also provide the feedback for all products then oly the submi enables."
+        msgType="info"
+        >
+
+        </app-show-msg>
+        <div class="flex m-10">
+            <button class="btn" [disabled]="checkFeedbackEnable(reqProps.childProps)" (click)="emitFeedback(reqProps)">
+                Submit Feedback
+            </button>
+        </div>
+    }
     @for(accordian of reqProps.childProps;track $index;){
     <div class="accordian-container align-self-center flex" [style.color]="reqProps.contentColor" [ngClass]="parentAccordianShow?'d-flex':'d-none'" [style.width]="accordian.accordianWidth" (click)="accordianEvent(accordian)">
         <h1 class="heading">
@@ -22,18 +38,26 @@
         </h1>
         <i class="fa fa-angle-up" [ngClass]="accordian.accordianShow?'icon-rotate-forward':accordian.notInitial?'icon-rotate-rev':''"></i>
     </div>
-     <div class="panel flex-space-around"[ngClass]="parentAccordianShow?'d-flex':'d-none'" [style.width]="accordian.accordianWidth" [ngClass]="accordian.accordianShow?'panel-open':accordian.notInitial?'panel-close':''">
-        <img [src]="accordian.img" class="image" />
-        <div class="flex-vertical" style="align-items: start;">
-            <p>
-                {{accordian.description}}
-            </p>
-            <p>
-               Quantity : {{accordian.quantity}}
-            </p>
-            <p>
-               Price : {{accordian.price | currency:'INR'}}
-            </p>
+     <div class="panel"[ngClass]="parentAccordianShow?'d-flex':'d-none'" [style.width]="accordian.accordianWidth" [ngClass]="accordian.accordianShow?'panel-open':accordian.notInitial?'panel-close':''">
+        <div class="flex-space-around">
+            <img [src]="accordian.img" class="image" />
+            <div class="flex-vertical" style="align-items: start;">
+                <p>
+                    {{accordian.description}}
+                </p>
+                <p>
+                Quantity : {{accordian.quantity}}
+                </p>
+                <p>
+                Price : {{accordian.price | currency:'INR'}} 
+                </p>
+            </div>
+        </div>
+        <div class="star-container flex" *ngIf="reqProps.delivered && !reqProps.feedBack">
+            <ng-container *ngFor="let star of (Array(5).fill(0));let i=index;">
+                <i class="fa-solid fa-star icon" *ngIf="i<accordian.userStarRating" (click)="deleteStar(accordian,i)"></i>
+                <i class="fa-regular fa-star icon"  *ngIf="i>=accordian.userStarRating" (click)="fillStar(accordian,i)"></i>
+            </ng-container>
         </div>
     </div>
    }

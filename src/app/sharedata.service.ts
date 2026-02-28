@@ -46,4 +46,8 @@ export class SharedataService implements OnInit {
   setUserToken=(token:string)=>{
     this.userToken.set(token);
   }
+  //trim method.
+  trimString=(value:string)=>{
+    return value.trim();
+  }
 }

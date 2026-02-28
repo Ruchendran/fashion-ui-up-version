@@ -62,6 +62,8 @@ export class LogInComponent implements OnInit {
     //This is only for Register users.
 
     if (this.register && !this.forgotPassword) {
+      this.userForm.value.userMail=this.shareData.trimString(this.userForm.value.userMail);
+      this.userForm.value.password=this.shareData.trimString(this.userForm.value.password);
       this.apiService.registerUser(this.userForm.value).subscribe((res: any) => {
         this.shareData.loader.set(true)
         this.shareData.setLogInUserVal(this.userForm?.value?.userName);
@@ -69,7 +71,7 @@ export class LogInComponent implements OnInit {
            this.shareData.loader.set(false)
           if (isPlatformBrowser(this.platformId)) {
             sessionStorage?.setItem('user', this.userForm?.value?.userName);
-            sessionStorage?.setItem('password', this.userForm?.value?.password);
+            // sessionStorage?.setItem('password', this.userForm?.value?.password);
             sessionStorage.setItem('userToken', res.userToken)
           };
           this.shareData.setUserToken(res?.userToken);
@@ -90,13 +92,15 @@ export class LogInComponent implements OnInit {
     }
     //This is only for login users.
     else if(!this.register  && !this.forgotPassword ) {
+      this.userForm.value.userMail=this.shareData.trimString(this.userForm.value.userMail);
+      this.userForm.value.password=this.shareData.trimString(this.userForm.value.password);
       this.apiService.loginUser(this.userForm.value).subscribe((res: any) => {
         this.shareData.loader.set(false)
         this.shareData.setLogInUserVal(res?.user);
         if (res.status == 200) {
           if (isPlatformBrowser(this.platformId)) {
             sessionStorage?.setItem('user', res?.user);
-            sessionStorage?.setItem('password', this.userForm?.value?.password);
+            // sessionStorage?.setItem('password', this.userForm?.value?.password);
             sessionStorage.setItem('userToken', res.userToken)
           }
           this.shareData.setUserToken(res?.userToken);

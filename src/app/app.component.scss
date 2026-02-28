@@ -1,13 +1,12 @@
 @import "../styles.scss";
 .render-container{
-    background-color:$bgColor;
+    // background-color:$bgColor;
     color:$fontColor;
     height: auto;
     opacity: 1;
     width: 100vw;
     position: relative;
 }
-
 .header{
     width: 100vw;
     height: 80px;

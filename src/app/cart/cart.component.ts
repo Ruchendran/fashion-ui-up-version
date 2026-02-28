@@ -62,18 +62,19 @@ updMeta(metaData:any){
     this.initializeData();
   }
   async initializeData(){
-    await this.getSavedProducts(this.userToken);
+    // await this.getSavedProducts(this.userToken);
     await this.getCartDetails(this.userToken);
-    if(this.savedProducts.length && this.cartList.length){
-      this.savedProducts.forEach((saveProd:any)=>{
-        const cartFind=this.cartList.find((cart:any)=>{
-         return cart.productId == saveProd.productId
-        });
-        if(cartFind){
-          cartFind.saveLater=true;
-        }
-      })
-    }
+    // if(this.savedProducts.length && this.cartList.length){
+    //   for (const saveProd of this.savedProducts){
+    //     const cartFind=this.cartList.find((cart:any)=>{
+    //      return cart.productId == saveProd.productId
+    //     });
+    //     if(cartFind){
+    //      await this.updSavLaterFlagInCart(cartFind);
+    //      await this.getCartDetails(this.userToken);
+    //     }
+    //   }
+    // }
   }
   getSavedProducts=async (token:string)=>{
     this.sharedData.loader.set(true);

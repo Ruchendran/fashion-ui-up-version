@@ -1,6 +1,14 @@
 <ng-container *ngIf="orderList.length || mobileAccordianDetails.length">
     <div class="container order-container" *ngIf="orderList"> 
     <div class="row">
+         <!-- @if(re.delivered && !reqProps.feedBack){ -->
+            <app-show-msg  style="width: 100%;padding: 0px;"
+            msgText="Please Provide feedBack of the products you ordered after status reached to delivered that will helps to others reach out the product!
+            Once u gven feedbac delivered Orders does not show in view."
+            msgType="info"
+            >
+            </app-show-msg>
+        <!-- } -->
         <table class="col-md-12 mt-3 mb-3">
             <thead>
                 <tr>
@@ -23,6 +31,9 @@
                         Total Price
                     </th>
                     <th>
+                        Status
+                    </th>
+                    <th>
                         Order
                     </th>
                 </tr>
@@ -37,6 +48,14 @@
                     </td>
                     <td>
                     <img [src]="product.productImg" class="image" />
+                          <div class="flex pad-10 hover-text" *ngIf="order.delivered && !order.feedBack" 
+                          [style.--hover-text]="'\'Provide Feedback\''"\
+                          >
+                            <ng-container *ngFor="let star of (Array(5).fill(0));let i=index;">
+                                <i class="fa-solid fa-star icon" *ngIf="i<product.userStarRating" (click)="deleteStar(product,i)"></i>
+                                <i class="fa-regular fa-star icon"  *ngIf="i>=product.userStarRating" (click)="fillStar(product,i)"></i>
+                            </ng-container>
+                        </div>
                     </td>
                     <td>
                         {{product.productName}}
@@ -51,6 +70,18 @@
                     {{ getTotalPrice(order.orderedProducts) | currency:'INR'}}
                     </td>
                     <td [attr.rowspan]="order.orderedProducts.length"  *ngIf="isFirst">
+                        {{order?.delivered?'Delivered':'Not Delivered'}}
+                        <br/>
+                        <button  class="btn hover-text" 
+                        [style.--hover-text]="'\'Feedback\''" 
+                        *ngIf="order.delivered && !order.feedBack"
+                        [disabled]="checkFeedbackEnable(order)"
+                        (click)="updateUserFeedBack(order.orderedProducts,order._id,order.userId)"
+                        >
+                            Submit
+                        </button>
+                    </td>
+                    <td [attr.rowspan]="order.orderedProducts.length"   *ngIf="isFirst">
                         <button  class="btn" (click)="trackOrder(order)">
                             Track Order
                         </button>
@@ -87,13 +118,15 @@
                 </div>
             </div>
         </div> -->
+            <h1 class="flex mobile-heading">
+                Your Shopy-io Orders
+            </h1>
         <ng-container *ngFor="let order of mobileAccordianDetails">
-            <app-parent-child-accordian [parentProps]="order" (emitOrderTrack)="getOrderTrack($event)">
+            <app-parent-child-accordian (emitOrerValueForFedback)="emitOrerValueForFedback($event)" [parentProps]="order" (emitOrderTrack)="getOrderTrack($event)">
         
             </app-parent-child-accordian>
         </ng-container>
     </div>
-    <ng-container #loaderContainer></ng-container>
 </ng-container>
 <ng-container *ngIf="!(orderList.length || mobileAccordianDetails.length)">
     <app-no-records-found></app-no-records-found>
