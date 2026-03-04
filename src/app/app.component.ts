@@ -25,8 +25,23 @@ export class AppComponent implements OnInit  {
     userToken:null
   };
   appInitialized=false;
-  constructor(private location:Location,@Inject(PLATFORM_ID) private platformId: Object,private route:Router,public shareData:SharedataService,private apiService:ApiserviceService){
+  constructor(
+    private location:Location,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private route:Router,
+    public shareData:SharedataService,
+    private apiService:ApiserviceService,
+  ){
 
+  }
+  //click ousidde the av.
+  @ViewChild('mobileNavMenu') mobileNavMenu!:ElementRef;
+   @ViewChild('mobileMenu') mobileMenu!:ElementRef;
+  @HostListener('document:touchend',['$event'])
+  clickOutsideNav=(event:Event)=>{
+    if(!this.mobileNavMenu?.nativeElement.contains(event.target) && !this.mobileMenu.nativeElement.contains(event.target)){
+      this.mobileNav=false;
+    }
   }
   headerHide:boolean=true;
   @ViewChild('signInHover') signInHover!:ElementRef;

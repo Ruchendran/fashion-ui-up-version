@@ -42,7 +42,7 @@
     <!--mobile-header-->
     <div class="mobile-header flex" *ngIf="headerHide">
         <div class="cart-order flex">
-          <i class="fa-solid fa-list icon cart menu" (click)="clickMobileArrow()"></i>
+          <i class="fa-solid fa-list icon cart menu" (click)="clickMobileArrow()" #mobileMenu></i>
           <i class="fa-solid fa-house-crack icon" (click)="clickHome()"></i>
         </div>
         <div class="cart-order flex">
@@ -64,7 +64,7 @@
     <router-outlet>
 
     </router-outlet>
-    <div class="mobile-nav-section" *ngIf="headerHide" [ngClass]="appInitialized?(mobileNav?'mobile-nav-animation-on':'mobile-nav-animation-off'):''">
+    <div #mobileNavMenu class="mobile-nav-section" *ngIf="headerHide" [ngClass]="appInitialized?(mobileNav?'mobile-nav-animation-on':'mobile-nav-animation-off'):''" >
         <i class="fa fa-window-close close-icon icon" (click)="clickMobileArrow()" ></i>
         <div class="mobile-nav-label-container flex-vertical mt-3" >
             <label  (click)="routesClick()">

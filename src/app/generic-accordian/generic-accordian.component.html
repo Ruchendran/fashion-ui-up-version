@@ -8,7 +8,7 @@
 </div>
  <div class="panel flex" [style.width]="reqProps.accordianWidth" [ngClass]="accordianShow?'panel-open':notInitial?'panel-close':''">
     <img [src]="reqProps.img" class="img" />
-    <div class="">
+    <div [ngClass]="accordianShow?'d-block':'d-none'">
         <p>
             {{reqProps.description}}
         </p>
