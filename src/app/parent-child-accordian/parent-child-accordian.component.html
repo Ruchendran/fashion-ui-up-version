@@ -1,8 +1,8 @@
-<div class="accordian-container flex" [style.color]="reqProps.contentColor" [style.width]="reqProps.parentWidth" (click)="parentAccordianEvent()">
+<div class="accordian-container flex" [style.color]="reqProps.contentColor" [style.width]="reqProps.parentWidth" (touchend)="parentAccordianEvent()">
         <h1 class="heading">
             {{reqProps.parentHeading}}
         </h1>
-        <i class="fa fa-angle-up" [ngClass]="parentAccordianShow?'icon-rotate-forward':parentNotInitial?'icon-rotate-rev':''"></i>
+        <i class="fa fa-angle-down" [ngClass]="parentAccordianShow?'icon-rotate-forward':parentNotInitial?'icon-rotate-rev':''"></i>
 </div>
  <div class="panel y-flex" [style.width]="reqProps.parentWidth" [ngClass]="parentAccordianShow?'panel-open':parentNotInitial?'panel-close':''">
      @if(reqProps.btnText && reqProps.btnShow){
@@ -36,7 +36,7 @@
         <h1 class="heading">
             {{accordian.heading}}
         </h1>
-        <i class="fa fa-angle-up" [ngClass]="accordian.accordianShow?'icon-rotate-forward':accordian.notInitial?'icon-rotate-rev':''"></i>
+        <i class="fa fa-angle-down" [ngClass]="accordian.accordianShow?'icon-rotate-forward':accordian.notInitial?'icon-rotate-rev':''"></i>
     </div>
      <div class="panel"[ngClass]="parentAccordianShow?'d-flex':'d-none'" [style.width]="accordian.accordianWidth" [ngClass]="accordian.accordianShow?'panel-open':accordian.notInitial?'panel-close':''">
         <div class="flex-space-around">
@@ -55,8 +55,8 @@
         </div>
         <div class="star-container flex" *ngIf="reqProps.delivered && !reqProps.feedBack">
             <ng-container *ngFor="let star of (Array(5).fill(0));let i=index;">
-                <i class="fa-solid fa-star icon" *ngIf="i<accordian.userStarRating" (click)="deleteStar(accordian,i)"></i>
-                <i class="fa-regular fa-star icon"  *ngIf="i>=accordian.userStarRating" (click)="fillStar(accordian,i)"></i>
+                <i class="fa-solid fa-star icon" *ngIf="i<accordian.userStarRating" (touchend)="deleteStar(accordian,i)"></i>
+                <i class="fa-regular fa-star icon"  *ngIf="i>=accordian.userStarRating" (touchend)="fillStar(accordian,i)"></i>
             </ng-container>
         </div>
     </div>

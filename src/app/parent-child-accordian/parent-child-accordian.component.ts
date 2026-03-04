@@ -43,7 +43,7 @@ export class ParentChildAccordianComponent implements OnChanges {
  parentAccordianShow=false;
  parentNotInitial=false;
  ngOnChanges(changes: SimpleChanges): void {
-     console.log(this.reqProps,"values");
+    //  console.log(this.reqProps,"values");
  }
   parentAccordianEvent=()=>{
     this.parentAccordianShow=!this.parentAccordianShow;

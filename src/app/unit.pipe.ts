@@ -13,6 +13,8 @@ export class UnitPipe implements PipeTransform {
         return `${value}/Piece`
       case ('Groceries'):
         return `${value}/Kg`
+      case ('Groceries-leaf-flowers'):
+        return `${value} (200g)`
       case ('Utensils'):
         return `${value}/Set`
 

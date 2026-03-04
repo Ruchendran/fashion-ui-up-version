@@ -1,7 +1,10 @@
 
 <div class="container place-order-container pad-top-other"  *ngIf="orderDetails">
     <div class="row">
-        <div class="col-12 flex-end">
+        <div class="flex space-between m-top-bot-15 col-12">
+                <p class="m-0 f-bold">
+                    Total:<span class="span-design-color">{{totalPrice | currency:'INR'}}</span>
+                </p>
                 <button class="btn" (click)="deliveryAddress()">
                     Confirm Order
                 </button>

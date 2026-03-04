@@ -21,6 +21,7 @@ export class PlaceOrderComponent implements OnInit  {
   addressForm:any;
   villageList=["Satrawada","Nagari","Chindalpet","Pudhupet","Ekambarakuppam"]
   addressList:any=[];
+  totalPrice:number=0
   ngOnInit(): void {
     if(isPlatformBrowser(this.platformId)){
       window.scrollTo(0,0);
@@ -37,6 +38,10 @@ export class PlaceOrderComponent implements OnInit  {
       //   })
       // })
       this.orderDetails=history.state.placeOrderList;
+      // console.log(this.orderDetails);
+      this.orderDetails.forEach((eachProd:any)=>{
+        this.totalPrice+=eachProd.productPrice;
+      })
     }
     this.userToken=this.sharedData.userToken();
     this.addressForm=new FormGroup({

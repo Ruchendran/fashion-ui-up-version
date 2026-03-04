@@ -37,7 +37,7 @@ export class ApiserviceService implements OnInit {
     getSavedProducts:serverVal.server+'/save-later/get-save-later',
     getSaveProdFromProductsModel:serverVal.server+'/save-later/get-from-products-model',
     deleteFromSavedProducts:serverVal.server+'/save-later/delete-product',
-    updUserFeedback:serverVal.server+'/products/upd-product-feedback',
+    updUserFeedback:serverVal.server+'/products/upd/feedback',
   }
 
   ngOnInit(): void {
@@ -134,4 +134,5 @@ export class ApiserviceService implements OnInit {
   updUserFeedback(feedbackProduct:any){
     return this.http.post(this.apiConstants.updUserFeedback,feedbackProduct);
   }
+
 }

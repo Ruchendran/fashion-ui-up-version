@@ -34,6 +34,9 @@
                         Status
                     </th>
                     <th>
+                        FeedBack
+                    </th>
+                    <th>
                         Order
                     </th>
                 </tr>
@@ -48,13 +51,13 @@
                     </td>
                     <td>
                     <img [src]="product.productImg" class="image" />
-                          <div class="flex pad-10 hover-text" *ngIf="order.delivered && !order.feedBack" 
-                          [style.--hover-text]="'\'Provide Feedback\''"\
-                          >
-                            <ng-container *ngFor="let star of (Array(5).fill(0));let i=index;">
-                                <i class="fa-solid fa-star icon" *ngIf="i<product.userStarRating" (click)="deleteStar(product,i)"></i>
-                                <i class="fa-regular fa-star icon"  *ngIf="i>=product.userStarRating" (click)="fillStar(product,i)"></i>
-                            </ng-container>
+                        <div class="flex pad-10 hover-text" *ngIf="order.delivered && !order.feedBack" 
+                            [style.--hover-text]="'\'Provide Feedback\''"
+                            >
+                                <ng-container *ngFor="let star of (Array(5).fill(0));let i=index;">
+                                    <i class="fa-solid fa-star icon" *ngIf="i<product?.userStarRating" (click)="deleteStar(product,i)"></i>
+                                    <i class="fa-regular fa-star icon"  *ngIf="i>=product?.userStarRating" (click)="fillStar(product,i)"></i>
+                                </ng-container>
                         </div>
                     </td>
                     <td>
@@ -72,9 +75,19 @@
                     <td [attr.rowspan]="order.orderedProducts.length"  *ngIf="isFirst">
                         {{order?.delivered?'Delivered':'Not Delivered'}}
                         <br/>
-                        <button  class="btn hover-text" 
+                        <!-- <button  class="btn hover-text" 
                         [style.--hover-text]="'\'Feedback\''" 
                         *ngIf="order.delivered && !order.feedBack"
+                        [disabled]="checkFeedbackEnable(order)"
+                        (click)="updateUserFeedBack(order.orderedProducts,order._id,order.userId)"
+                        >
+                            Submit
+                        </button> -->
+                    </td>
+                    <td>
+                        <button  class="btn hover-text" 
+                        [style.--hover-text]="'\'Feedback\''" 
+                        
                         [disabled]="checkFeedbackEnable(order)"
                         (click)="updateUserFeedBack(order.orderedProducts,order._id,order.userId)"
                         >

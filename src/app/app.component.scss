@@ -269,11 +269,13 @@ label{
     font-weight: bold;
  } 
  .nav-line{
-    color:$designColor !important;
-    width: 80%;
-    height: 3px;
-    font-weight: bold;
+    // color:$designColor !important;
+    // width: 80%;
+    // height: 3px;
+    // font-weight: bold;
     // z-index: 3;
+        color:$designColor;
+    width: 100%;
  }
  .close-icon{
     right: 10px;

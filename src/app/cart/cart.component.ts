@@ -8,10 +8,11 @@ import { Meta,Title } from '@angular/platform-browser';
 import { EventModalComponent } from '../event-modal/event-modal.component';
 import { lastValueFrom } from 'rxjs';
 import { NoRecordsFoundComponent } from '../no-records-found/no-records-found.component';
+import { UnitPipe } from '../unit.pipe';
 
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule,EventModalComponent,NoRecordsFoundComponent],
+  imports: [CommonModule,EventModalComponent,NoRecordsFoundComponent,UnitPipe],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })

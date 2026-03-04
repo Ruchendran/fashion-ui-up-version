@@ -1,9 +1,9 @@
 
-<div class="accordian-container flex" [style.width]="reqProps.accordianWidth" (click)="accordianEvent()">
+<div class="accordian-container flex" [style.width]="reqProps.accordianWidth" (touchend)="accordianEvent()">
         <h1 class="heading" [style.color]="reqProps.contentColor">
             {{reqProps.heading}}
         </h1>
-        <i class="fa fa-angle-up" [style.color]="reqProps.contentColor" [ngClass]="accordianShow?'icon-rotate-forward':notInitial?'icon-rotate-rev':''"></i>
+        <i class="fa fa-angle-down" [style.color]="reqProps.contentColor" [ngClass]="accordianShow?'icon-rotate-forward':notInitial?'icon-rotate-rev':''"></i>
    
 </div>
  <div class="panel flex" [style.width]="reqProps.accordianWidth" [ngClass]="accordianShow?'panel-open':notInitial?'panel-close':''">

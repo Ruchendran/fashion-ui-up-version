@@ -34,10 +34,10 @@
 }
 @keyframes icon-rot-for {
  0%   { transform: rotate(0deg); }
-    100% { transform: rotate(-180deg); }
+    100% { transform: rotate(180deg); }
 }
 @keyframes icon-rot-rev {
-0%   { transform: rotate(-180deg); }
+0%   { transform: rotate(180deg); }
     100% { transform: rotate(0deg); }
 }
 .panel{

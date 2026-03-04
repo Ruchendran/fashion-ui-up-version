@@ -59,6 +59,7 @@ export class OrderComponent implements OnInit {
     this.sharedData.loader.set(true)
     this.apiService.getOrderList(token).subscribe((res:any)=>{
       this.orderList=res?.getOrderData;
+      // console.log(this.orderList,"lists")
       this.mobileAccordianDetails=[]
       res.getOrderData.forEach((order:any,index:any)=>{
         let mobileOrderData:any={};
@@ -92,7 +93,7 @@ export class OrderComponent implements OnInit {
         mobileOrderData['childProps']=mobileProductList;
         this.mobileAccordianDetails.push(mobileOrderData);
       })
-      console.log(this.mobileAccordianDetails,'sss')
+      // console.log(this.mobileAccordianDetails,'sss')
       this.sharedData.loader.set(false);
     })
   }
