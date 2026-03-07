@@ -39,7 +39,7 @@ export class AppComponent implements OnInit  {
    @ViewChild('mobileMenu') mobileMenu!:ElementRef;
   @HostListener('document:touchend',['$event'])
   clickOutsideNav=(event:Event)=>{
-    if(!this.mobileNavMenu?.nativeElement.contains(event.target) && !this.mobileMenu.nativeElement.contains(event.target)){
+    if((this.mobileNavMenu && !this.mobileNavMenu?.nativeElement.contains(event.target)) && (this.mobileMenu && !this.mobileMenu.nativeElement.contains(event.target))){
       this.mobileNav=false;
     }
   }

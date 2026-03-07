@@ -1,5 +1,5 @@
 
-<div class="accordian-container flex" [style.width]="reqProps.accordianWidth" (touchend)="accordianEvent()">
+<div class="accordian-container flex" [style.width]="reqProps.accordianWidth" (touchend)="accordianEvent($event)" (click)="accordianEvent($event)">
         <h1 class="heading" [style.color]="reqProps.contentColor">
             {{reqProps.heading}}
         </h1>
@@ -7,7 +7,7 @@
    
 </div>
  <div class="panel flex" [style.width]="reqProps.accordianWidth" [ngClass]="accordianShow?'panel-open':notInitial?'panel-close':''">
-    <img [src]="reqProps.img" class="img" />
+    <img [src]="reqProps.img" class="img" [ngClass]="accordianShow?'d-block':'d-none'"/>
     <div [ngClass]="accordianShow?'d-block':'d-none'">
         <p>
             {{reqProps.description}}

@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CommonModule,isPlatformBrowser} from '@angular/common';
+import { Component, EventEmitter, Inject, Input, OnInit, Output,PLATFORM_ID } from '@angular/core';
 
 @Component({
   selector: 'app-generic-pagination',
@@ -8,6 +8,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrl: './generic-pagination.component.scss'
 })
 export class GenericPaginationComponent implements OnInit {
+  constructor(@Inject(PLATFORM_ID) private PlatformId:Object){
+
+  }
 
   @Input('paginationDetails') paginationDetails!:any;
   @Output('eventPageEmit') emitPageEmit=new EventEmitter<any>;
@@ -52,7 +55,13 @@ export class GenericPaginationComponent implements OnInit {
     }
   }
   selectPage=(page:number)=>{
+    this.scrollTop();
     this.activePage=page;
     this.emitPageEmit.emit(this.activePage);
+  }
+  scrollTop=()=>{
+    if(isPlatformBrowser(this.PlatformId)){
+      window.scrollTo(0,0);
+    }
   }
 }

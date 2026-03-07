@@ -80,7 +80,7 @@ export class PlaceOrderComponent implements OnInit  {
       //  this.hideLoader();
     },er=>{
       this.sharedData.loader.set(false)
-      this.sharedData.setModalMsg(er.message)
+      this.sharedData.setModalMsg('Server Busy.Try after sometime.')
     }) 
   }
   deliveryAddress=(order?:any)=>{

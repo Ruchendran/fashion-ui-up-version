@@ -77,6 +77,17 @@ updMeta(metaData:any){
     //   }
     // }
   }
+  onSelectAll=()=>{
+    this.cartList.forEach((cart:any)=>{
+      cart.isChecked=!cart.isChecked;
+      if(cart.isChecked){
+        this.placeOrdersList.push(cart);
+      }
+      else{
+        this.placeOrdersList=[];
+      }
+    })
+  }
   getSavedProducts=async (token:string)=>{
     this.sharedData.loader.set(true);
     try{
@@ -93,6 +104,17 @@ updMeta(metaData:any){
     try{
     const res:any=await lastValueFrom(this.apiService.getCartProducts(token));
     this.cartList=res.getCartData;
+    //only if placeorders available.
+    if(this.placeOrdersList.length){
+      this.placeOrdersList.forEach((placeOrd:any)=>{
+        this.cartList.find((cart:any)=>{
+          if(cart.productId == placeOrd.productId){
+            cart.isChecked=true;
+            return;
+          }
+        })
+      })
+    }
       this.sharedData.loader.set(false);
     }
     catch(e){
@@ -152,6 +174,7 @@ updMeta(metaData:any){
       })
   }
   onChecked=(event:any,cart:any)=>{
+    cart.isChecked=!cart.isChecked;
     if(event.target.checked){
       this.placeOrdersList.push(cart)
     }
@@ -184,6 +207,7 @@ updMeta(metaData:any){
       }
   }
  async saveItLater(cart:any){
+  console.log(this.cartList,"lists");
     await this.saveLaterMethod(cart);
     await this.updSavLaterFlagInCart(cart);
     this.getCartDetails(this.userToken);

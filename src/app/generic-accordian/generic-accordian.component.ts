@@ -24,10 +24,12 @@ export class GenericAccordianComponent implements OnInit {
   constructor(){
 
   }
+
   ngOnInit(): void {
-     
   }
-  accordianEvent=()=>{
+  accordianEvent=(event:any)=>{
+    event.preventDefault();
+    // event.stopPropagation();
     this.accordianShow=!this.accordianShow;
     this.notInitial=true;
   }

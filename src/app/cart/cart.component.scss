@@ -92,6 +92,10 @@ p{
 .saved-products{
     color:$designColor;
 }
+.all-select-section{
+    min-width: 90px;
+    position: relative;
+}
 @media screen and (max-width:576px){
     .cart-container{
         display: none;
@@ -127,5 +131,14 @@ p{
     .s-icon{
         color:$text-color;
         padding-right: 10px;
+    }
+    .mobile-select-all{
+        top: 0px;
+        position: absolute;
+        left: 0px;
+    }
+    .mobile-select-all-span{
+        position: absolute;
+        right: 0px;
     }
 }

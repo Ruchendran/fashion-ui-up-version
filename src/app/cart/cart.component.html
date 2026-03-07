@@ -1,7 +1,16 @@
 <ng-container *ngIf="cartList.length">
     <div class="container cart-container">
     <div class="row">
-        <div class="col-12 flex-end p-0">
+        <div class="col-12 u-flex space-between p-0">
+            <div class="flex space-between all-select-section">
+                <label class="container-box ">
+                    <input type="checkbox" class="checkbox" (change)="onSelectAll()" />
+                    <span class="checkspan"></span>
+                </label>
+                <span class="span-design-color">
+                    Select All
+                </span>
+            </div>
             <button  class="btn p-0 m-0" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
                 Place Order
             </button>
@@ -40,7 +49,7 @@
                 <tr>
                     <td>
                         <label class="container-box ">
-                            <input type="checkbox" class="checkbox" (change)="onChecked($event,cart)" />
+                            <input type="checkbox" class="checkbox" (change)="onChecked($event,cart)" [checked]="cart.isChecked" />
                             <span class="checkspan"></span>
                         </label>
                     </td>
@@ -86,8 +95,17 @@
     <!---This is for mobile view-->
     <div class="container mobile-cart-container pad-top-other">
         <div class="row  justify-content-md-start justify-content-center">
-            <div class="col-11 flex-end">
-                <button  class="btn m-bot-top-10" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
+            <div class="col-11 flex space-between p-3">
+                <div class="flex space-between all-select-section">
+                    <label class="container-box mobile-select-all">
+                        <input type="checkbox" class="checkbox" (change)="onSelectAll()" />
+                        <span class="checkspan"></span>
+                    </label>
+                    <span class="span-design-color mobile-select-all-span">
+                        Select All
+                    </span>
+                </div>
+                <button  class="btn m-0" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
                     Place Order
                 </button>
             </div>
@@ -95,8 +113,8 @@
                 <div class="product">
                     <div class="flex">
                         <label class="container-box ">
-                                <input type="checkbox" class="checkbox" (change)="onChecked($event,data)" />
-                                <span class="checkspan"></span>
+                                <input type="checkbox" class="checkbox" (change)="onChecked($event,data)" [checked]="data.isChecked"/>
+                                <span class="checkspan" ></span>
                         </label>
                         <i class="fa-solid fa-trash icon" (click)="deleteFromCart(data)"></i>
                         <div class="col-4 flex">
