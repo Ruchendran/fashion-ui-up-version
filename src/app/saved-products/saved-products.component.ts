@@ -19,6 +19,7 @@ export class SavedProductsComponent implements OnInit {
   deleteModal:boolean=false;
   productId:any='';
   modalMsg='';
+  actionFor!: string;
   constructor(@Inject(PLATFORM_ID) private platformId:Object,private apiService:ApiserviceService,private sharedData:SharedataService,private route:Router){
 
   }
@@ -60,9 +61,25 @@ export class SavedProductsComponent implements OnInit {
       this.route.navigate(['/'])
     }
   }
+  deleteAllFromSavedProducts=()=>{
+     this.openDeleteModal('Are you sure want to delete all from saved it later!','delete-all');
+  }
    receiveEvent=(eventValEmit:any)=>{
-    if(eventValEmit){
-      this.deleteProductFromSaveLater(this.productId); 
+    if(eventValEmit.eventVal){
+      if(eventValEmit.actionFor == 'delete'){
+        this.deleteProductFromSaveLater(this.productId); 
+      }
+      else if(eventValEmit.actionFor == 'delete-all'){
+        console.log('hit')
+        this.sharedData.loader.set(true);
+        this.apiService.deleteAllFromSavedProducts(this.userToken).subscribe((res:any)=>{
+          this.sharedData.loader.set(false);
+          this.sharedData.setModalMsg(res.message);
+           this.getSaveProdFromProductsModel(this.userToken);
+        },er=>{
+          this.sharedData.loader.set(false);
+        })
+      }
     }else{
       this.closeDeleteModal();
     }
@@ -72,22 +89,24 @@ export class SavedProductsComponent implements OnInit {
     console.log(productId,"sss");
     this.apiService.deleteFromSavedProducts(this.userToken,productId).subscribe((res:any)=>{
       // this.sharedData.loader.set(false);
-      // this.sharedData.setModalMsg(res.message);
+      this.sharedData.setModalMsg(res.message);
       this.getSaveProdFromProductsModel(this.userToken);
     },er=>{
       this.sharedData.loader.set(false);
+      this.sharedData.setModalMsg(er.message);
       this.closeDeleteModal();
     })
   }
   closeDeleteModal=()=>{
     this.deleteModal=false;
   }
-  openDeleteModal=(msg:string)=>{
+  openDeleteModal=(msg:string,action:string)=>{
     this.deleteModal=true;
     this.modalMsg=msg;
+    this.actionFor=action;
   }
   deleteFromSave=(data:any)=>{
     this.productId=data._id;
-    this.openDeleteModal('Are you sure want to delete from cart!');
+    this.openDeleteModal('Are you sure want to delete from sve it later!','delete');
   }
 }

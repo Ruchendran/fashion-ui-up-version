@@ -1,19 +1,24 @@
-<ng-container *ngIf="cartList.length">
+<ng-container *ngIf="cartList?.length">
     <div class="container cart-container">
     <div class="row">
         <div class="col-12 u-flex space-between p-0">
             <div class="flex space-between all-select-section">
                 <label class="container-box ">
-                    <input type="checkbox" class="checkbox" (change)="onSelectAll()" />
+                    <input type="checkbox" class="checkbox" (change)="onSelectAll($event)" [checked]="placeOrdersList?.length==cartList?.length" />
                     <span class="checkspan"></span>
                 </label>
                 <span class="span-design-color">
                     Select All
                 </span>
             </div>
-            <button  class="btn p-0 m-0" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
-                Place Order
-            </button>
+            <div class="u-flex gap-10">
+                <button class="plain-btn delete-all-desktop" (click)="deleteAllFromCart()">
+                    Delete All
+                </button>
+                <button  class="btn p-0 m-0" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
+                    Place Order
+                </button>
+            </div>
         </div>
         <table class="col-md-12 mt-3 mb-3">
             <thead>
@@ -98,16 +103,24 @@
             <div class="col-11 flex space-between p-3">
                 <div class="flex space-between all-select-section">
                     <label class="container-box mobile-select-all">
-                        <input type="checkbox" class="checkbox" (change)="onSelectAll()" />
+                        <input type="checkbox" class="checkbox" (change)="onSelectAll($event)" [checked]="placeOrdersList?.length==cartList?.length" />
                         <span class="checkspan"></span>
                     </label>
                     <span class="span-design-color mobile-select-all-span">
                         Select All
                     </span>
                 </div>
-                <button  class="btn m-0" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
-                    Place Order
-                </button>
+                <div class="u-flex gap-10">
+                    <button class="plain-btn plain-btn-trash hover-text" [style.--hover-text]="'\'Delete All\''" (click)="deleteAllFromCart()">
+                        <i class="fa-solid fa-trash delete-all-icon" ></i>
+                        <!-- <span class="span-design-color">
+                            Delete All
+                        </span> -->
+                    </button>
+                    <button  class="btn m-0" (click)="placeOrder()" [disabled]="!placeOrdersList.length">
+                        Place Order
+                    </button>
+                </div>
             </div>
             <div class="col-11 col-md-4 p-3" *ngFor="let data of cartList">
                 <div class="product">
@@ -167,8 +180,8 @@
             <i class="fa fa-angle-right" ></i>
         </div>
     </div>
-    <app-event-modal [inputMsg]="modalMsg" *ngIf="deleteModal" (sendEvent)="receiveEvent($event)"></app-event-modal>
+    <app-event-modal [inputMsg]="modalMsg" [actionFor]="actionFor" *ngIf="deleteModal" (sendEvent)="receiveEvent($event)"></app-event-modal>
 </ng-container>
-<ng-container *ngIf="!cartList.length">
+<ng-container *ngIf="!cartList?.length">
     <app-no-records-found ></app-no-records-found>
 </ng-container>

@@ -96,6 +96,9 @@ p{
     min-width: 90px;
     position: relative;
 }
+.delete-all-desktop{
+    display: block;
+}
 @media screen and (max-width:576px){
     .cart-container{
         display: none;
@@ -140,5 +143,14 @@ p{
     .mobile-select-all-span{
         position: absolute;
         right: 0px;
+    }
+    .delete-all-desktop{
+        display: none;
+    }
+    .delete-all-icon{
+        color:$designColor;
+    }
+    .plain-btn-trash{
+        width: 50px;
     }
 }

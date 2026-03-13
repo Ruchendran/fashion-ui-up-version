@@ -8,11 +8,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class EventModalComponent {
   @Input('inputMsg') messageVal:any;
+  @Input('actionFor') actionFor!:string;
   @Output('sendEvent') sendEvent:EventEmitter<any>=new EventEmitter<any>;
   eventDecision=(eventVal:boolean)=>{
-    this.sendEvent.emit(eventVal);
+    this.sendEvent.emit({eventVal,actionFor:this.actionFor});
   }
   closeModal=(eventVal:boolean)=>{
-    this.sendEvent.emit(eventVal);
+    this.sendEvent.emit({eventVal});
   }
 }

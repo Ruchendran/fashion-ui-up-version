@@ -2,7 +2,6 @@ import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { CommonModule,isPlatformBrowser } from '@angular/common';
 import { ApiserviceService } from '../apiservice.service';
 import { SharedataService } from '../sharedata.service';
-import { LoaderComponent } from '../loader/loader.component';
 import { Router,ActivatedRoute} from '@angular/router';
 import { Meta,Title } from '@angular/platform-browser';
 import { EventModalComponent } from '../event-modal/event-modal.component';
@@ -25,9 +24,10 @@ export class CartComponent implements OnInit {
   cartList:any;
   userToken:any='';
   modalMsg:string='';
-  cartData:any=false;
+  cartData:any='';
   placeOrdersList:any=[];
   savedProducts:any=[];
+  actionFor:string='';
 updMeta(metaData:any){
         // Ensure you're setting the correct <title> tag as well
         this.titleService.setTitle(metaData.title); 
@@ -77,16 +77,19 @@ updMeta(metaData:any){
     //   }
     // }
   }
-  onSelectAll=()=>{
-    this.cartList.forEach((cart:any)=>{
-      cart.isChecked=!cart.isChecked;
-      if(cart.isChecked){
+  onSelectAll=(event:Event)=>{
+    if((event.target as HTMLInputElement).checked){
+      this.cartList.forEach((cart:any)=>{
+        cart.isChecked=true;
         this.placeOrdersList.push(cart);
-      }
-      else{
-        this.placeOrdersList=[];
-      }
-    })
+      })
+    }
+    else{
+      this.cartList.forEach((cart:any)=>{
+        cart.isChecked=false;
+      });
+      this.placeOrdersList=[];
+    }
   }
   getSavedProducts=async (token:string)=>{
     this.sharedData.loader.set(true);
@@ -141,22 +144,27 @@ updMeta(metaData:any){
       this.route.navigate(['/place-order'],{state:{placeOrderList:this.placeOrdersList}});
   }
   receiveEvent=(eventValEmit:any)=>{
-    if(eventValEmit){
-      this.deleteProductFromCart(this.cartData); 
+    if(eventValEmit.eventVal){
+      if(eventValEmit.actionFor == 'delete'){
+        this.deleteProductFromCart(this.cartData); 
+      }else if(eventValEmit.actionFor == 'delete-all'){
+        this.deleteAllFromCartSpecificUser();
+      }
     }else{
       this.closeDeleteModal();
     }
   }
-  openDeleteModal=(msg:string)=>{
+  openDeleteModal=(msg:string,action:string)=>{
     this.deleteModal=true;
     this.modalMsg=msg;
+    this.actionFor=action;
   }
   closeDeleteModal=()=>{
     this.deleteModal=false;
   }
   deleteFromCart=(cart:any)=>{
     this.cartData=cart;
-    this.openDeleteModal('Are you sure want to delete from cart!');
+    this.openDeleteModal('Are you sure want to delete from cart!','delete');
   }
   deleteProductFromCart=(cart:any)=>{
       this.sharedData.loader.set(true);
@@ -214,5 +222,21 @@ updMeta(metaData:any){
   }
   navToSavedProucts=()=>{
     this.route.navigate(['/saved-products']);
+  }
+  deleteAllFromCart=()=>{
+   this.openDeleteModal('Are you sure want to delete all from cart!','delete-all'); 
+  }
+  deleteAllFromCartSpecificUser=()=>{
+    this.sharedData.loader.set(true);
+    this.apiService.deleteAllFromCart(this.userToken).subscribe((res:any)=>{
+      this.sharedData.setModalMsg(res.message)
+      this.sharedData.loader.set(false)
+      this.initializeData();
+        this.callCartCount();
+    },er=>{
+       this.sharedData.setModalMsg(er.message)
+      this.sharedData.loader.set(false)
+      this.closeDeleteModal();
+    })
   }
 }

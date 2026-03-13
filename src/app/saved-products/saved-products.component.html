@@ -1,6 +1,11 @@
 <ng-container *ngIf="savedProductsList.length">
     <div class="container pad-top-other">
         <div class="row  justify-content-md-start justify-content-center">
+            <div class="col-11 col-md-12 flex-end">
+                  <button class="plain-btn" (click)="deleteAllFromSavedProducts()">
+                    Delete All
+                </button>
+            </div>
             <div class="col-11 col-md-4 p-3" *ngFor="let data of savedProductsList">
                 <div class="product flex">
                     <i class="fa-solid fa-trash icon" (click)="deleteFromSave(data)"></i>
@@ -25,7 +30,7 @@
             </div>
         </div>
     </div>
-    <app-event-modal [inputMsg]="modalMsg" *ngIf="deleteModal" (sendEvent)="receiveEvent($event)"></app-event-modal>
+    <app-event-modal [inputMsg]="modalMsg" [actionFor]="actionFor" *ngIf="deleteModal" (sendEvent)="receiveEvent($event)"></app-event-modal>
 </ng-container>
 <ng-container *ngIf="!savedProductsList.length">
     <app-no-records-found></app-no-records-found>

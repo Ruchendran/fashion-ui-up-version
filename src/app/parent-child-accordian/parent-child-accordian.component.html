@@ -4,7 +4,7 @@
         </h1>
         <i class="fa fa-angle-down" [ngClass]="parentAccordianShow?'icon-rotate-forward':parentNotInitial?'icon-rotate-rev':''"></i>
 </div>
- <div class="panel y-flex" [style.width]="reqProps.parentWidth" [ngClass]="parentAccordianShow?'panel-open':parentNotInitial?'panel-close':''">
+ <div class="panel y-flex"  [style.width]="reqProps.parentWidth" [ngClass]="[parentAccordianShow?'panel-open':parentNotInitial?'panel-close':'',parentAccordianShow?'d-flex':'d-none']">
      @if(reqProps.btnText && reqProps.btnShow){
     <div class="flex space-between w-95 m-10" [ngClass]="parentAccordianShow?'d-flex':'d-none'">
         <p class="m-0 f-bold">
@@ -38,7 +38,7 @@
         </h1>
         <i class="fa fa-angle-down" [ngClass]="accordian.accordianShow?'icon-rotate-forward':accordian.notInitial?'icon-rotate-rev':''"></i>
     </div>
-     <div class="panel" [style.width]="accordian.accordianWidth" [ngClass]="accordian.accordianShow?'panel-open':accordian.notInitial?'panel-close':''">
+     <div class="panel" [style.width]="accordian.accordianWidth" [ngClass]="[accordian.accordianShow?'panel-open':accordian.notInitial?'panel-close':'',accordian.accordianShow?'d-block':'d-none']">
         <div class="flex-space-around" [ngClass]="accordian.accordianShow?'d-flex':'d-none'">
             <img [src]="accordian.img" class="image" />
             <div class="flex-vertical" style="align-items: start;">
