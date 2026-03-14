@@ -84,7 +84,7 @@
                             Submit
                         </button> -->
                     </td>
-                    <td>
+                    <td [attr.rowspan]="order.orderedProducts.length"   *ngIf="isFirst">
                         <button  class="btn hover-text" 
                         [style.--hover-text]="'\'Feedback\''" 
                         

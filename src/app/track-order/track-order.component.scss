@@ -26,10 +26,12 @@
     background: $designColor;
 }
 .bold-text-odd{
+    // min-width: 200px;
     position: absolute;
     left: -100px;
 }
 .bold-text-even{
+    min-width: 150px;
     position: absolute;
     left:50px;
 }

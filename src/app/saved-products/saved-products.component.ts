@@ -70,23 +70,26 @@ export class SavedProductsComponent implements OnInit {
         this.deleteProductFromSaveLater(this.productId); 
       }
       else if(eventValEmit.actionFor == 'delete-all'){
-        console.log('hit')
-        this.sharedData.loader.set(true);
-        this.apiService.deleteAllFromSavedProducts(this.userToken).subscribe((res:any)=>{
-          this.sharedData.loader.set(false);
-          this.sharedData.setModalMsg(res.message);
-           this.getSaveProdFromProductsModel(this.userToken);
-        },er=>{
-          this.sharedData.loader.set(false);
-        })
+        this.deleteAllProductsFromSaveLterSpecificUser()
       }
     }else{
       this.closeDeleteModal();
     }
   }
+  deleteAllProductsFromSaveLterSpecificUser=()=>{
+      this.sharedData.loader.set(true);
+      this.apiService.deleteAllFromSavedProducts(this.userToken).subscribe((res:any)=>{
+        this.sharedData.loader.set(false);
+        this.sharedData.setModalMsg(res.message);
+          this.getSaveProdFromProductsModel(this.userToken);
+      },er=>{
+        this.sharedData.loader.set(false);
+        this.sharedData.setModalMsg('Server getting busy!try later');
+        this.closeDeleteModal();
+      })
+  }
   deleteProductFromSaveLater=(productId:any)=>{
     this.sharedData.loader.set(true);
-    console.log(productId,"sss");
     this.apiService.deleteFromSavedProducts(this.userToken,productId).subscribe((res:any)=>{
       // this.sharedData.loader.set(false);
       this.sharedData.setModalMsg(res.message);

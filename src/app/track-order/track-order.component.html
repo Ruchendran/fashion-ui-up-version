@@ -6,13 +6,24 @@
         <p>
            Expected:{{expectedTime}}
         </p>
-        <div class="col-12 col-md-12 tracking-container flex-vertical">
+        <div class="col-12 col-md-12 tracking-container flex-vertical m-bot-40">
             <ng-container *ngFor="let stage of trackingMapList;let i=index;let od=odd;let end=last" class="m-4">
                 <div class="track-stage flex" [ngClass]="i<activeTrackingIndex?'active-track-stages':'unactive-track-stages'">
-                    <b  [ngClass]="!od?'bold-text-even':'bold-text-odd'">
-                        {{stage}}
-                    </b>
-
+                    <span [ngClass]="!od?'bold-text-even':'bold-text-odd'">
+                        <b >
+                            {{stage}}
+                            <br/>
+                        </b>
+                        <label *ngIf="i==0">
+                            Departed 
+                        </label>
+                        <label *ngIf="i != 0 && i == activeTrackingIndex-1 && !end">
+                            Reached {{stage}}
+                        </label>
+                        <label *ngIf="end  && i == activeTrackingIndex-1">
+                            delivered product
+                        </label>
+                    </span>
                 </div>
                 <div class="track-line" *ngIf="!end">
                     

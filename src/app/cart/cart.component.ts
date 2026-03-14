@@ -234,7 +234,7 @@ updMeta(metaData:any){
       this.initializeData();
         this.callCartCount();
     },er=>{
-       this.sharedData.setModalMsg(er.message)
+       this.sharedData.setModalMsg('Server getting busy!try later')
       this.sharedData.loader.set(false)
       this.closeDeleteModal();
     })

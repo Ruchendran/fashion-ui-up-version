@@ -1,4 +1,4 @@
-<div class="accordian-container flex" [style.color]="reqProps.contentColor" [style.width]="reqProps.parentWidth" (touchend)="parentAccordianEvent()">
+<div class="accordian-container flex" [style.color]="reqProps.contentColor" [style.width]="reqProps.parentWidth" (click)="parentAccordianEvent()">
         <h1 class="heading">
             {{reqProps.parentHeading}}
         </h1>
@@ -32,7 +32,7 @@
         </div>
     }
     @for(accordian of reqProps.childProps;track $index;){
-    <div class="accordian-container align-self-center flex" [style.color]="reqProps.contentColor"  [style.width]="accordian.accordianWidth" (touchend)="accordianEvent(accordian)">
+    <div class="accordian-container align-self-center flex" [style.color]="reqProps.contentColor"  [style.width]="accordian.accordianWidth" (click)="accordianEvent(accordian)">
         <h1 class="heading">
             {{accordian.heading}}
         </h1>
