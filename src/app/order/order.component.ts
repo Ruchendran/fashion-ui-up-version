@@ -63,7 +63,7 @@ export class OrderComponent implements OnInit {
       this.mobileAccordianDetails=[]
       res.getOrderData.forEach((order:any,index:any)=>{
         let mobileOrderData:any={};
-        mobileOrderData['parentHeading']=`${order.delivered?'Delivered Order':'Pending Order'} ${index+1}`;
+        mobileOrderData['parentHeading']=`Order-${index+1} (${order.delivered?'Delivered':'Pending'})`;
         mobileOrderData['parentWidth']='100%';
         mobileOrderData['btnText']='Track Order';
         mobileOrderData['btnShow']=true;
@@ -153,6 +153,7 @@ export class OrderComponent implements OnInit {
     this.apiService.updUserFeedback({productsListPayload,orderId,userId}).subscribe((res:any)=>{
       this.sharedData.loader.set(false);
       this.sharedData.setModalMsg(res.message);
+      
       this.getOrderList(this.userToken);
       this.callOrderCount(this.userToken);
     })

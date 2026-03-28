@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { ShowMsgComponent } from '../show-msg/show-msg.component';
 
 export interface Props{
   contentColor:string,
@@ -8,12 +9,13 @@ export interface Props{
   description:string,
   price:any,
   img:string,
-  quantity:number
+  quantity:number,
+  family:string
 }
 
 @Component({
   selector: 'app-generic-accordian',
-  imports: [CommonModule],
+  imports: [CommonModule,ShowMsgComponent],
   templateUrl: './generic-accordian.component.html',
   styleUrl: './generic-accordian.component.scss'
 })

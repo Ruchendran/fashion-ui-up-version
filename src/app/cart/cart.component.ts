@@ -141,7 +141,15 @@ updMeta(metaData:any){
   }
   placeOrder=(cart?:any)=>{
     console.log(this.placeOrdersList,"list")
+     let orderedPrice=0;
+     this.placeOrdersList.forEach((order:any)=>{
+      orderedPrice+=order.productPrice;
+     });
+     if(orderedPrice>=30){
       this.route.navigate(['/place-order'],{state:{placeOrderList:this.placeOrdersList}});
+     }else{
+      this.sharedData.setModalMsg('Please purchase min 30 worth.Then only order able to proceed!');
+     }
   }
   receiveEvent=(eventValEmit:any)=>{
     if(eventValEmit.eventVal){

@@ -6,17 +6,28 @@
         <i class="fa fa-angle-down" [style.color]="reqProps.contentColor" [ngClass]="accordianShow?'icon-rotate-forward':notInitial?'icon-rotate-rev':''"></i>
    
 </div>
- <div class="panel flex" [style.width]="reqProps.accordianWidth" [ngClass]="accordianShow?'panel-open':notInitial?'panel-close':''">
-    <img [src]="reqProps.img" class="img" [ngClass]="accordianShow?'d-block':'d-none'"/>
-    <div [ngClass]="accordianShow?'d-block':'d-none'">
-        <p>
-            {{reqProps.description}}
-        </p>
-        <p>
-            {{reqProps.price | currency:'INR'}}
-        </p>
-        <p>
-            Quantity:&nbsp;{{reqProps.quantity}}
-        </p>
-    </div>
+ <div [style.--animation-height]="reqProps.family=='Wears-Custom'?'300px':'150px'" class="panel flex-y" [style.width]="reqProps.accordianWidth" [ngClass]="accordianShow?'panel-open':notInitial?'panel-close':''" > 
+    <app-show-msg [ngClass]="accordianShow?'d-block':'d-none'" *ngIf="reqProps.family=='Wears-Custom'" [msgText]="'If You custom shirts stiching with in a 3 hours.Proceed with click the custom button.'">
+
+        </app-show-msg>
+        <div class="flex-space-around" [style.width]="reqProps.accordianWidth" >
+            <img [src]="reqProps.img" class="img" [ngClass]="accordianShow?'d-block':'d-none'"/>
+            <div [ngClass]="accordianShow?'d-block':'d-none'" class="mobile-view">
+                <span>
+                    {{reqProps.description}}
+                </span>
+                <br/>
+                <span>
+                    {{reqProps.price | currency:'INR'}}
+                </span>
+                <br/>
+                <span>
+                    Quantity:&nbsp;{{reqProps.quantity}}
+                </span>
+                <br/>
+                <button *ngIf="reqProps.family=='Wears-Custom'" class="btn u-min-w-btn">
+                    Custom Stiching
+                </button>
+            </div>
+        </div>
 </div>

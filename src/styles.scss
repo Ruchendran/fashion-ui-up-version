@@ -12,7 +12,8 @@ $fontColor:#000000;
 display: block;
 }
 $mobileHeader:#36454F;
-$designColor:#f2b50c;
+$designColor:var(--designColor,#f2b50c);
+// $designColor:#9013d4;
 $mobileBg:#f2f2f2;
 $orange:#f2b50c;
 $text-color:#d5e3d9;

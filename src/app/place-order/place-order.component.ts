@@ -25,19 +25,8 @@ export class PlaceOrderComponent implements OnInit  {
   ngOnInit(): void {
     if(isPlatformBrowser(this.platformId)){
       window.scrollTo(0,0);
-      // this.userToken=sessionStorage.getItem('userToken');
-      // this.sharedData.loader.set(true)
-      // this.activeRoute.queryParams.subscribe((data:any)=>{
-      //   this.apiService.getPlaceOrderDetail(data?.productId,this.userToken).subscribe((res:any)=>{
-      //       this.sharedData.loader.set(false)
-      //       this.orderDetails=res?.orderDetails;
-      //       this.orderDetails.quantity=state?.quantity;
-      //       this.orderDetails.productPrice=this.orderDetails.productPrice*state?.quantity;
-      //   },er=>{
-      //      this.sharedData.loader.set(false)
-      //   })
-      // })
       this.orderDetails=history.state.placeOrderList;
+      console.log(this.orderDetails,"details");
       // console.log(this.orderDetails);
       this.orderDetails.forEach((eachProd:any)=>{
         this.totalPrice+=eachProd.productPrice;
@@ -53,7 +42,6 @@ export class PlaceOrderComponent implements OnInit  {
     });
     this.sharedData.loader.set(true);
     this.apiService.getUserAddress(this.userToken).subscribe((res:any)=>{
-      console.log(res,"sss")
        this.sharedData.loader.set(false);
       if(res.address?.length){
         res.address.forEach((val:any)=>{
