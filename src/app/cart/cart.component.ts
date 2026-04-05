@@ -37,14 +37,14 @@ updMeta(metaData:any){
         this.metaService.updateTag({property:'og:image',content:metaData.image || 'https://fashion-ui.netlify.app/assets/home-section/zoom/zoom-img.jpg'})
     }
   callCartCount = () => {
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     this.apiService.getCartCount(this.userToken).subscribe((res: any) => {
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
       this.sharedData.cartCount.set(res.cartCount);
       this.closeDeleteModal();
     },
       er => {
-        this.sharedData.loader.set(false);
+        // this.sharedData.loader.set(false);
         this.closeDeleteModal();
       })
   }
@@ -59,7 +59,7 @@ updMeta(metaData:any){
       this.metaData = resolvedSeoData;
       this.updMeta(this.metaData);
     }
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     this.initializeData();
   }
   async initializeData(){
@@ -92,18 +92,18 @@ updMeta(metaData:any){
     }
   }
   getSavedProducts=async (token:string)=>{
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     try{
     const res=await lastValueFrom(this.apiService.getSavedProducts(token));
     this.savedProducts=res;
-    this.sharedData.loader.set(false);
+    // this.sharedData.loader.set(false);
     }
     catch(e){
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
     }
   }
   getCartDetails=async(token:string)=>{
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     try{
     const res:any=await lastValueFrom(this.apiService.getCartProducts(token));
     this.cartList=res.getCartData;
@@ -118,10 +118,10 @@ updMeta(metaData:any){
         })
       })
     }
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
     }
     catch(e){
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
     }
     // this.apiService.getCartProducts(token).subscribe((res:any)=>{
     //   this.cartList=res?.getCartData;
@@ -175,17 +175,17 @@ updMeta(metaData:any){
     this.openDeleteModal('Are you sure want to delete from cart!','delete');
   }
   deleteProductFromCart=(cart:any)=>{
-      this.sharedData.loader.set(true);
+      // this.sharedData.loader.set(true);
       this.apiService.delFromCart(cart.productId,cart.userId).subscribe((res:any)=>{
         this.sharedData.setModalMsg(res.message)
-        this.sharedData.loader.set(false)
+        // this.sharedData.loader.set(false)
         // this.getCartDetails(this.userToken);
         this.initializeData();
         this.callCartCount();
       },
     er=>{
       this.sharedData.setModalMsg(er.message)
-      this.sharedData.loader.set(false)
+      // this.sharedData.loader.set(false)
       this.closeDeleteModal();
       })
   }
@@ -203,23 +203,23 @@ updMeta(metaData:any){
   }
    saveLaterMethod=async(cart:any)=>{
     try{
-     this.sharedData.loader.set(true);
+    //  this.sharedData.loader.set(true);
      const res:any=await lastValueFrom(this.apiService.saveLaterRequest(cart));
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
       this.sharedData.setModalMsg(res.message);
     }
     catch(e){
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
     }
   }
   updSavLaterFlagInCart=async(cart:any)=>{
-      this.sharedData.loader.set(true);
+      // this.sharedData.loader.set(true);
       try{
       const res:any=await lastValueFrom(this.apiService.saveLaterFlagUpdCart(cart));
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
       }
       catch(e){
-        this.sharedData.loader.set(false);
+        // this.sharedData.loader.set(false);
       }
   }
  async saveItLater(cart:any){
@@ -235,15 +235,15 @@ updMeta(metaData:any){
    this.openDeleteModal('Are you sure want to delete all from cart!','delete-all'); 
   }
   deleteAllFromCartSpecificUser=()=>{
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     this.apiService.deleteAllFromCart(this.userToken).subscribe((res:any)=>{
       this.sharedData.setModalMsg(res.message)
-      this.sharedData.loader.set(false)
+      // this.sharedData.loader.set(false)
       this.initializeData();
         this.callCartCount();
     },er=>{
        this.sharedData.setModalMsg('Server getting busy!try later')
-      this.sharedData.loader.set(false)
+      // this.sharedData.loader.set(false)
       this.closeDeleteModal();
     })
   }

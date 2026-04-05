@@ -1,6 +1,7 @@
 <div class="msg-modal flex">
     <div class="modal-box">
-        <i class="fa fa-window-close close-icon icon" (click)="closeModal()" ></i>
+        <!--this is identity for clicking close icon.-->
+        <i class="fa fa-window-close close-icon icon" (click)="closeModal('close-icon')" ></i>
         <div class="flex-vertical u-p-10px">
             <p>
                 {{messageVal}}

@@ -200,6 +200,19 @@ export const routes: Routes = [
         }
     },
     {
+        path:'favourites',
+        loadComponent:()=>import("./favourites/favourites.component").then(s=>s.FavouritesComponent),
+        canActivate: [authGuard],
+        data: {
+            title: "Your Shopping Cart: Ready to Check Out?",
+            description: 'Dont miss out! Your items are waiting. Complete your order now to secure your purchases and get free express shipping.',
+            image: '',
+        },
+                resolve:{
+            seoData:seoResolver
+        }
+    },
+    {
         path:'page-not-found',
          loadComponent:()=>import("./page-not-found/page-not-found.component").then(s=>s.PageNotFoundComponent)
     },

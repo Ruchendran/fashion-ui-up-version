@@ -39,7 +39,12 @@ export class ApiserviceService implements OnInit {
     deleteFromSavedProducts:serverVal.server+'/save-later/delete-product',
     updUserFeedback:serverVal.server+'/products/upd/feedback',
     deleteAllFromCart:serverVal.server+'/cart/delete-all',
-    deleteAllFromSavedProducts:serverVal.server+'/save-later/delete-all'
+    deleteAllFromSavedProducts:serverVal.server+'/save-later/delete-all',
+    addToFavourites:serverVal.server+'/favourites/save',
+    delFromFavourites:serverVal.server+'/favourites/delete',
+    getAllFavourites:serverVal.server+'/favourites/get-all',
+    getAllFavProductsFromPoductsDb:serverVal.server+'/favourites/get-fav-products',
+    deleteAllFromFvourites:serverVal.server+'/favourites/delete-all'
   }
 
   ngOnInit(): void {
@@ -142,5 +147,19 @@ export class ApiserviceService implements OnInit {
   deleteAllFromSavedProducts(userId:string){
     return this.http.delete(this.apiConstants.deleteAllFromSavedProducts+`/${userId}`);
   }
-
+  addToFavourites(userId:string,productId:string){
+    return this.http.post(this.apiConstants.addToFavourites,{userId:userId,productId:productId}) 
+  }
+  delFromFavourites(userId:string,productId:string){
+    return this.http.delete(this.apiConstants.delFromFavourites,{params:{userId:userId,productId:productId}})
+  }
+  getAllFavourites(userToken:string){
+   return this.http.get(this.apiConstants.getAllFavourites,{params:{userId:userToken}})
+  }
+  getAllFavProductsFromPoductsDb(userToken:string){
+    return this.http.get(this.apiConstants.getAllFavProductsFromPoductsDb,{params:{userId:userToken}})
+  }
+   deleteAllFromFvourites(userId:string){
+    return this.http.delete(this.apiConstants.deleteAllFromFvourites+`/${userId}`);
+   }
 }

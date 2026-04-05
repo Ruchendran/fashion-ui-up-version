@@ -89,9 +89,6 @@ p{
 .checkbox:checked ~ .checkspan::after{
     display: block;
 }
-.saved-products{
-    color:$designColor;
-}
 .all-select-section{
     min-width: 90px;
     position: relative;

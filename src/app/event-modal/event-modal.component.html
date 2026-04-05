@@ -7,7 +7,7 @@
             </p>
             <div class="flex">
                 <button class="btn m-2" (click)="eventDecision(true)" >
-                    Delete
+                    {{actionFor == 'add'?'Add':'Delete'}}
                 </button>
                 <button class="btn m-2" (click)="eventDecision(false)">
                     Cancel

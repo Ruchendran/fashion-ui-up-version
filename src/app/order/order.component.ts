@@ -31,14 +31,14 @@ export class OrderComponent implements OnInit {
         this.metaService.updateTag({property:'og:image',content:metaData.image || 'https://fashion-ui.netlify.app/assets/home-section/zoom/zoom-img.jpg'})
     }
   callOrderCount=(userToken:any)=>{
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     this.apiService.getOrderCount(userToken).subscribe((res:any)=>{
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
       this.sharedData.orderCount.set(res.orderCount);
        this.route.navigate(['/orders']);
     },
     er=>{
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
     }
   )
   }
@@ -56,7 +56,7 @@ export class OrderComponent implements OnInit {
     this.getOrderList(this.userToken)
   }
   getOrderList(token:any){
-    this.sharedData.loader.set(true)
+    // this.sharedData.loader.set(true)
     this.apiService.getOrderList(token).subscribe((res:any)=>{
       this.orderList=res?.getOrderData;
       // console.log(this.orderList,"lists")
@@ -94,7 +94,7 @@ export class OrderComponent implements OnInit {
         this.mobileAccordianDetails.push(mobileOrderData);
       })
       // console.log(this.mobileAccordianDetails,'sss')
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
     })
   }
   viewOrder=(order:any)=>{
@@ -149,9 +149,9 @@ export class OrderComponent implements OnInit {
     products.forEach((product:any)=>{
       productsListPayload.push({userStarRating:product.userStarRating,productId:product.productId});
     });
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     this.apiService.updUserFeedback({productsListPayload,orderId,userId}).subscribe((res:any)=>{
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
       this.sharedData.setModalMsg(res.message);
       
       this.getOrderList(this.userToken);

@@ -6,5 +6,6 @@ export  interface ProductInterface{
     productPrice:number,
     productRating:number,
     __v:number,
-    _id:string
+    _id:string,
+    favourite:boolean
 }

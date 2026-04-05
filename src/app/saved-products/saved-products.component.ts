@@ -34,26 +34,26 @@ export class SavedProductsComponent implements OnInit {
     this.getSaveProdFromProductsModel(this.userToken)
   }
   getSaveProdFromProductsModel=(token:string)=>{
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     this.apiService.getSaveProdFromProductsModel(token).subscribe((res:any)=>{
       this.savedProductsList=res.savedProducts;
-       this.sharedData.loader.set(false);
-       this.closeDeleteModal()
+      //  this.sharedData.loader.set(false);
+       this.closeDeleteModal();
     },er=>{
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
       this.closeDeleteModal()
     })
   }
     addToCart = (product: any) => {
     if(this.user && this.userToken){
-      this.sharedData.loader.set(true);
+      // this.sharedData.loader.set(true);
       this.apiService.saveToCart({ ...product, userToken: this.userToken, quantity: 1 }).subscribe((res: any) => {
         this.sharedData.setModalMsg(res.message);
-        this.sharedData.loader.set(false);
+        // this.sharedData.loader.set(false);
         this.sharedData.callCartCount(this.userToken);
       },
         er => {
-          this.sharedData.loader.set(false)
+          // this.sharedData.loader.set(false)
         })
     }
     else{
@@ -77,25 +77,25 @@ export class SavedProductsComponent implements OnInit {
     }
   }
   deleteAllProductsFromSaveLterSpecificUser=()=>{
-      this.sharedData.loader.set(true);
+      // this.sharedData.loader.set(true);
       this.apiService.deleteAllFromSavedProducts(this.userToken).subscribe((res:any)=>{
-        this.sharedData.loader.set(false);
+        // this.sharedData.loader.set(false);
         this.sharedData.setModalMsg(res.message);
           this.getSaveProdFromProductsModel(this.userToken);
       },er=>{
-        this.sharedData.loader.set(false);
+        // this.sharedData.loader.set(false);
         this.sharedData.setModalMsg('Server getting busy!try later');
         this.closeDeleteModal();
       })
   }
   deleteProductFromSaveLater=(productId:any)=>{
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     this.apiService.deleteFromSavedProducts(this.userToken,productId).subscribe((res:any)=>{
       // this.sharedData.loader.set(false);
       this.sharedData.setModalMsg(res.message);
       this.getSaveProdFromProductsModel(this.userToken);
     },er=>{
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
       this.sharedData.setModalMsg(er.message);
       this.closeDeleteModal();
     })

@@ -14,10 +14,14 @@ export class MessageModalComponent {
   }
 
   @Input('inputMsg') messageVal:any;
-  closeModal=()=>{
+  closeModal=(value?:string)=>{
     if(this.messageVal == 'Please register or sign in'){
-      this.sharedData.setModalMsg('');
-      this.route.navigate(['/sign-in']);
+      if(value == 'close-icon'){
+        this.sharedData.setModalMsg('');
+      }else{
+        this.sharedData.setModalMsg('');
+        this.route.navigate(['/sign-in']);
+      }
     }
     else{
       this.sharedData.setModalMsg('');

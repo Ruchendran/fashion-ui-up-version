@@ -27,10 +27,8 @@ export class ChatbotComponent implements OnInit {
      };
      this.chatList.push(obj);
       // chat?.scrollTo(0,document.documentElement.scrollHeight);
-     this.sharedData.loader.set(true);
       this.apiService.chatbotService(this.text).subscribe((res:any)=>{
         this.text=''
-        this.sharedData.loader.set(false);
         let final={
           user:'server',
           msg:res.responseText
@@ -41,7 +39,6 @@ export class ChatbotComponent implements OnInit {
            chat?.scrollTo(0,chat.scrollHeight);
       },500)
       },er=>{
-        this.sharedData.loader.set(false);
       });
   }
 }

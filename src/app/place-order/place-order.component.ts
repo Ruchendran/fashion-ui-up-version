@@ -40,9 +40,9 @@ export class PlaceOrderComponent implements OnInit  {
       phone:new FormControl('',Validators.required),
       payOnDelivery:new FormControl('---select-cashon-delivery---',Validators.required)
     });
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     this.apiService.getUserAddress(this.userToken).subscribe((res:any)=>{
-       this.sharedData.loader.set(false);
+      //  this.sharedData.loader.set(false);
       if(res.address?.length){
         res.address.forEach((val:any)=>{
           let obj={active:false,addressVal:val};
@@ -50,13 +50,13 @@ export class PlaceOrderComponent implements OnInit  {
         })
       }
     },er=>{
-       this.sharedData.loader.set(false);
+      //  this.sharedData.loader.set(false);
     })
   }
   confirmOrder=(order?:any)=>{
-     this.sharedData.loader.set(true)
+    //  this.sharedData.loader.set(true)
     this.apiService.appendOrder(order).subscribe((res:any)=>{
-       this.sharedData.loader.set(false)
+      //  this.sharedData.loader.set(false)
        if(res.status == 409){
             this.sharedData.setModalMsg(res.message)
        }
@@ -67,7 +67,7 @@ export class PlaceOrderComponent implements OnInit  {
        }
       //  this.hideLoader();
     },er=>{
-      this.sharedData.loader.set(false)
+      // this.sharedData.loader.set(false)
       this.sharedData.setModalMsg('Server Busy.Try after sometime.')
     }) 
   }
@@ -78,14 +78,14 @@ export class PlaceOrderComponent implements OnInit  {
     this.deliveryAddressForm=false;
   }
     callOrderCount=(userToken:any)=>{
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     this.apiService.getOrderCount(userToken).subscribe((res:any)=>{
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
       this.sharedData.orderCount.set(res.orderCount);
        this.route.navigate(['/orders']);
     },
     er=>{
-      this.sharedData.loader.set(false);
+      // this.sharedData.loader.set(false);
     }
   )
   }
@@ -100,9 +100,9 @@ export class PlaceOrderComponent implements OnInit  {
   }
   postalCode=(village?:any)=>{
     if(this.addressForm.value.pincode.length==6){
-      this.sharedData.loader.set(true)
+      // this.sharedData.loader.set(true)
       this.apiService.postalCodeApi(this.addressForm.value.pincode).subscribe((res:any)=>{
-        this.sharedData.loader.set(false);
+        // this.sharedData.loader.set(false);
         this.villageList=[];
         res.postalList[0].PostOffice.forEach((postal:any)=>{
           this.villageList.push(postal?.Name)
@@ -113,7 +113,7 @@ export class PlaceOrderComponent implements OnInit  {
         });
         }
       },er=>{
-        this.sharedData.loader.set(false);
+        // this.sharedData.loader.set(false);
         this.sharedData.setModalMsg(er.message);
       })
     }

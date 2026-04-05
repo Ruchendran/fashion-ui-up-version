@@ -37,38 +37,38 @@ export class LogInComponent implements OnInit {
     this.forgotPassword=false;
   }
   callCartCount=(userToken:any)=>{
-    this.shareData.loader.set(true);
+    // this.shareData.loader.set(true);
     this.apiService.getCartCount(userToken).subscribe((res:any)=>{
-      this.shareData.loader.set(false);
+      // this.shareData.loader.set(false);
       this.shareData.cartCount.set(res.cartCount);
     },
   er=>{
-    this.shareData.loader.set(false);
+    // this.shareData.loader.set(false);
   })
   }
   callOrderCount=(userToken:any)=>{
-    this.shareData.loader.set(true);
+    // this.shareData.loader.set(true);
     this.apiService.getOrderCount(userToken).subscribe((res:any)=>{
-      this.shareData.loader.set(false);
+      // this.shareData.loader.set(false);
       this.shareData.orderCount.set(res.orderCount);
     },
     er=>{
-      this.shareData.loader.set(false);
+      // this.shareData.loader.set(false);
     }
   )
   }
   onSubmit = () => {
-    this.shareData.loader.set(true);
+    // this.shareData.loader.set(true);
     //This is only for Register users.
 
     if (this.register && !this.forgotPassword) {
       this.userForm.value.userMail=this.shareData.trimString(this.userForm.value.userMail);
       this.userForm.value.password=this.shareData.trimString(this.userForm.value.password);
       this.apiService.registerUser(this.userForm.value).subscribe((res: any) => {
-        this.shareData.loader.set(true)
+        // this.shareData.loader.set(true)
         this.shareData.setLogInUserVal(this.userForm?.value?.userName);
         if (res.status == 200) {
-           this.shareData.loader.set(false)
+          //  this.shareData.loader.set(false)
           if (isPlatformBrowser(this.platformId)) {
             sessionStorage?.setItem('user', this.userForm?.value?.userName);
             // sessionStorage?.setItem('password', this.userForm?.value?.password);
@@ -81,13 +81,13 @@ export class LogInComponent implements OnInit {
 
         }
         if (res.status == 403) {
-           this.shareData.loader.set(false)
-          alert(res.message + " Plesase login");
+          //  this.shareData.loader.set(false)
+          this.shareData.setModalMsg(res.message + " Plesase login");
         }
       },
         (error) => {
-          this.shareData.loader.set(false)
-          alert("Something went wrong!!!!!!!");
+          // this.shareData.loader.set(false)
+          this.shareData.setModalMsg("Something went wrong!!!!!!!");
         });
     }
     //This is only for login users.
@@ -95,7 +95,7 @@ export class LogInComponent implements OnInit {
       this.userForm.value.userMail=this.shareData.trimString(this.userForm.value.userMail);
       this.userForm.value.password=this.shareData.trimString(this.userForm.value.password);
       this.apiService.loginUser(this.userForm.value).subscribe((res: any) => {
-        this.shareData.loader.set(false)
+        // this.shareData.loader.set(false)
         this.shareData.setLogInUserVal(res?.user);
         if (res.status == 200) {
           if (isPlatformBrowser(this.platformId)) {
@@ -109,18 +109,18 @@ export class LogInComponent implements OnInit {
           this.route.navigate(["/"]);
         }
         else {
-          alert(res.message);
+          this.shareData.setModalMsg(res.message);
         }
       },
         (error) => {
-          this.shareData.loader.set(false)
-          alert("Something went wrong!!!!!!!");
+          // this.shareData.loader.set(false)
+          this.shareData.setModalMsg("Something went wrong!!!!!!!");
         }
       )
     }
     else if(this.forgotPassword){
       if(this.userForm.value.newPassword == this.userForm.value.confirmPassword){
-        this.shareData.loader.set(false);
+        // this.shareData.loader.set(false);
         this.forgotPassword=false;
         this.apiService.resetPassword(this.userForm.value.userMail,this.userForm.value.newPassword).subscribe((res:any)=>{
           this.shareData.setModalMsg(res.message);
@@ -129,7 +129,7 @@ export class LogInComponent implements OnInit {
         })
       }
       else{
-        this.shareData.loader.set(false)
+        // this.shareData.loader.set(false)
         this.shareData.setModalMsg("pls make the password match!");
       }
     }

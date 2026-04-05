@@ -60,6 +60,8 @@
         </div>
         <div class="col-11 col-md-4 p-3" *ngFor="let data of filteredProducts">
             <div class="product flex">
+                <i class="fa-regular fa-heart icon heart-icon-pos" *ngIf="!data.favourite" (click)="clickFav(data)"></i>
+                <i class="fa-solid fa-heart icon heart-icon-pos" *ngIf="data.favourite" (click)="clickFav(data)"></i>
                 <div class="col-6 flex">
                     <img [src]="data.productImg" class="image" />
                 </div>
@@ -92,3 +94,20 @@
 
     </app-generic-pagination>
 </ng-container>
+<!--Favorite section-->
+ <div class="saved-products flex m-bot-top-10 pointer" (click)="navToFavourites()">
+        <div>
+            <i class="fa fa-angle-left" ></i>
+            <i class="fa fa-angle-left" ></i>
+            <i class="fa fa-angle-left" ></i>
+        </div>
+        <strong>
+            Go To Favourites
+        </strong>
+        <div>
+            <i class="fa fa-angle-right" ></i>
+            <i class="fa fa-angle-right" ></i>
+            <i class="fa fa-angle-right" ></i>
+        </div>
+    </div>
+<app-event-modal [inputMsg]="modalMsg" *ngIf="showEventModal"  [actionFor]="actionFor" (sendEvent)="receiveEvent($event)"></app-event-modal>

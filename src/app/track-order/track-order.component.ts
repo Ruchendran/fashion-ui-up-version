@@ -36,14 +36,14 @@ export class TrackOrderComponent implements OnInit {
     this.activateRoute.queryParams.subscribe((val:any)=>{
       this.orderId=val?.orderId;
     });
-    this.sharedData.loader.set(true);
+    // this.sharedData.loader.set(true);
     this.apiService.getOrderDetail(this.orderId).subscribe((res:any)=>{
-      this.sharedData.loader.set(false)
+      // this.sharedData.loader.set(false)
       this.trackingMapList=res?.orderDetails?.trackerMap;
       this.activeTrackingIndex=res?.orderDetails?.activeTrackingIndex+1;
       this.expectedTime=res?.orderDetails?.expectedTime
     },er=>{
-      this.sharedData.loader.set(false)
+      // this.sharedData.loader.set(false)
     })
   }
 }
