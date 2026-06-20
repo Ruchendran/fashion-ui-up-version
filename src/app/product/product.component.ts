@@ -43,7 +43,16 @@ export class ProductComponent implements OnInit {
     // Use the image from the resolved data if available, otherwise use a fallback
     this.metaService.updateTag({ property: 'og:image', content: metaData.image || 'https://fashion-ui.netlify.app/assets/home-section/zoom/zoom-img.jpg' })
   }
+ getColorsFromRoot=()=>{
+  const rootStyles = getComputedStyle(document.documentElement);
+  const activeColor = rootStyles.getPropertyValue('--activeColor').trim();
+  const normalColor = rootStyles.getPropertyValue('--normalColor').trim();
+  this.paginationDetails.styles.activeColor=activeColor;
+  this.paginationDetails.styles.normalColor=normalColor;
+  console.log(this.paginationDetails.styles,"colors")
+ }
   ngOnInit(): void {
+    this.getColorsFromRoot();
     const resolvedSeoData = this.activateRoute.snapshot.data['seoData'];
     if (resolvedSeoData) {
       this.metaData = resolvedSeoData;
@@ -135,8 +144,8 @@ export class ProductComponent implements OnInit {
   paginationDetails={
     totalRecords:null,
     styles:{
-      normalColor:'#f2b50c',
-      activeColor:'#ffffff',
+      normalColor:'',
+      activeColor:'',
     }
   }
   capturePage=async(page:any)=>{

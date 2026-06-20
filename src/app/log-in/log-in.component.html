@@ -1,58 +1,64 @@
 <div class="login-section">
-    <img src="assets/mens-cloth1.png"  alt="mens-cloth1" class="mens-cloth1"/>
-    <img  src="assets/mens-cloth5.png" alt="mens-cloth5" class="mens-cloth5"/>
-    <!-- <img src="assets/ani-img-male.png" alt="ani-img-male" class="ani-img-male" /> -->
-    <img  src="assets/mens-cloth3.png" alt="mens-cloth3" class="mens-cloth3"/>
-    <div class="form-section">
-        <h2 class="form-head">
-           Welcome To Fashion Shop
-        </h2>
-        <form class="login-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
-            <div class="user-section">
-                <i class="fa-regular fa-envelope icon"></i>
-                <input placeholder="Enter Username as Mail"  htmlFor="userMail"  type="text" class="input-field" formControlName="userMail"/>
-            </div>
-            <div class="user-section" *ngIf="!forgotPassword">
-                <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
-                <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i>
-                <input placeholder="Enter Password"   [type]="eyeOpen?'text':'password'"  class="input-field" formControlName="password"/>
-            </div>
-            <!--forgot password section-->
-            <div class="user-section" *ngIf="!register && forgotPassword" >
-                <!-- <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
-                <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i> -->
-                <input placeholder="New Password"   [type]="eyeOpen?'text':'password'"  class="input-field" formControlName="newPassword" />
-            </div>
-            <div class="user-section"   *ngIf="!register && forgotPassword" >
-                <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
-                <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i>
-                <input placeholder="Confirm Password"   [type]="eyeOpen?'text':'password'"  class="input-field"  formControlName="confirmPassword"/>
-            </div>
-                 <!--forgot password section-->
-            <div class="user-section" *ngIf="register">
-                <i class="fa-solid fa-phone-flip icon"></i>
-                <input placeholder="Enter Phone"  htmlFor="phone"  type="text"  class="input-field" formControlName="phone"/>
-            </div>
-            <div class="user-section" *ngIf="register">
-                <i class="fa-solid fa-user icon"></i>
-                <input placeholder="Enter Name"  htmlFor="phone"  type="text"  class="input-field" formControlName="userName"/>
-            </div>
-            <div  class="forgot-section flex">
-                <!-- <a (click)="loginAdmin()" *ngIf="!adminUser">Login Admin</a> -->
-                <!-- <a *ngIf="adminUser" (click)="normalUser()">User</a> -->
-                <a (click)="forgotPas()" *ngIf="!register">Forgot Password?</a>
-            </div>
-            <button class="submit-btn" type="submit">
-                Submit
-            </button>
-            <div  class="dont-have-section flex">
-                <span>
-                    Don't Have Account?
-                </span>
-                <a (click)="onRegister()"  *ngIf="register">Login Now</a>
-                <a (click)="onRegister()" *ngIf="!register">Register Now</a>
-            </div>
-        </form>
+    <div class="side-design-container">
+        
+    </div>
+    <div class="form-section u-gap-50">
+        <div class="trending-container flex">
+            <h1 class="form-head">
+                Trending Shoy-io products
+            </h1>
+        </div>
+        <div class="flex-vertical">
+            <h2 class="form-head">
+            Welcome To Shopy-io
+            </h2>
+            <form class="login-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <div class="user-section">
+                    <i class="fa-regular fa-envelope icon"></i>
+                    <input placeholder="Enter Username as Mail"  htmlFor="userMail"  type="text" class="input-field" formControlName="userMail"/>
+                </div>
+                <div class="user-section" *ngIf="!forgotPassword">
+                    <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
+                    <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i>
+                    <input placeholder="Enter Password"   [type]="eyeOpen?'text':'password'"  class="input-field" formControlName="password"/>
+                </div>
+                <!--forgot password section-->
+                <div class="user-section" *ngIf="!register && forgotPassword" >
+                    <!-- <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
+                    <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i> -->
+                    <input placeholder="New Password"   [type]="eyeOpen?'text':'password'"  class="input-field" formControlName="newPassword" />
+                </div>
+                <div class="user-section"   *ngIf="!register && forgotPassword" >
+                    <i class="fa-solid fa-eye-slash icon eye" (click)="onClickeye()" *ngIf="!eyeOpen"></i>
+                    <i class="fa-solid fa-eye icon eye" (click)="onClickeye()" *ngIf="eyeOpen"></i>
+                    <input placeholder="Confirm Password"   [type]="eyeOpen?'text':'password'"  class="input-field"  formControlName="confirmPassword"/>
+                </div>
+                    <!--forgot password section-->
+                <div class="user-section" *ngIf="register">
+                    <i class="fa-solid fa-phone-flip icon"></i>
+                    <input placeholder="Enter Phone"  htmlFor="phone"  type="text"  class="input-field" formControlName="phone"/>
+                </div>
+                <div class="user-section" *ngIf="register">
+                    <i class="fa-solid fa-user icon"></i>
+                    <input placeholder="Enter Name"  htmlFor="phone"  type="text"  class="input-field" formControlName="userName"/>
+                </div>
+                <div  class="forgot-section flex">
+                    <!-- <a (click)="loginAdmin()" *ngIf="!adminUser">Login Admin</a> -->
+                    <!-- <a *ngIf="adminUser" (click)="normalUser()">User</a> -->
+                    <a (click)="forgotPas()" *ngIf="!register">Forgot Password?</a>
+                </div>
+                <button class="submit-btn" type="submit">
+                    Submit
+                </button>
+                <div  class="dont-have-section flex">
+                    <span>
+                        Don't Have Account?
+                    </span>
+                    <a (click)="onRegister()"  *ngIf="register">Login Now</a>
+                    <a (click)="onRegister()" *ngIf="!register">Register Now</a>
+                </div>
+            </form>
+        </div>
     </div>
     <!-- <div class="card-train flex" id="cards">
             <div class="cards card1 flex">

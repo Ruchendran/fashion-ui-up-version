@@ -25,9 +25,51 @@
                     Quantity:&nbsp;{{reqProps.quantity}}
                 </span>
                 <br/>
-                <button *ngIf="reqProps.family=='Wears-Custom'" class="btn u-min-w-btn">
-                    Custom Stiching
-                </button>
+                <div *ngIf="reqProps.family=='Wears-Custom'">
+                    <strong>
+                        Custom Stiching
+                    </strong>
+                    <div class="u-flex gap-10">
+                        <div>
+                            <input 
+                            id="yes" 
+                            type="radio" 
+                            value="Yes" 
+                            [name]="reqProps.heading"
+                            [checked]="stichingFormShow" 
+                            (change)="onSelectRadio('Yes')"   
+                            class="pointer"
+                            />
+                            <label for="yes">
+                                Yes
+                            </label>
+                        </div>
+                        <div>
+                            <input 
+                            id="no" 
+                            type="radio"
+                            value="No" 
+                            [name]="reqProps.heading" 
+                            [checked]="!stichingFormShow" 
+                            (change)="onSelectRadio('No')" 
+                            class="pointer"
+                            />
+                            <label for="no">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 </div>
+
+<ng-container [ngTemplateOutlet]="stichingFormShow?customStichingForm:null">
+
+</ng-container>
+
+<ng-template #customStichingForm>
+    <app-custom-stiching-fields (closeForm)="closeFormReceive($event)">
+        
+    </app-custom-stiching-fields>
+</ng-template>

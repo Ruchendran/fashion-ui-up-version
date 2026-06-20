@@ -1,69 +1,32 @@
 @import "../../styles.scss";
 .login-section{
-    margin-top: 80px;
+    // margin-top: 80px;
     width: 100vw;
-    height: 555px;
+    height:100vh;
     position: relative;
     overflow: hidden;
+    display: flex;
 }
-.mens-cloth1{
-    height: 250px;
+.side-design-container{
+    width: 20vw;
+    background: $designColor;
+    height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+.side-design-container::after{
+    content: '';
     position: absolute;
-    animation: mens-cloth1-move 2s ease-in-out forwards;
-    left:5vw;
-    top: 0vh;
-    filter: drop-shadow(2px 2px 5px grey);
+    left: 100%;
+    width: 200%;
+    height: 100%;
+    top: 0;
+    background: $designColor;
 }
-@keyframes mens-cloth1-move{
-    0%{
-        transform: translate(-500px,-200px);
-        animation-delay: 0.5s;
-    }
-    50%{
-        filter: drop-shadow(20px 15px 10px grey);
-    }
-    100%{
-        transform: translate(0px,0px);
-    }
-}
-.mens-cloth5{
-    height: 250px;
-    position: absolute;
-    animation: mens-cloth5-move 2s ease-in-out forwards;
-    left:23vw;
-    top: -5vh;
-    filter: drop-shadow(2px 2px 5px grey);
-}
-@keyframes mens-cloth5-move{
-    0%{
-        transform: translate(-80vw,90vh);
-        animation-delay: 0.5s;
-    }
-    50%{
-        filter: drop-shadow(20px 15px 10px grey);
-    }
-    100%{
-        transform: translate(0px,0px);
-    }
-}
-.mens-cloth3{
-    height: 250px;
-    position: absolute;
-    left:18vw;
-    top: 38vh;
-    animation: mens-cloth3-move 2s ease-in-out forwards;
-    filter: drop-shadow(-2px -2px 5px grey);
-}
-@keyframes mens-cloth3-move{
-    0%{
-        transform: translate(120vw,120vh);
-    }    
-    85%{
-        filter: drop-shadow(-20px -15px 10px grey);
-    }
-    100%{
-        transform: translate(0px,0px);
-    }
+.trending-container{
+    width: 60%;
+    height: 100px;
+    box-shadow: 0px 3px 10px grey;
 }
 .login-form{
     display: flex;
@@ -112,33 +75,34 @@
     border: 2px solid $designColor;
 }
 .form-section{
+    padding-left: 50px;
+    width: 80vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;    
-    right: 20vw;
-    top: 0vh;
-    animation: form-animation 2s forwards ease-in-out;
-    animation-delay:0.1s;
-    opacity: 0;
-    filter: drop-shadow(-2px -2px 5px grey);
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    // border: 1px solid grey;
+    background: #ffffff;
     z-index: 2;
+    position: relative;
 }
-@keyframes form-animation{
-    0%{
-        opacity: 1;
-        transform: translate(100vw,-100vh);
-    }
-    50%{
-        filter: drop-shadow(5px 5px 10px grey);
-    }
-    100%{
-        opacity: 1;
-        transform: translate(0px,0px);
-        filter: drop-shadow(0px 0px 0px grey);
-    }
-}
+// @keyframes form-animation{
+//     0%{
+//         opacity: 1;
+//         transform: translate(100vw,-100vh);
+//     }
+//     50%{
+//         filter: drop-shadow(5px 5px 10px grey);
+//     }
+//     100%{
+//         opacity: 1;
+//         transform: translate(0px,0px);
+//         filter: drop-shadow(0px 0px 0px grey);
+//     }
+// }
 .form-head{
     margin: 0px ;
     color:$designColor;
@@ -238,6 +202,12 @@ to{
 }
 }
 @media screen and (max-width : 576px) {
+    .trending-container{
+        display: none;
+    }
+    .side-design-container{
+        display: none;
+    }
     .mens-cloth1{
         display: none;
     }
@@ -248,6 +218,7 @@ to{
         display: none;
     }
     .form-section{
+        width: 100vw;
         justify-content: start;
         animation: none;
         position: relative;
@@ -255,7 +226,9 @@ to{
         top: 100px;
         right: 0px;
         height: 100vh;
-        filter: none;
+        // filter: none;
+        background: transparent;
+        padding-left: 0px;
     }
     .render-container{
         height: 100vh;

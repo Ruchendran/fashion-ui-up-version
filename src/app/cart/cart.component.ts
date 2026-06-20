@@ -78,6 +78,7 @@ updMeta(metaData:any){
     // }
   }
   onSelectAll=(event:Event)=>{
+     this.placeOrdersList=[];
     if((event.target as HTMLInputElement).checked){
       this.cartList.forEach((cart:any)=>{
         cart.isChecked=true;
@@ -88,7 +89,6 @@ updMeta(metaData:any){
       this.cartList.forEach((cart:any)=>{
         cart.isChecked=false;
       });
-      this.placeOrdersList=[];
     }
   }
   getSavedProducts=async (token:string)=>{

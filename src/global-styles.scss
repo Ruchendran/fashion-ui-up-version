@@ -1,0 +1,58 @@
+@import "./styles.scss";
+.u-box-shadow{
+    box-shadow: 0px 2px 5px grey;
+}
+.u-back-drop-filter{
+    backdrop-filter: blur(5px);
+}
+.size-btn{
+    color:$bgColor;
+    background-color:$designColor;
+    border: none;
+    width: 80px;
+    height: 80px;
+    font-size: 30px;
+    border-radius: 100%;
+}
+.highlight-size{
+    background-color:green;
+}
+
+//custom gaps.
+
+.u-row-10{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+//align self
+.u-align-center{
+    align-self: center;
+}
+
+.u-stack-4{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+//inputs styles
+.input-w-100{
+    width: 100%;
+    height: 40px;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+.u-grids{
+    display: grid;
+    grid-template-columns: 3fr 3fr 3fr;
+}
+
+//gaps
+.u-gap-50{
+    gap: 50px;
+}

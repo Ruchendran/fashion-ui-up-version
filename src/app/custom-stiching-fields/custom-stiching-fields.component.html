@@ -1,0 +1,269 @@
+<div class="custom-stiching-form flex">
+    <div class="form-section u-box-shadow">
+        <i class="fa fa-window-close close-icon icon" aria-hidden="true" (click)="closeForm()"></i>
+        <div class="flex">
+            <h2 class="h2-font u-align-center">
+                Custom Stiching Dimensions
+            </h2>
+        </div>
+        <div class="u-row-10">
+            <button class="size-btn pointer" [ngClass]="{'highlight-size':activeSize == 'S'}" (click)="selectStichDesign('S')">
+                S
+            </button>
+            <button class="size-btn pointer" (click)="selectStichDesign('M')"  [ngClass]="{'highlight-size':activeSize == 'M'}">
+                M
+            </button>
+            <button class="size-btn pointer" (click)="selectStichDesign('XL')"  [ngClass]="{'highlight-size':activeSize == 'XL'}">
+                XL
+            </button>
+        </div>
+        <div class="flex">
+            @if(activeSize == 'S'){
+                <strong>
+                    Small Size Design
+                </strong>
+            }
+            @else if(activeSize == 'M'){
+                <strong>
+                    Medium Size Design
+                </strong>
+            }
+            @else{
+                <strong>
+                    Large Size Design
+                </strong>
+            }
+        </div>
+        <form [formGroup]="customStichForm" (ngSubmit)="onSubmitForm()">
+            <div class="u-grids">
+                <!--Height field-->
+                <div class="flex">
+                    <div class="u-stack-4 form-input-w">
+                        <label>
+                            Shirt Height
+                        </label>
+                        <select placeholder="Select the Height" class="input-w-100" formControlName="shirtHeight">
+                            <option  [disabled]="true" >
+                                Select Height
+                            </option>
+                            <option *ngFor="let item of [].constructor(5); let i = index">
+                                {{i+getNumberBasedOnSize()}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!---Circumference-->
+                <div class="flex">
+                    <div class="u-stack-4 form-input-w">
+                        <label>
+                            Shirt Width
+                        </label>
+                        <select placeholder="Select the Height" class="input-w-100" formControlName="shirtWidth">
+                            <option  [disabled]="true" >
+                                Select Shirt Width
+                            </option>
+                            <option *ngFor="let item of [].constructor(5); let i = index">
+                                {{i+7}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!--Shoulder-->
+                <div class="flex">
+                    <div class="u-stack-4 form-input-w">
+                        <label>
+                            Shirt Shoulder
+                        </label>
+                        <select placeholder="Select the Height" class="input-w-100" formControlName="shirtShoulder">
+                            <option  [disabled]="true" >
+                                Select Shoulder
+                            </option>
+                            <option *ngFor="let item of [].constructor(5); let i = index">
+                                {{i+12}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!--Hand Circumference-->
+                <div class="flex">
+                    <div class="u-stack-4 form-input-w">
+                        <label>
+                            Shirt Hand Round
+                        </label>
+                        <select placeholder="Select the Height" class="input-w-100" formControlName="handRound">
+                            <option  [disabled]="true" >
+                                Select Hand Round
+                            </option>
+                            <option *ngFor="let item of [].constructor(5); let i = index">
+                                {{i+13}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!--Full hand or half hand Shirt Decision-->
+                <div class="flex">
+                    <div class="u-stack-4 form-input-w">
+                        <strong>
+                            Full Hand
+                        </strong>
+                        <div class="u-flex gap-10">
+                            <div>
+                                <input
+                                 id="yes" 
+                                 type="radio" 
+                                 value="Yes" 
+                                 name="fullHand"
+                                 [checked]="fullHandShirt" 
+                                 (change)="onSelectRadioFullHand('Yes')" 
+                                 formControlName="fullHand"  
+                                 />
+                                <label for="yes">
+                                    Yes
+                                </label>
+                            </div>
+                            <div>
+                                <input 
+                                id="no" 
+                                type="radio" 
+                                value="No" 
+                                name='fullHand'
+                                [checked]="!fullHandShirt" 
+                                (change)="onSelectRadioFullHand('No')" 
+                                formControlName="fullHand"  
+                                />
+                                <label for="no">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex">
+                <strong>
+                    {{fullHandShirt?'Full Hand Dimensions':'Half Hand Dimesions'}}
+                </strong>
+            </div>
+            <!--Full Hand Dimesnsions-->
+            @if(fullHandShirt){
+            <div class="u-grids">
+                <!--Hand Height-->
+                    <div class="flex">
+                    <div class="u-stack-4 form-input-w">
+                        <label>
+                            Hand Height
+                        </label>
+                        <select placeholder="Select the Height" class="input-w-100" formControlName="handHeight">
+                            <option  [disabled]="true" >
+                                Select Hand Height
+                            </option>
+                            <option *ngFor="let item of [].constructor(8); let i = index">
+                                {{i+10}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!--Full Middle Round-->
+                    <div class="flex">
+                    <div class="u-stack-4 form-input-w">
+                        <label>
+                            Full Hand Middle Round
+                        </label> 
+                        <select placeholder="Select the Height" class="input-w-100" formControlName="handMidRound">
+                            <option  [disabled]="true" >
+                                Hand Middle Round
+                            </option>
+                            <option *ngFor="let item of [].constructor(8); let i = index">
+                                {{i+13}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <!--Full Hand Cup Round-->
+                    <div class="flex">
+                    <div class="u-stack-4 form-input-w">
+                        <label>
+                            Cup Round
+                        </label>
+                        <select placeholder="Select the Height" class="input-w-100" formControlName="cupRound">
+                            <option  [disabled]="true" >
+                                Cup Round
+                            </option>
+                            <option *ngFor="let item of [].constructor(5); let i = index">
+                                {{i+8}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            }
+            @else{
+                <div class="u-grids">
+                    <!--Half Hand height-->
+                    <div class="flex">
+                    <div class="u-stack-4 form-input-w">
+                        <label>
+                           Half Hand Height
+                        </label>
+                        <select placeholder="Select the Height" class="input-w-100">
+                            <option  [disabled]="true" >
+                                Select Hand Height
+                            </option>
+                            <option *ngFor="let item of [].constructor(5); let i = index">
+                                {{i+8}}
+                            </option>
+                        </select>
+                    </div>
+                    </div>
+                    <!--Half hand end Round-->
+                    <div class="flex">
+                        <div class="u-stack-4 form-input-w">
+                            <label>
+                               Half Hand End Round
+                            </label>
+                            <select placeholder="Select the Height" class="input-w-100" formControlName="handRound">
+                                <option  [disabled]="true" >
+                                    Select Hand Round
+                                </option>
+                                <option *ngFor="let item of [].constructor(15); let i = index">
+                                    {{i+10}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="flex">
+                        <div class="u-stack-4 form-input-w">
+                            <label>
+                                Hand End Round
+                            </label>
+                            <select placeholder="Select the Height" class="input-w-100">
+                                <option *ngFor="let item of [].constructor(15); let i = index">
+                                    {{i+10}}
+                                </option>
+                            </select>
+                        </div>
+                    </div> -->
+                </div>
+            } 
+            <div class="flex m-10">
+                <button class="btn"type=submit>
+                    Submit
+                </button>
+            </div>
+        </form>
+        <div class="u-flex-align-start m-10">
+                <div class="shirt-height-left" [style.height]="customStichForm.value.shirtHeight*10+10+'px'">
+
+                </div>
+                <div class="shoulder" [style.width]="customStichForm.value.shirtWidth*10+'px'" >
+                    
+                </div>
+                <div class="hand-round" [style.height]="customStichForm.value.handRound*7+'px'">
+
+                </div>
+                <div class="shirt-height" [style.height]="customStichForm.value.shirtHeight*10+'px'">
+
+                </div>
+        </div>
+    </div>
+</div>

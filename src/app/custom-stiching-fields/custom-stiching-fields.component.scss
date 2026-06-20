@@ -1,0 +1,61 @@
+@import "../../styles.scss";
+.custom-stiching-form{
+    width: 100vw;
+    height: 100%;
+    background-color:transparent;
+    backdrop-filter: blur(5px);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+}
+.form-section{
+    position: absolute;
+    width: 80%;
+    min-height: 50%;
+    height: fit-content;
+    background: #ffffff;
+    top: 10%;
+    overflow-y: scroll;
+}
+.form-input-w{
+    width: 250px;
+    align-self: center;
+}
+.close-icon{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.shoulder{
+    height: 2px;
+    width: 10px;
+    background-color:$designColor;
+    rotate: 10deg;
+}
+.hand-round{
+    width: 30px;
+    height: 10px;
+    border: 2px solid $designColor;
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-left-radius: 20px;
+    position:relative;
+    top: 9px;
+    z-index: 3;
+    background: #ffffff;
+}
+.shirt-height{
+    width: 2px;
+    height: 20px;
+    background-color:$designColor;
+    position: relative;
+    top: 9px;
+    right: 4px;
+    z-index: 1;
+}
+.shirt-height-left{
+    width: 2px;
+    height: 20px;
+    background-color:$designColor;
+}
