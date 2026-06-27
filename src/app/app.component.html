@@ -1,5 +1,10 @@
 <div class="render-container">
     <header class="header" *ngIf="headerHide">
+        <div class="logo-section flex">
+            <strong class="logo-txt pointer" (click)="clickHome()">
+                SHOPYIO
+            </strong>
+        </div>
         <div class="section flex-space-around home-page-header" >
             <label routerLink="/" class="label" routerLinkActive="header-label"
                 [routerLinkActiveOptions]="{exact:true}">

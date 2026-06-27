@@ -17,9 +17,18 @@
     // box-shadow:inset 0px 0px 10px grey;
     background: transparent;
 }
+.logo-section{
+    width: 20%;
+    height: 100%;
+}
+.logo-txt{
+    font-size: 30px;
+    color:$designColor;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
 .section{
     height: 100%;
-    width: 100%;
+    width: 80%;
     background-color:#171615;
     color:$designColor;
     font-weight: bold;
