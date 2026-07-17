@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { CustomStichingFieldsComponent } from '../custom-stiching-fields/custom-stiching-fields.component';
 
 export interface Props{
-  contentColor:string,
   accordianWidth:string,
   heading:string,
   description:string,

@@ -68,7 +68,7 @@ export class OrderComponent implements OnInit {
         mobileOrderData['btnText']='Track Order';
         mobileOrderData['btnShow']=true;
         mobileOrderData['orderId']=order._id;
-        mobileOrderData['contentColor']='#f2b50c';
+        // mobileOrderData['contentColor']='#f2b50c';
         mobileOrderData['delivered']=order.delivered;
         mobileOrderData['feedBack']=order.feedBack;
         let mobileProductList:any=[];

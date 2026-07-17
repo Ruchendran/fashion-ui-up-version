@@ -39,12 +39,6 @@
     width: 80%;
     height:80%;
 }
-.swipe-section{
-    width: 100%;
-    background-color:transparent;
-    height: transform;
-    // box-shadow: 0.5px 0.5px 20px  grey;
-}
 .img{
     width:70%;
     box-shadow: 1px 1px 20px grey;
@@ -67,62 +61,6 @@
 }
 .img3:hover{
     transform: rotate(0deg);
-}
-.content-section{
-    margin: 20px;
-    flex-direction: column;
-    height: transform;
-}
-// .content-section>h2{
-//     font-size: 20px;
-// }
-.content-sub-division{
-    margin-top: 20px;
-    justify-content: space-around;
-}
-.content-sub-division>div{
-    width: 40%;
-}
-.content-sub-division>div>p{
-    text-align: justify;
-}
-.left-content{
-    position: relative;
-    left: -50%;
-}
-.left-side-content{
-    animation: left-content-animation 2.5s 1 forwards ease-in;
-}
-@keyframes left-content-animation{
-    0%{
-        filter: drop-shadow(20px 20px 4px grey);
-    }
-    80%{
-        filter: drop-shadow(20px 20px 4px grey);
-    }
-    100%{
-        filter: drop-shadow(0px 0px 0px grey);
-        left: 0%;
-    }
-}
-.right-content{    
-    position: relative;
-    right: -50%;
-}
-.right-side-content{
-    animation: right-content-animation 2.5s 1 forwards ease-in;
-}
-@keyframes right-content-animation{
-    0%{
-        filter: drop-shadow(-20px 20px 4px grey);
-    }
-    80%{
-        filter: drop-shadow(-20px 20px 4px grey);
-    }
-    100%{
-        filter: drop-shadow(0px 0px 0px grey);
-        right: 0%;
-    }
 }
 .brand-section{
     flex-direction: column;
@@ -310,23 +248,6 @@
     }
     .slider-note {
         width: 80%;
-    }
-    .left-content{
-        left: 0px;
-    }
-    .right-content{
-        right: 0px;
-    }
-    .content-section{
-        margin: 0px;
-        flex-direction: column;
-        height: fit-content;
-    }
-    .content-sub-division>div{
-        width: 90%;
-    }
-    .content-sub-division{
-       flex-direction: column;
     }
     .mobile-card-img{
         display: none;
