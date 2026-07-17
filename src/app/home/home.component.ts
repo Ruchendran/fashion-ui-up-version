@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { WearSectionComponent } from '../wear-section/wear-section.component';
 import { Meta,Title } from '@angular/platform-browser'; 
 import { ActivatedRoute } from '@angular/router';
+import { HomeCardsComponent } from '../home-cards/home-cards.component';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule,WearSectionComponent],
+  imports: [CommonModule,HomeCardsComponent,WearSectionComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

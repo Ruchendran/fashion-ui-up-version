@@ -44,7 +44,9 @@ export class ApiserviceService implements OnInit {
     delFromFavourites:serverVal.server+'/favourites/delete',
     getAllFavourites:serverVal.server+'/favourites/get-all',
     getAllFavProductsFromPoductsDb:serverVal.server+'/favourites/get-fav-products',
-    deleteAllFromFvourites:serverVal.server+'/favourites/delete-all'
+    deleteAllFromFvourites:serverVal.server+'/favourites/delete-all',
+    //trending apis
+    getTrendingProducts:serverVal.server+'/trending/get-all-products',
   }
 
   ngOnInit(): void {
@@ -161,5 +163,9 @@ export class ApiserviceService implements OnInit {
   }
    deleteAllFromFvourites(userId:string){
     return this.http.delete(this.apiConstants.deleteAllFromFvourites+`/${userId}`);
+   }
+
+   getTrendingProducts(){
+    return this.http.get(this.apiConstants.getTrendingProducts);
    }
 }

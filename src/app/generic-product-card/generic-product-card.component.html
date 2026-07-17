@@ -1,0 +1,12 @@
+@if(cardDetails){
+    <div class="card flex-vertical-space-between pointer" >
+        <img [src]="cardDetails.productImg" class="card-img" [alt]="cardDetails.productName" />
+        <h5>{{ cardDetails?.productName }}</h5>
+        <p >
+            {{cardDetails?.productPrice | currency:'INR' | unit:cardDetails?.productFamily}}
+        </p>
+        <button  class="btn w-100" (click)="addToCart(cardDetails)">
+            Add Cart
+        </button>
+    </div>
+}

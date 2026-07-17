@@ -16,9 +16,9 @@
             <label routerLink="/orders" class="label" routerLinkActive="header-label">
                 Orders
             </label>
-            <label routerLink="/cart" class="label" routerLinkActive="header-label">
+            <!-- <label routerLink="/cart" class="label" routerLinkActive="header-label">
                 Cart
-            </label>
+            </label> -->
             <label id="sign-in" (click)="pointerClick(shareData.logInUser() ? 'log-out' : 'sign-in')" class="label">
                 {{shareData.logInUser() ? 'Log Out' : 'Sign In'}}
             </label>

@@ -1,0 +1,12 @@
+<div class="generic-card-section flex-vertical ">
+    <div class="generic-trending-section m-bot-top-10">
+        <h5 class="generic-heading pad-10">
+            Tending product sales with quality!
+        </h5>
+    </div>
+    <div class="u-row-40 u-pad-t-b-40">
+        @for(cardDetail of trendingProducts;track $index){
+            <app-generic-product-card [cardDetails]="cardDetail" ngSkipHydration></app-generic-product-card>
+        }
+    </div>
+</div>
