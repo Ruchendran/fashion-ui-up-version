@@ -3,52 +3,13 @@
     <div class="row">
         <div class="flex space-between m-top-bot-15 col-12">
                 <p class="m-0 f-bold">
-                    Total:<span class="span-design-color">{{totalPrice | currency:'INR'}}</span>
+                    Total:<span class="span-design-color u-bold">{{totalPrice | currency:'INR'}}</span>
                 </p>
                 <button class="btn" (click)="deliveryAddress()">
                     Confirm Order
                 </button>
         </div>
         <ng-container *ngFor="let order of orderDetails">
-            <!-- <div class="flex">
-                <div class="col-md-6 col-12  flex mt-2">
-                    <img [src]="order?.productImg" alt="order-image" class="order-img" />
-                </div>
-                <div class="col-md-6 col-12  flex mt-2 order-product-det">
-                    <h4>
-                        {{order?.productName}}
-                    </h4>
-                    <p>
-                        {{order?.productDes}}
-                    </p>
-                    <p>
-                        {{order?.productPrice | currency:'INR'}}
-                    </p>
-                    <p>
-                        Quantity:{{order?.quantity}} 
-                        @switch(order?.productFamily){
-                            @case('Wears'){
-                                <b>Piece</b>
-                            }
-                            @case('Gadgets'){
-                                <b>Piece</b>
-                            }
-                            @case('Asthetics'){
-                                <b>piece</b>
-                            }
-                            @case('Groceries'){
-                                <b>Kg</b>
-                            }
-                            @case('Utensils'){
-                                <b>Set</b>
-                            }
-                            @default{
-                                <b>default</b>
-                            }
-                        }
-                    </p>
-                </div>
-            </div> -->
             <app-generic-accordian 
             [reqProps]="{
                 accordianWidth:'100%',
@@ -94,16 +55,23 @@
                 <div class="flex input-div">
                     <select  class="input-field" formControlName="payOnDelivery">
                         <option  [disabled]="true" >
-                            ---select-cashon-delivery---
+                            ---select-payon-delivery---
                         </option>
                             <option>
                                 Yes
                             </option>
-                            <option [disabled]="true">
+                            <option >
                                 No
                             </option>
                     </select>
                 </div>
+                <!--upi section-->
+                @if(addressForm.value.payOnDelivery == 'No'){
+                    <ng-container [ngTemplateOutlet]="upiSection">
+
+                    </ng-container>
+                }
+                <!--upi section -->
                 <div class="flex input-div">
                     <select  class="input-field" formControlName="village">
                         <option  [disabled]="true" >
@@ -129,6 +97,44 @@
             <!-- <div class="razor-div">
 
             </div> -->
+
         </div>
     </div>
 </ng-container>
+
+<ng-template #upiSection>
+    <div class="upi-section flex-vertical gap-10">
+        <p class="u-font-12 w-100">
+            Download/Scan Qr code.Once payment Success please send that payment screen shot then only we 
+            will move it to ur order.
+            <span class="fields-para">
+                If u send the screenshot after also ur products not moved to order means contact us.
+            </span>
+        </p>
+        <div class="flex w-100">
+            <img src="../../assets/upi-qr-code.jpeg" alt="qr-code" class="upi-qr-code-img"/>
+        </div>
+        <div class="flex w-100">
+            <button class="upi-btn">
+                Download
+            </button>
+        </div>
+        <div class="flex-vertical gap-10">
+            <p class="upi-para u-font-12 u-bold">
+                Once Payment Done Pleas upload success screenshot.Then only proceed to order.
+            </p>
+            <div class="image-section flex">
+                @if(addressForm.value.upiSuccessImg){
+                    <img [src]="addressForm.value.upiSuccessImg"  class="success-payment-image" />
+                }
+            </div>
+            <input  type="file" accept="image/*" class="u-d-hide" (change)="onChangeUpi($event)" #uploadUpi />
+            <button class="btn upi-btn" (click)="uploadUpi.click()" type="button">
+                <label class="u-p-r-10">
+                    Upload Image
+                </label>
+                <i class="fa-solid fa-upload upi-upload-icon" ></i>
+            </button>
+        </div>
+    </div>
+</ng-template>

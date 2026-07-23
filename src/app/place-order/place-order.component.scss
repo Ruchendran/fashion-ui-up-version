@@ -1,4 +1,7 @@
 @import "../../styles.scss";
+p{
+    margin: 0px;
+}
 .place-order-container{
     margin-bottom: 20px;
     width: 100vw;
@@ -97,6 +100,47 @@
 .address-active{
     color:green;
     border: 2px solid green;
+}
+.upi-qr-code-img{
+    width: 80%;
+}
+.upi-btn{
+    width: 70%;
+    border-radius: 10px;
+}
+.upi-para{
+     color:green;
+     text-align: justify;
+}
+.upi-section{
+    margin: 10px;
+    width: 300px;
+}
+.image-section{
+    width: 200px;
+    height: 200px;
+    border: 2px $fontColor solid;
+    border-radius: 10px;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+.image-section::after{
+    content: '';
+    position: absolute;
+    height: 95%;
+    width: 95%;
+    background-color:$designColor;
+    border-radius: 10px;
+    z-index: -1;
+}
+.upi-upload-ico{
+    color:$bgColor;
+}
+.success-payment-image{
+    width: 90%;
+    height: 90%;
+    border-radius: 10px;
 }
 @media screen and (max-width:576px){
     .product-details{

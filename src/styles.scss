@@ -106,6 +106,12 @@ $paraFontFamily:'Inter', sans-serif;
     align-items: center;
     flex-direction: column;
 }
+.flex-vertical-space-between-align-start{
+    display: flex;
+    justify-content:space-between;
+    align-items: flex-start;
+    flex-direction: column;
+}
 .flex-end{
     display: flex;
     justify-content:end;
@@ -121,6 +127,9 @@ $paraFontFamily:'Inter', sans-serif;
     display: flex;
     align-items: start;
     justify-content: center;
+}
+.u-flex-align-center{
+    align-items: center;
 }
 .icon-font,.icon{
     cursor: pointer;

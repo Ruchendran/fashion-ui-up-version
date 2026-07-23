@@ -1,13 +1,7 @@
 .generic-card-section{
     width: 100%;
     height: transform;
-   background: linear-gradient(
-        135deg,
-        #EAFBFF 0%,
-        #D4F4FF 30%,
-        #B8ECFF 65%,
-        #A5E3FF 100%
-    );
+   background: #F8F9FA;
 }
 .generic-trending-section{
     width: 99%;
@@ -37,6 +31,24 @@
     padding-top: 40px;
     padding-bottom: 40px;
 
+}
+// text styles.
+.u-bold{
+    font-weight: bold;
+}
+.u-font-12{
+    font-size: 12px;
+}
+
+
+///padding styles
+.u-p-r-10{
+    padding-right: 10px;
+ }
+/// padding styles.
+
+.u-d-hide{
+    display: none;
 }
 @media screen and (max-width:576px){
     .generic-card-section{

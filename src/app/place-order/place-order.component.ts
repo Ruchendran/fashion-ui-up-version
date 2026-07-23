@@ -29,7 +29,7 @@ export class PlaceOrderComponent implements OnInit  {
       console.log(this.orderDetails,"details");
       // console.log(this.orderDetails);
       this.orderDetails.forEach((eachProd:any)=>{
-        this.totalPrice+=eachProd.productPrice;
+        this.totalPrice+=(eachProd.productPrice)*(eachProd.quantity);
       })
     }
     this.userToken=this.sharedData.userToken();
@@ -38,7 +38,8 @@ export class PlaceOrderComponent implements OnInit  {
       pincode:new FormControl('',[Validators.required]),
       village:new FormControl('---select-the-area---',Validators.required),
       phone:new FormControl('',Validators.required),
-      payOnDelivery:new FormControl('---select-cashon-delivery---',Validators.required)
+      payOnDelivery:new FormControl('---select-payon-delivery---',Validators.required),
+      upiSuccessImg:new FormControl('',Validators.required)
     });
     // this.sharedData.loader.set(true);
     this.apiService.getUserAddress(this.userToken).subscribe((res:any)=>{
@@ -130,5 +131,21 @@ export class PlaceOrderComponent implements OnInit  {
       phone:parseAddress[3],
     });
     this.postalCode(parseAddress[1].trim());
+  }
+
+
+  ///upload upi success image
+    onChangeUpi=(event:Event)=>{
+    const input=event.target as HTMLInputElement;
+    if(input.files && input.files.length > 0){
+      const file=input?.files[0]
+      const reader=new FileReader();
+      reader.onload=()=>{
+        this.addressForm.patchValue({
+          upiSuccessImg:reader.result as string
+        })
+      }
+      reader.readAsDataURL(file);
+    }
   }
 }
